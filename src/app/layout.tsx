@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FilmHub",
+  title: "MovieHub",
   description: "Review your favorite movies",
 };
 
