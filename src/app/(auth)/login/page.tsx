@@ -1,12 +1,21 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { loginUser, loginWithGoogle } from "@/actions/auth";
+import { validateLoginForm } from "@/lib/utils";
 
 const LoginPage = () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e?.currentTarget);
+    validateLoginForm(formData);
+  };
+
+  const handleGoogleLogin = async () => {};
+
   return (
     <>
-      <div className="min-h-screen overflow-hidden pb-40">
+      <div className="min-h-screen overflow-hidden pb-40 px-2 sm:px-0">
         <Image
           src="/sign-in-background.png"
           alt="background"
@@ -15,7 +24,7 @@ const LoginPage = () => {
         />
         <div
           className="bg-dark-transparent backdrop-brightness-90 backdrop-blur-xs 
-          px-10 pt-5 pb-10 rounded-md min-w-[250px] w-fit mx-auto mt-[80px] lg:mt-[160px] "
+          px-3 sm:px-10 pt-5 pb-10 rounded-md min-w-[250px] w-fit mx-auto mt-[80px] lg:mt-[160px] "
         >
           <Link
             href={"/"}
@@ -29,7 +38,7 @@ const LoginPage = () => {
           <hr className="text-black border-gray-300 mb-4 w-full" />
           <div className="flex flex-col gap-5 mt-7 mb-4 items-center">
             <Button
-              onClick={loginWithGoogle}
+              onClick={handleGoogleLogin}
               className="items-center bg-gray-100 py-5 cursor-pointer hover:bg-white"
             >
               <img src="/icons/google.svg" alt="google" className="size-7" />
@@ -41,9 +50,9 @@ const LoginPage = () => {
           </div>
           <form
             className="flex flex-col text-[1.2em] lg:text-[1.1em] items-center  "
-            action={loginUser}
+            onSubmit={handleSubmit}
           >
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 w-full">
               <div>
                 <label htmlFor="username" className="font-semibold">
                   Username
@@ -56,12 +65,12 @@ const LoginPage = () => {
                     aria-hidden="true"
                   />
                   <input
-                    id="username"
-                    name="username"
+                    id="email"
+                    name="email"
                     type="text"
                     required
-                    placeholder="Enter your username: "
-                    className="pl-1.5 py-1  rounded-r-2xl outline-0 focus:bg-black"
+                    placeholder="yourEmail@email.com "
+                    className=" py-1 rounded-r-2xl outline-0 focus:bg-black text-center w-full"
                   />
                 </div>
               </div>
@@ -81,8 +90,8 @@ const LoginPage = () => {
                     name="password"
                     type="password"
                     required
-                    placeholder="Enter your password: "
-                    className="pl-1.5 py-1  rounded-r-2xl outline-0 focus:bg-black"
+                    placeholder="******** "
+                    className=" py-1  rounded-r-2xl outline-0 focus:bg-black text-center w-full pr-4"
                   />
                 </div>
               </div>
@@ -98,7 +107,7 @@ const LoginPage = () => {
               Don't have an account?<span> </span>
               <Link
                 href={"/register"}
-                className="underline italic hover:text-blue-300 "
+                className="underline hover:text-blue-300 "
               >
                 Register now!
               </Link>
