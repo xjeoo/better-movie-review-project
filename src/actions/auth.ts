@@ -1,19 +1,17 @@
 "use server";
 
-import { loginData, registerData, validateCredentialsResponse } from "../../types/auth";
+import { validateLoginForm, validateRegisterForm } from "@/lib/auth";
+import { loginData, registerData, validateCredentialsResponse } from "../types/auth";
+import dbConnect from "@/lib/database";
+import User from "@/models/User";
+import bcrypt from "bcryptjs";
+import { redirect } from "next/navigation";
+import { createSession } from "@/lib/session";
 
-export async function loginUser(formData: FormData) {
-  const name  = formData.get("username");
-  const password = formData.get("password");
-   
-  // trebuie continuat
-  // ... 
-}
 
 export async function loginWithGoogle(){
 
 }
-
 
 
 export async function validateRegisterData( userData : registerData) : Promise<validateCredentialsResponse>{
@@ -90,4 +88,94 @@ export async function validateLoginData( userData : loginData) : Promise<validat
     ok: true,
     message: "Valid credentials"
   }
+}
+
+
+
+export async function login( prevState: any, formData: FormData){
+  const isValid = validateLoginForm(formData);
+
+  if(!isValid.ok){
+    return {
+      ok: false,
+      message: isValid.message
+    }
+  }
+
+  const email = formData.get("email")?.toString();
+  const password = formData.get("password")?.toString();
+
+  await dbConnect();
+  
+    const user = await User.findOne({email: email});
+    if(!user){
+      return {
+        ok:false,
+        message: "Invalid credentials",
+      }
+    }
+
+    const correctPassword = await bcrypt.compare(password!, user.password)
+
+    if(!correctPassword)
+      return {
+        ok:false,
+        message: "Invalid credentials",
+      }
+    
+    
+    
+    const userInfo = {
+      email: email!,
+      username: user.username,
+      image: user.image || "none",
+      role: user.role
+
+    }
+
+    await createSession(userInfo);
+ 
+   redirect("/");
+  
+}
+
+export async function register( prevState: any, formData: FormData ){
+  const isValid = validateRegisterForm(formData);
+
+  if(!isValid.ok){
+    return {
+        ok: false,
+      message: isValid.message
+    }
+  }
+
+  const username = formData.get("username")?.toString();
+  const email = formData.get("email")?.toString();
+  const password = formData.get("password")?.toString();
+
+  await dbConnect();
+
+  const userExists = await User.findOne({email: email});
+    if(userExists){
+      return {
+        ok:false,
+        message: "User already exists",
+    
+    };
+    }
+    const hashedPassword = await bcrypt.hash(password!, 10);
+  
+    const newUser = new User({
+      username,
+      email,
+      password: hashedPassword,
+      image:"none",
+      role: "user"
+    })
+  
+    await newUser.save();
+
+    redirect("/login")
+
+
 }

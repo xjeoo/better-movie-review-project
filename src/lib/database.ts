@@ -1,8 +1,9 @@
-import mongoose from 'mongoose'; // MI-A SCHIMBAT CHATGPTU VARIANTA DIN JS DE PE UN SITE, IN TS SI TREBUIE SA MAI MA UIT SA INTELEG
-
+import { GoogleUserInfo } from '@/types/auth';
+import User from '@/models/User';
+import mongoose from 'mongoose'; 
 const MONGODB_URI = process.env.MONGODB_URI;
 
-if (!MONGODB_URI) {
+if (!MONGODB_URI) { 
   throw new Error('Please define the MONGODB_URI environment variable');
 }
 
@@ -39,3 +40,44 @@ async function dbConnect(): Promise<typeof mongoose> {
 }
 
 export default dbConnect;
+
+
+
+export async function saveUserToDatabase(user: GoogleUserInfo) {
+  const { email, name, googleId, image } = user;
+
+  await dbConnect();
+
+  // 1. Caută user cu googleId
+  const userWithGoogleId = await User.findOne({ googleId });
+
+  if (userWithGoogleId ) {
+      
+    // User deja există cu acest googleId, nu mai facem nimic
+    return true;
+  }
+
+  // 2. Dacă nu există googleId, caută user cu același email
+  const userWithEmail = await User.findOne({ email });
+
+  if (userWithEmail) {
+    // Dacă există user cu email, dar fără googleId, îi adăugăm googleId
+    userWithEmail.googleId = googleId;
+    if(userWithEmail.image === "none")
+      userWithEmail.image = image
+    await userWithEmail.save();
+    return true;
+  }
+
+  // 3. Dacă nu există deloc user, creăm unul nou
+  const newUser = new User({
+    email,
+    username: name,
+    googleId,
+    image,
+    role: "user",
+  });
+
+  await newUser.save();
+  return true;
+}
