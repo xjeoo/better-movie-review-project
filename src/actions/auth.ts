@@ -9,9 +9,6 @@ import { redirect } from "next/navigation";
 import { createSession } from "@/lib/session";
 
 
-export async function loginWithGoogle(){
-
-}
 
 
 export async function validateRegisterData( userData : registerData) : Promise<validateCredentialsResponse>{
@@ -123,9 +120,8 @@ export async function login( prevState: any, formData: FormData){
         message: "Invalid credentials",
       }
     
-    
-    
     const userInfo = {
+      userId: user._id,
       email: email!,
       username: user.username,
       image: user.image || "none",
@@ -170,6 +166,7 @@ export async function register( prevState: any, formData: FormData ){
       email,
       password: hashedPassword,
       image:"none",
+      emailVerified: false,
       role: "user"
     })
   

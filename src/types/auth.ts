@@ -33,4 +33,5 @@ export type GoogleUserInfo = {
   name: string | null | undefined,
   googleId: string | null | undefined,
   image?: string | null | undefined,
+  emailVerified: boolean,
 }

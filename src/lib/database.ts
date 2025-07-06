@@ -1,7 +1,10 @@
 import { GoogleUserInfo } from '@/types/auth';
 import User from '@/models/User';
 import mongoose from 'mongoose'; 
+import { redirect } from 'next/navigation';
 const MONGODB_URI = process.env.MONGODB_URI;
+
+// DATABASE INITIATION START HERE // SCRISA CU CHATGPT
 
 if (!MONGODB_URI) { 
   throw new Error('Please define the MONGODB_URI environment variable');
@@ -41,10 +44,10 @@ async function dbConnect(): Promise<typeof mongoose> {
 
 export default dbConnect;
 
-
+// DATABASE INITIATION ENDS HERE
 
 export async function saveUserToDatabase(user: GoogleUserInfo) {
-  const { email, name, googleId, image } = user;
+  const { email, name, googleId, image, emailVerified } = user;
 
   await dbConnect();
 
@@ -61,6 +64,8 @@ export async function saveUserToDatabase(user: GoogleUserInfo) {
   const userWithEmail = await User.findOne({ email });
 
   if (userWithEmail) {
+    if(userWithEmail.emailVerified === false && userWithEmail.googleId === undefined)
+      return redirect('/error');
     // Dacă există user cu email, dar fără googleId, îi adăugăm googleId
     userWithEmail.googleId = googleId;
     if(userWithEmail.image === "none")
@@ -75,6 +80,7 @@ export async function saveUserToDatabase(user: GoogleUserInfo) {
     username: name,
     googleId,
     image,
+    emailVerified,
     role: "user",
   });
 

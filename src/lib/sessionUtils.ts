@@ -1,5 +1,7 @@
-import { error } from "console";
 import { jwtVerify, SignJWT } from "jose";
+import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
+import { usePathname } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
 const secret = process.env.SESSION_SECRET;
@@ -32,8 +34,6 @@ export async function updateSession(request : NextRequest){
   if(!session)
     return null;
 
-  console.log("a intrat")
-
   const newExpirationTime = new Date(Date.now() + 1000 * 60 * 60) ;
   // const newExpirationTime = new Date(Date.now() + 1000 * 15) ; //15 sec pentru test
 
@@ -48,20 +48,15 @@ export async function updateSession(request : NextRequest){
   const expirationTime = decrypted.exp;
   const totalDuration = expirationTime! - issuedAt!;
   const timeLeft = expirationTime! - currentTime!;
-
   if(timeLeft >= totalDuration / 4 )
   {
-    console.log("NO REFRESH")
     return null;
 
   }
 
- 
   decrypted!.expiresAt = newExpirationTime;
  
   const newPayload = await encrypt(decrypted, newExpirationTime);
-
-  console.log("REFRESH")
 
   const res = NextResponse.next();
   res.cookies.set({
@@ -73,4 +68,9 @@ export async function updateSession(request : NextRequest){
   })
 
   return res;
+}
+
+export async function logout(){
+  const cookie = await cookies();
+  cookie.set("session", "", { expires: new Date(0) });
 }

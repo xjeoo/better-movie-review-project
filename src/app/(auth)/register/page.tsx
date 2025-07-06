@@ -15,7 +15,7 @@ const RegisterPage = () => {
         />
         <div
           className="bg-dark-transparent backdrop-brightness-90 backdrop-blur-xs 
-          px-3 sm:px-10 pt-5 pb-10 rounded-md min-w-[250px] w-fit mx-auto mt-[70px] lg:mt-[140px] "
+          px-3 sm:px-10 pt-5 pb-10 rounded-md min-w-[250px] w-fit mx-auto mt-[40px] lg:mt-[140px] "
         >
           <Link
             href={"/"}

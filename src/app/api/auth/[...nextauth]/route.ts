@@ -1,7 +1,7 @@
 import { saveUserToDatabase } from '@/lib/database'
 import { createGoogleSession } from '@/lib/session'
 import NextAuth, { NextAuthOptions } from 'next-auth'
-import GoogleProvider from 'next-auth/providers/google'
+import GoogleProvider, { GoogleProfile } from 'next-auth/providers/google'
 
 
 
@@ -25,12 +25,13 @@ import GoogleProvider from 'next-auth/providers/google'
       // Aici salvezi doar ce vrei tu în baza ta de date
       try {
         // Exemplu: salvezi doar email-ul și numele
-        
+        const googleProfile = profile as GoogleProfile;
         await saveUserToDatabase({
           email: user.email,
           name: user.name,
           googleId: account?.providerAccountId,
-          image: user.image, // ---------------------------- Aici o sa adaug si profile.email_verified cand o sa ma prind cum merge
+          image: user.image,
+          emailVerified: googleProfile.email_verified || false, // ---------------------------- Aici o sa adaug si profile.email_verified cand o sa ma prind cum merge
           // Adaugi doar câmpurile pe care le vrei
         })
 
@@ -68,8 +69,6 @@ import GoogleProvider from 'next-auth/providers/google'
   // Configurează redirect-urile
   pages: {
     signIn: '/login',
-    signOut: '/logout',
-    error: '/auth/error',
   }
 }
 

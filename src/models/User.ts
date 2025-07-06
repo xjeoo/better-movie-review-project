@@ -20,6 +20,9 @@ const UserSchema = new mongoose.Schema({
   googleId:{
     type: String
   },
+  emailVerified:{
+    type: Boolean
+  },
   role:{
     type: String,
     default: "user"

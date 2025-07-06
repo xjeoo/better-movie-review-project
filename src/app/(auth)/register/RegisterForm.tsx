@@ -12,7 +12,7 @@ const RegisterForm = () => {
 
   return (
     <form
-      className="flex flex-col text-[1.2em] lg:text-[1.1em] items-center  "
+      className="flex flex-col text-[1.2em] lg:text-[1.1em] items-center"
       action={registerAction}
     >
       <div className="flex flex-col gap-4">
@@ -48,7 +48,7 @@ const RegisterForm = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col lg:flex-row gap-4 items-center">
+        <div className="flex flex-col sm:flex-row gap-4 items-center">
           <div className="flex flex-col">
             <label htmlFor="password">Password</label>
             <input
@@ -60,7 +60,7 @@ const RegisterForm = () => {
               className="pl-3 rounded-2xl outline-1 outline-gray-300 bg-transparent backdrop-brightness-75  py-1 focus:bg-black"
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col w-full">
             <label htmlFor="confirm-password">Confirm password</label>
             <input
               type="password"
