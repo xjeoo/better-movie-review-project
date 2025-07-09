@@ -1,18 +1,21 @@
 import Link from "next/link";
 import React from "react";
+import UserComponent from "./UserComponent";
 
 const Navbar = () => {
   return (
-    <nav className="max-w-dvw flex justify-between text-[1.3em] items-center px-4 py-2">
+    <nav className="relative flex w-full justify-between bg-[#555] h-[50px] items-center px-10">
+      <button>Menu</button>
       <Link
         href={"/"}
-        className="flex items-center h-full px-1.5 outline-1 outline-blue-primary rounded-4xl"
+        className="flex items-center outline-0 outline-white rounded-4xl text-[1.2em]"
       >
-        <img src="/logo.svg" className="size-10" />
-        <span className="ml-1">
-          Movie<span className="text-blue-primary">Hub</span>
+        <img src="/logo.svg" className="size-10 " />
+        <span className="ml-0.5 font-semibold ">
+          Movie<span className="text-blue-primary font-bold">Hub</span>
         </span>
       </Link>
+      <UserComponent />
     </nav>
   );
 };

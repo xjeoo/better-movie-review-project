@@ -1,33 +1,23 @@
-import { jwtVerify, SignJWT } from "jose";
-import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
-import { usePathname } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
+import { decrypt, encrypt } from "./jwt";
+import { userInfo } from "@/types/entites";
 
-const secret = process.env.SESSION_SECRET;
-const encodedSecret = new TextEncoder().encode(secret);
-
-export async function encrypt(payload: any, expiresAt: Date) {
-  const safePayload = JSON.parse(JSON.stringify(payload));
-  const expirationTime = Math.floor(expiresAt.getTime() / 1000)
-  return new SignJWT(safePayload)
-    .setProtectedHeader({ alg: "HS256" })
-    .setIssuedAt()
-    .setExpirationTime(expirationTime)
-    .sign(encodedSecret);
-}
-
-export async function decrypt(session: string | undefined = "") {
-  try {
-    const { payload } = await jwtVerify(session, encodedSecret, {
-      algorithms: ["HS256"],
-    });
-    return payload;
-  } catch (error) {
-    console.log("Failed to verify session");
+export async function getSession(): Promise<userInfo | null>{
+  const cookie = await cookies();
+  const jwt = cookie.get('session')?.value;
+  if(!jwt){
+    console.log(`Can't get session: User not logged in`);
+    return null;
   }
+  const userInfo = await decrypt(jwt.toString());
+  if(!userInfo){
+    console.log(`Can't get session: Decrypt failed`);
+    return null;
+  }
+  
+  return userInfo.data as userInfo;
 }
-
 
 export async function updateSession(request : NextRequest){
   const session = request.cookies.get('session')?.value

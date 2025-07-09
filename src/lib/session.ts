@@ -3,7 +3,7 @@ import { userInfo } from "../types/entites";
 import { cookies  } from "next/headers";
 import dbConnect from "./database";
 import  User  from "@/models/User";
-import { encrypt } from "./sessionUtils";
+import { encrypt } from "./jwt";
 
 
 

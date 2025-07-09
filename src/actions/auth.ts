@@ -60,8 +60,6 @@ export async function validateLoginData( userData : loginData) : Promise<validat
 
   const { username, password } = userData;
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
   if(!username || !password )
     return {
       ok: false,

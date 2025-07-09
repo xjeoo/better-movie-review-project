@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useActionState } from "react";
 import { login } from "@/actions/auth";
-import Image from "next/image";
 const LoginForm = () => {
   const [state, loginAction, isPending] = useActionState(login, undefined);
 

@@ -1,6 +1,4 @@
 "use client";
-import { useEffect, useRef } from "react";
-import { handleCredentialResponse } from "@/lib/auth";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 

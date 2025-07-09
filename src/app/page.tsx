@@ -1,11 +1,17 @@
+import Footer from "@/components/Footer";
 import LogoutButton from "@/components/LogoutButton";
+import Navbar from "@/components/Navbar";
 import React from "react";
 
 const HomePage = () => {
   return (
-    <div>
-      HomePage <LogoutButton />
-    </div>
+    <>
+      <Navbar />
+      <div className="w-full h-full">
+        HomePage <LogoutButton />
+      </div>
+      <Footer />
+    </>
   );
 };
 

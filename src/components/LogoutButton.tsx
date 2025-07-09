@@ -1,5 +1,5 @@
 import { logout } from "@/lib/sessionUtils";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import React from "react";
 
 const LogoutButton = () => {
