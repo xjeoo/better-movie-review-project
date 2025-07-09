@@ -1,14 +1,11 @@
 "use client";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 const GoogleButton = () => {
-  const router = useRouter();
-
   const handleGoogleLogin = async () => {
     try {
       // Autentifică cu Google
-      const result = await signIn("google", {
+      await signIn("google", {
         redirect: false,
         callbackUrl: "/",
       });

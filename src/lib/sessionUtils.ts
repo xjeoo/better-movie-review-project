@@ -46,7 +46,7 @@ export async function updateSession(request : NextRequest){
 
   decrypted!.expiresAt = newExpirationTime;
  
-  const newPayload = await encrypt(decrypted, newExpirationTime);
+  const newPayload = await encrypt(decrypted as userInfo, newExpirationTime);
 
   const res = NextResponse.next();
   res.cookies.set({

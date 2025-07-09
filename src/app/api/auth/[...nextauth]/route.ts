@@ -46,7 +46,7 @@ import GoogleProvider, { GoogleProfile } from 'next-auth/providers/google'
       }
     },
 
-    async jwt({ token, user, account }) {
+    async jwt({ token, account }) {
       // Nu stoca sesiunea în JWT, doar informații minime pentru verificare
       if (account) {
         token.googleId = account.providerAccountId
