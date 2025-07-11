@@ -84,6 +84,7 @@
   --color-blue-primary: #5f9beb;
   --color-blue-primary-lighter: #5f9beb;
   --color-blue-primary-darker: #357bc7;
+  --color-blue-primary-darker-100: #2e6cb0;
 
   --color-brown-primary: #a16415;
 
@@ -144,7 +145,7 @@
 
 body {
   color: white;
-  background-color: #222;
+  background-color: #000000;
 }
 
 input:-webkit-autofill,

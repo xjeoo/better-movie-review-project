@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import { NextResponse, NextRequest } from 'next/server'
 import { updateSession } from './lib/sessionUtils';
   const authRoutes = ["/login", "/register"];
-  const protectedRoutes = ["/"];
+  const protectedRoutes = [""];
 export async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname
 
