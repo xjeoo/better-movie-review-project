@@ -1,6 +1,5 @@
-import Navbar from "@/components/custom_ui/navbar/Navbar";
+import Footer from "@/components/custom_ui/Footer";
 import NavbarSessionProvider from "@/components/NavbarSessionProvider";
-import SessionProvider from "@/components/NavbarSessionProvider";
 
 export default function RootLayout({
   children,
@@ -10,8 +9,9 @@ export default function RootLayout({
   return (
     <>
       <div className="w-full">
-        <NavbarSessionProvider colorType={"dynamic"} />
+        <NavbarSessionProvider colorType="static" />
         {children}
+        <Footer />
       </div>
     </>
   );

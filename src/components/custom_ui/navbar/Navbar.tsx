@@ -1,18 +1,56 @@
+"use client";
 import Link from "next/link";
-import React from "react";
-import { SidebarTrigger } from "../../ui/sidebar";
-import UserComponent from "../../UserComponent";
+// import { SidebarTrigger } from "../../ui/sidebar";
+import { userInfo } from "@/types/entites";
+import UserBox from "./UserBox";
+import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
+import Sidebar from "../sidebar/Sidebar";
 
-const Navbar = () => {
+const Navbar = ({
+  sidebar = false,
+  session,
+  colorType = "static",
+}: {
+  sidebar?: boolean;
+  session: userInfo | null;
+  colorType: "static" | "dynamic" | null;
+}) => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 250); // schimbi pragul după nevoie
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className=" w-full px-2 flex justify-between bg-dark-transparent h-[50px] items-center">
+    <nav
+      className={cn(
+        "fixed w-full px-2 flex justify-between  h-[50px] items-center z-2000 [transition:background-color,550ms]",
+        scrolled || colorType === "static"
+          ? "bg-darker-transparent"
+          : "bg-dark-transparent"
+      )}
+    >
       <div className="flex  gap-6 text-[1.1em] pl-4">
-        <SidebarTrigger className="cursor-pointer hover:bg-blue-primary" />
-        <Link href={"/"} className="mr-10">
-          Home
-        </Link>
+        {sidebar && <Sidebar />}
+        {/* <SidebarTrigger className="cursor-pointer hover:bg-blue-primary" /> */}
       </div>
-      <UserComponent />
+      <Link
+        href={"/"}
+        className="hidden sm:flex  items-center outline-0 outline-white rounded-4xl text-[1.2em] mx-auto"
+      >
+        <img src="/logo.svg" className="size-10 " />
+        <span className="ml-0.5 font-semibold text-white ">
+          Movie<span className="text-blue-primary font-bold">Hub</span>
+        </span>
+      </Link>
+
+      <UserBox session={session} />
     </nav>
   );
 };

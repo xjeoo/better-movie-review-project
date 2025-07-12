@@ -88,9 +88,24 @@
 
   --color-brown-primary: #a16415;
 
+  --color-light-blue-transparent: rgba(0, 40, 180, 0.4);
+
+  --color-light-dark-transparent: rgba(0, 0, 0, 0.2);
   --color-dark-transparent: rgba(0, 0, 0, 0.4);
+  --color-darker-transparent: rgba(0, 0, 0, 0.8);
 
   --color-error: #de0f00;
+}
+
+@media (min-width: 640px) {
+  /* facut de gpt */
+  .sm\:ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
 }
 
 /* @media (prefers-color-scheme: dark) {

@@ -11,7 +11,7 @@ const HomePage = async () => {
   return (
     <>
       <div className="flex-1 sm:flex w-full h-full flex-col">
-        <HomeCarousel movies={movies.results} /> <LogoutButton />
+        <HomeCarousel movies={movies} /> <LogoutButton />
         <Footer />
       </div>
     </>

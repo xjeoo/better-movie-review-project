@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import genres from "@/constants/genres";
 import GenrePill from "../GenrePill";
+import { backDropPath1080 } from "@/constants/movies";
 
 const CarouselCard = ({
   movie,
@@ -14,13 +15,12 @@ const CarouselCard = ({
   index: number;
   maxLength: number;
 }) => {
-  const backDropPath = "https://image.tmdb.org/t/p/original";
   return (
     <Card className="!p-0 items-center bg-dark-transparent border-0">
       <CardContent className="flex w-full h-fit justify-center items-center !px-0  ">
-        <div className="relative w-full h-[1080px] items-center justify-center overflow-hidden">
+        <div className="relative w-full h-[900px] sm:h-[1080px] items-center justify-center overflow-hidden select-none">
           <Image
-            src={backDropPath + movie.backdrop_path}
+            src={backDropPath1080 + movie.backdrop_path}
             alt={movie.title}
             fill
             loading={index === 0 ? "eager" : "lazy"}
@@ -44,9 +44,7 @@ const CarouselCard = ({
                 ))}
               </div>
 
-              <p className="hidden sm:flex text-[1.1em] max-w-[80%] text-neutral-300 text-pretty">
-                {" "}
-                {/* sa pun elipsis la overflow eventual */}
+              <p className="hidden sm:flex text-[1.1em] max-w-[80%] sm:ellipsis text-neutral-300 ">
                 {movie.overview}
               </p>
               <Link

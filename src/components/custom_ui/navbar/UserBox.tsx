@@ -1,8 +1,7 @@
-"use client";
+// "use client"; // fac client cand fac dropdown-ul
 import { userInfo } from "@/types/entites";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
 
 const UserBox = ({ session }: { session: userInfo | null }) => {
   return (
@@ -26,7 +25,9 @@ const UserBox = ({ session }: { session: userInfo | null }) => {
         </>
       ) : (
         <>
-          <Link href={"/login"}>Log In</Link>
+          <Link href={"/login"} className="size-full flex items-center">
+            Log In
+          </Link>
         </>
       )}
     </button>
