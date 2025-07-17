@@ -6,7 +6,7 @@ const CastCard = ({ info }: { info: any }) => {
   return (
     <Link
       href={`/actor/${info.id}`}
-      className="relative flex flex-col w-[180px] mx-auto border-1 border-neutral-400 rounded-xl select-none"
+      className="relative flex flex-col w-[180px] mx-auto border-1 border-neutral-400 rounded-xl select-none "
     >
       <div className="relative w-full aspect-square">
         <Image
@@ -21,9 +21,9 @@ const CastCard = ({ info }: { info: any }) => {
         />
       </div>
 
-      <div className="absolute bottom-0 flex flex-col justify-center items-center w-full bg-neutral-700/60 rounded-b-xl">
+      <div className="absolute text-center bottom-0 flex flex-col justify-center items-center w-full bg-neutral-700/60 rounded-b-xl">
         <span>{info.name}</span>
-        <span>{info.character}</span>
+        <span>-{info.character}-</span>
       </div>
     </Link>
   );

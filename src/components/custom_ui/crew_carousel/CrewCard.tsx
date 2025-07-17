@@ -22,9 +22,9 @@ const CrewCard = ({ info }: { info: any }) => {
         />
       </div>
 
-      <div className="absolute bottom-0 flex flex-col justify-center items-center w-full bg-neutral-700/60 rounded-b-xl">
+      <div className="absolute text-center bottom-0 flex flex-col justify-center items-center w-full bg-neutral-700/60 rounded-b-xl">
         <span>{info.name}</span>
-        <span>{info.job}</span>
+        <span>-{info.job}-</span>
       </div>
     </Link>
   );

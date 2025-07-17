@@ -1,5 +1,6 @@
 import CastCarousel from "@/components/cast_carousel/CastCarousel";
 import CrewCarousel from "@/components/custom_ui/crew_carousel/CrewCarousel";
+import CreateReview from "@/components/CreateReview";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { backDropPath1080, backDropPath720 } from "@/constants/movies";
@@ -27,7 +28,7 @@ const MoviePage = async ({
         <div className="absolute h-[10%] w-full bg-gradient-to-b from-black/90 to-transparent"></div>
         <div className="absolute h-full w-full flex justify-center items-center ">
           <Image
-            src={backDropPath1080 + movie.data.backdrop_path}
+            src={backDropPath720 + movie.data.backdrop_path}
             alt="backdrop"
             fill
             loading="eager"
@@ -37,7 +38,7 @@ const MoviePage = async ({
           <div className="absolute -bottom-5 h-[25%] w-full bg-gradient-to-t from-black to-transparent"></div>
         </div>
 
-        <main className="relative md:border-x-1 border-x-neutral-500 backdrop-blur-md px-2 md:px-0 w-full md:w-[80%] lg:w-[70%] bg-black/70 md:bg-black/80 pt-15 pb-10 z-10 mx-auto text-shadow-2xs text-shadow-black ">
+        <main className="relative lg:border-x-1 border-x-neutral-500 backdrop-blur-md px-2 md:px-0 w-full lg:w-[70%] bg-black/70 md:bg-black/80 pt-15 pb-10 z-10 mx-auto text-shadow-2xs text-shadow-black ">
           <div className="flex flex-col items-center lg:flex-row gap-10 md:gap-5 px-2 md:px-6">
             <div className="flex flex-col gap-2 items-center md:items-start w-full md:w-[80%] lg:w-[55%] text-neutral-200">
               <div>
@@ -110,7 +111,7 @@ const MoviePage = async ({
           </div>
         </main>
       </div>
-      <div className="relative md:border-x-1 border-x-neutral-500 px-2 md:px-6 w-full md:w-[80%] lg:w-[70%] pt-15 z-10 mx-auto text-shadow-2xs text-shadow-black md:rounded-b-md">
+      <div className="relative lg:border-x-1 border-x-neutral-500 px-2 md:px-6 w-full lg:w-[70%] pt-15 z-10 mx-auto text-shadow-2xs text-shadow-black md:rounded-b-md">
         <div className="flex flex-col gap-15">
           <div>
             <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-10">
@@ -130,6 +131,11 @@ const MoviePage = async ({
             <div className="w-[90%] mx-auto flex flex-col">
               <CrewCarousel info={movie.cast.crew.slice(0, 50)} />
             </div>
+          </div>
+          <Separator className="bg-neutral-300 my-10" />
+          <div className="w-full">
+            <h2 className="text-3xl md:text-4xl">Leave a review</h2>
+            <CreateReview />
           </div>
         </div>
       </div>
