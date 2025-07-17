@@ -8,8 +8,8 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <div className="w-full">
-        <NavbarSessionProvider colorType="static" />
+      <NavbarSessionProvider colorType="static" />
+      <div className="w-full pt-15">
         {children}
         <Footer />
       </div>

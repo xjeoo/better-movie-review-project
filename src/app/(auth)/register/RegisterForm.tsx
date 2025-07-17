@@ -12,7 +12,7 @@ const RegisterForm = () => {
 
   return (
     <form
-      className="flex flex-col text-[1.2em] lg:text-[1.1em] items-center"
+      className="w-full flex flex-col text-[1.2em] lg:text-[1.1em] items-center"
       action={registerAction}
     >
       <div className="flex flex-col gap-4">

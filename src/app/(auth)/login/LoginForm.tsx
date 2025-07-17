@@ -13,7 +13,7 @@ const LoginForm = () => {
     >
       <div className="flex flex-col gap-4 w-full">
         <div>
-          <label htmlFor="username" className="font-semibold">
+          <label htmlFor="email" className="font-semibold">
             Email
           </label>
           <div className="flex gap-2 items-center pl-3 rounded-2xl outline-1 outline-gray-300 bg-transparent backdrop-brightness-75">

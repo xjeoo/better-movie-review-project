@@ -30,9 +30,9 @@ const Navbar = ({
   return (
     <nav
       className={cn(
-        "fixed w-full px-2 flex justify-between  h-[50px] items-center z-2000 [transition:background-color,550ms]",
+        "fixed w-full px-2 flex justify-between  h-[50px] items-center z-2000 [transition:background-color,550ms] backdrop-blur-md",
         scrolled || colorType === "static"
-          ? "bg-darker-transparent"
+          ? "bg-black/85"
           : "bg-dark-transparent"
       )}
     >

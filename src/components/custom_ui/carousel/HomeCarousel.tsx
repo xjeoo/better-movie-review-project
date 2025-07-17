@@ -12,6 +12,7 @@ const HomeCarousel = ({ movies }: { movies: any }) => {
   return (
     <Carousel
       orientation="horizontal"
+      opts={{ loop: true }}
       // plugins={[
       //   Autoplay({
       //     delay: 5000,

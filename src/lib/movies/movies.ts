@@ -1,3 +1,4 @@
+import { months } from "@/constants/movies";
 
 
 const TMDB_READ_ACCESS_KEY = process.env.TMDB_READ_ACCESS_KEY
@@ -23,10 +24,35 @@ try {
 
 }
 
+export function formatDate(date: string){
+  const newDate = date.split("-");
+  const year = newDate[0];
+  const monthKey = newDate[1] as keyof typeof months;
+  const month = months[monthKey];
+  const day = parseInt(newDate[2]);
+
+  return `${day} ${month} ${year}`
+
+}
+
+type videoResult = {
+  id: string,
+  iso_639_1: string,
+  iso_3166_1: string,
+  key: string,
+  name: string,
+  site: string,
+  size: number | string,
+  type: string,
+  official: true,
+  published_at: string | Date,
+}
+
 export async function getMovieById(movieId: string)
 {
-  const videourl = `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`;
-  const infourl = `https://api.themoviedb.org/3/movie/${movieId}`;
+  const videoUrl = `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`;
+  const infoUrl = `https://api.themoviedb.org/3/movie/${movieId}`;
+  const castUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits`
 
   const options = { 
   method: 'GET',
@@ -36,16 +62,26 @@ export async function getMovieById(movieId: string)
   }
 };
 
-  const [detailsRes, videosRes] = await Promise.all([
-    fetch(infourl, options),
-    fetch(videourl, options)
+  const [detailsRes, videosRes, castRes] = await Promise.all([
+    fetch(infoUrl, options),
+    fetch(videoUrl, options),
+    fetch(castUrl, options)
   ]);
   if(!detailsRes.ok) console.log("Failed fetching movie details");
   if(!videosRes.ok) console.log("Failed fetching movie videos");
 
+  const trailers = (await videosRes.json()).results.filter((video: videoResult)=>video.name.toLowerCase().includes("trailer") && video.site.toLowerCase().includes("youtube"))
+
+  const cast = await castRes.json();
+
+  const directors = cast.crew.filter((dude: any) => dude.job === "Director");
+
+
   const movieInfo = {
     data: await detailsRes.json(),
-    video: await videosRes.json()
+    video: trailers,
+    cast: cast,
+    directors: directors,
   }
 
   return movieInfo;
