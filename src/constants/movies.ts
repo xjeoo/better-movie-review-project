@@ -4,7 +4,9 @@
  export const posterPathOriginal = "https://image.tmdb.org/t/p/original/"
  export const posterPath500 = "https://image.tmdb.org/t/p/w500/"
 
-export const months = {
+ export const starColor = "#5f9beb";
+ 
+ export const months = {
   "01": "Jan",
   "02": "Feb",
   "03": "Mar",
@@ -17,4 +19,4 @@ export const months = {
   "10": "Oct",
   "11": "Nov",
   "12": "Dec",
-}
+ }

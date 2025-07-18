@@ -2,6 +2,7 @@ import { GoogleUserInfo } from '@/types/auth';
 import User from '@/models/User';
 import mongoose from 'mongoose'; 
 import { redirect } from 'next/navigation';
+import Review from '@/models/Review';
 const MONGODB_URI = process.env.MONGODB_URI;
 
 // DATABASE INITIATION START HERE // SCRISA CU CHATGPT
@@ -86,4 +87,33 @@ export async function saveUserToDatabase(user: GoogleUserInfo) {
 
   await newUser.save();
   return true;
+}
+
+type saveReviewResponse={
+  ok: boolean,
+  text: string;
+}
+export async function saveReviewToDatabase(movieId: string, userId: mongoose.Types.ObjectId, rating: number, text: string):Promise<saveReviewResponse>{
+  await dbConnect();
+  const reviewExists = await Review.findOne({userId, movieId});
+
+  if(reviewExists) return {
+    ok: false,
+    text: "Movie already reviewed"
+  }
+
+  const newReview = new Review({
+    movieId,
+    userId,
+    rating,
+    text
+  });
+
+  await newReview.save();
+
+  return  {
+    ok: true,
+    text: "Review saved"
+  }
+
 }

@@ -94,6 +94,8 @@
   --color-dark-transparent: rgba(0, 0, 0, 0.4);
   --color-darker-transparent: rgba(0, 0, 0, 0.8);
 
+  --color-gray-transparent: rgba(200, 200, 200, 0.2);
+
   --color-error: #de0f00;
 }
 

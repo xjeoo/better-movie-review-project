@@ -18,6 +18,7 @@ const CrewCard = ({ info }: { info: any }) => {
           }
           alt={info.name}
           fill
+          sizes="180px"
           className="object-cover rounded-xl"
         />
       </div>

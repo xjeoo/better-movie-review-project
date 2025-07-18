@@ -1,10 +1,16 @@
 import CastCarousel from "@/components/cast_carousel/CastCarousel";
 import CrewCarousel from "@/components/custom_ui/crew_carousel/CrewCarousel";
-import CreateReview from "@/components/CreateReview";
+import CreateReview from "@/components/reviews/CreateReview";
+import ReviewSection from "@/components/reviews/ReviewSection";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { backDropPath1080, backDropPath720 } from "@/constants/movies";
+import {
+  backDropPath1080,
+  backDropPath720,
+  starColor,
+} from "@/constants/movies";
 import { formatDate, getMovieById } from "@/lib/movies/movies";
+import { getSession } from "@/lib/sessionUtils";
 import { Calendar, Clapperboard, Clock, Star, Video } from "lucide-react";
 import Image from "next/image";
 import React from "react";
@@ -16,11 +22,9 @@ const MoviePage = async ({
 }) => {
   const { movieId } = await params;
   const youtubeUrl = "https://www.youtube.com/embed/";
-  const starColor = "#5f9beb";
 
   const movie = await getMovieById(movieId);
-
-  console.log(movie);
+  const user = await getSession();
 
   return (
     <div className="flex flex-col w-full h-full pb-20 bg-black">
@@ -31,7 +35,9 @@ const MoviePage = async ({
             src={backDropPath720 + movie.data.backdrop_path}
             alt="backdrop"
             fill
+            sizes="100vw"
             loading="eager"
+            priority={true}
             className="relative object-cover blur-xs"
           />
           <div className="absolute -top-5 h-[25%] w-full bg-gradient-to-b from-black to-transparent"></div>
@@ -134,9 +140,9 @@ const MoviePage = async ({
           </div>
           <Separator className="bg-neutral-300 my-10" />
           <div className="w-full">
-            <h2 className="text-3xl md:text-4xl">Leave a review</h2>
-            <CreateReview />
+            <CreateReview movieId={movie.data.id} user={user} />
           </div>
+          <ReviewSection movieId={movie.data.id} />
         </div>
       </div>
     </div>

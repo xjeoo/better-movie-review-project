@@ -13,11 +13,11 @@ const CastCarousel = ({ info }: { info: any }) => {
       <div className="absolute -left-1 w-[5%] h-full bg-gradient-to-r from-black to-transparent z-10" />
       <div className="absolute -right-1 w-[5%] h-full bg-gradient-to-l from-black to-transparent z-10" />
 
-      <Carousel>
+      <Carousel opts={{ dragFree: true }}>
         <CarouselContent>
           {info.map((dude: any, index: number) => (
             <CarouselItem
-              className="!justify-center !items-center basis-1/1 sm:basis-1/2 md:basis-1/3 lg:basis-[29%] xl:basis-1/4 "
+              className="!justify-center !items-center basis-auto "
               key={index}
             >
               <CastCard info={dude} />
