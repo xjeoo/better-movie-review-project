@@ -7,3 +7,11 @@ export type userInfo = {
   image: string,
   role: string
 }
+
+export type ReviewType = {
+  _id: Types.ObjectId | string,
+  userId: string,
+  movieId: string,
+  rating: number,
+  text: string,
+}

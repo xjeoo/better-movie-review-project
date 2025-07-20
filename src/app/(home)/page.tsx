@@ -6,7 +6,6 @@ import HomeCarousel from "@/components/custom_ui/carousel/HomeCarousel";
 
 const HomePage = async () => {
   const movies = await getDiscoverMovies();
-  console.log(movies);
 
   return (
     <>

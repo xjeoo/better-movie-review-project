@@ -3,6 +3,7 @@ import User from '@/models/User';
 import mongoose from 'mongoose'; 
 import { redirect } from 'next/navigation';
 import Review from '@/models/Review';
+import { updateRatingOnCreate } from './movies/reviews';
 const MONGODB_URI = process.env.MONGODB_URI;
 
 // DATABASE INITIATION START HERE // SCRISA CU CHATGPT
@@ -110,6 +111,9 @@ export async function saveReviewToDatabase(movieId: string, userId: mongoose.Typ
   });
 
   await newReview.save();
+
+  await updateRatingOnCreate(movieId, rating);
+
 
   return  {
     ok: true,

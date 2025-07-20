@@ -1,8 +1,7 @@
 "use server"
 
-import dbConnect, { saveReviewToDatabase } from "@/lib/database";
+import { saveReviewToDatabase } from "@/lib/database";
 import { getSession } from "@/lib/sessionUtils";
-import Review from "@/models/Review";
 
 type sumbitResponse={
   ok: boolean,
@@ -59,17 +58,4 @@ export async function submitReview(prevState: any, formData: FormData) : Promise
     text:"Failed to save review"
   }
   }
-}
-
-export async function getReviewsByMovieId(movieId: string){
-  await dbConnect();
-
-  try {
-    const reviews = await Review.find({movieId});
-    return reviews;
-  } catch (err) {
-    console.log(err);
-  }
-
-  return false;
 }

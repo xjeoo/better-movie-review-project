@@ -4,14 +4,18 @@ import CreateReview from "@/components/reviews/CreateReview";
 import ReviewSection from "@/components/reviews/ReviewSection";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import {
-  backDropPath1080,
-  backDropPath720,
-  starColor,
-} from "@/constants/movies";
+import { backDropPath720, starColor } from "@/constants/movies";
 import { formatDate, getMovieById } from "@/lib/movies/movies";
+import { getRatingByMovieId } from "@/lib/movies/reviews";
 import { getSession } from "@/lib/sessionUtils";
-import { Calendar, Clapperboard, Clock, Star, Video } from "lucide-react";
+import {
+  Calendar,
+  Clapperboard,
+  Clock,
+  Star,
+  StarHalf,
+  Video,
+} from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
@@ -24,6 +28,7 @@ const MoviePage = async ({
   const youtubeUrl = "https://www.youtube.com/embed/";
 
   const movie = await getMovieById(movieId);
+  const rating = await getRatingByMovieId(movieId);
   const user = await getSession();
 
   return (
@@ -44,7 +49,7 @@ const MoviePage = async ({
           <div className="absolute -bottom-5 h-[25%] w-full bg-gradient-to-t from-black to-transparent"></div>
         </div>
 
-        <main className="relative lg:border-x-1 border-x-neutral-500 backdrop-blur-md px-2 md:px-0 w-full lg:w-[70%] bg-black/70 md:bg-black/80 pt-15 pb-10 z-10 mx-auto text-shadow-2xs text-shadow-black ">
+        <main className="relative lg:border-x-1 border-x-neutral-500 backdrop-blur-md px-2 md:px-0 w-full lg:w-[70%] bg-black/70 md:bg-black/80 pt-15 -mt-1 pb-10 z-10 mx-auto text-shadow-2xs text-shadow-black ">
           <div className="flex flex-col items-center lg:flex-row gap-10 md:gap-5 px-2 md:px-6">
             <div className="flex flex-col gap-2 items-center md:items-start w-full md:w-[80%] lg:w-[55%] text-neutral-200">
               <div>
@@ -75,15 +80,49 @@ const MoviePage = async ({
                   )
                 )}
               </div>
-              <div className="flex gap-1.5 mt-4 items-center text-xl">
-                {/*------ASTA O SA O SEPAR INTR-O COMPONENTA------- */}
-                <span className="flex text-xl">
-                  {Array.from({ length: 5 }).map((star, index) => (
-                    <Star key={index} fill={starColor} color={starColor} />
-                  ))}
-                </span>{" "}
-                5.0/5.0
-              </div>
+              {rating.averageRating ? (
+                <div className="flex gap-1.5 mt-4 items-center text-xl">
+                  {/*------ASTA O SA O SEPAR INTR-O COMPONENTA------- */}
+                  <span className="flex text-xl">
+                    {Array.from({ length: parseInt(rating.averageRating) }).map(
+                      //map for full stars
+                      (_, index) => (
+                        <Star key={index} fill={starColor} color={starColor} />
+                      )
+                    )}
+                    {Array.from({
+                      // map for decimal part with half star
+                      length:
+                        parseFloat(rating.averageRating) -
+                          parseInt(rating.averageRating) >
+                        0.25
+                          ? 1
+                          : 0,
+                    }).map((_, index) => (
+                      <span className="relative" key={index}>
+                        <Star
+                          color="#b6c1d4"
+                          className="absolute top-0 left-0"
+                        />
+                        <StarHalf
+                          fill={starColor}
+                          color={starColor}
+                          className="absolute top-0 left-0 "
+                        />
+                      </span>
+                    ))}
+                    {Array.from({
+                      // map for remaining empty stars
+                      length: 5 - Math.floor(rating.averageRating),
+                    }).map((_, index) => (
+                      <Star key={index} color="#b6c1d4" />
+                    ))}
+                  </span>
+                  {parseFloat(rating.averageRating).toFixed(1) || "none"}/5
+                </div>
+              ) : (
+                <span className="text-xl">-Not rated yet-</span>
+              )}
               <div>
                 <h3 className="text-xl md:text-2xl w-full text-white mt-10">
                   Overview

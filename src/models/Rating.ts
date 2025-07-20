@@ -13,6 +13,8 @@ const RatingSchema = new mongoose.Schema({
   averageRating:{
     type: Number,
     required: true,
+    min: 1,
+    max: 5
   }
 });
 

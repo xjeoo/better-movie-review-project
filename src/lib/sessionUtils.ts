@@ -3,6 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { decrypt, encrypt } from "./jwt";
 import { userInfo } from "@/types/entites";
 
+export async function getToken(){
+  const cookie = await cookies();
+  const jwt = cookie.get('session')?.value;
+  return jwt || null;
+}
+
 export async function getSession(): Promise<userInfo | null>{
   const cookie = await cookies();
   const jwt = cookie.get('session')?.value;
