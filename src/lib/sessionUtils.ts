@@ -40,8 +40,8 @@ export async function updateSession(request : NextRequest){
   }
 
   const currentTime = Math.floor( Date.now() / 1000 );
-  const issuedAt = decrypted.iat //  
-  const expirationTime = decrypted.exp;
+  const issuedAt = decrypted?.iat //  
+  const expirationTime = decrypted?.exp;
   const totalDuration = expirationTime! - issuedAt!;
   const timeLeft = expirationTime! - currentTime!;
   if(timeLeft >= totalDuration / 4 )

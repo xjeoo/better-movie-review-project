@@ -49,8 +49,8 @@ const MoviePage = async ({
           <div className="absolute -bottom-5 h-[25%] w-full bg-gradient-to-t from-black to-transparent"></div>
         </div>
 
-        <main className="relative lg:border-x-1 border-x-neutral-500 backdrop-blur-md px-2 md:px-0 w-full lg:w-[70%] bg-black/70 md:bg-black/80 pt-15 -mt-1 pb-10 z-10 mx-auto text-shadow-2xs text-shadow-black ">
-          <div className="flex flex-col items-center lg:flex-row gap-10 md:gap-5 px-2 md:px-6">
+        <main className="relative xl:border-x-1 border-x-neutral-500 backdrop-blur-md px-2 md:px-0 w-full xl:w-[70%] bg-black/70 md:bg-black/80 pt-15 -mt-1 pb-10 z-10 mx-auto text-shadow-2xs text-shadow-black ">
+          <div className="flex flex-col items-center lg:flex-row gap-10 md:gap-5 px-2 md:px-2 xl:px-6">
             <div className="flex flex-col gap-2 items-center md:items-start w-full md:w-[80%] lg:w-[55%] text-neutral-200">
               <div>
                 <h2 className="text-4xl text-white md:text-5xl font-semibold text-center mb-2">
@@ -156,7 +156,7 @@ const MoviePage = async ({
           </div>
         </main>
       </div>
-      <div className="relative lg:border-x-1 border-x-neutral-500 px-2 md:px-6 w-full lg:w-[70%] pt-15 z-10 mx-auto text-shadow-2xs text-shadow-black md:rounded-b-md">
+      <div className="relative xl:border-x-1 border-x-neutral-500 px-2 md:px-6 w-full xl:w-[70%] pt-15 z-10 mx-auto text-shadow-2xs text-shadow-black md:rounded-b-md">
         <div className="flex flex-col gap-15">
           <div>
             <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-10">

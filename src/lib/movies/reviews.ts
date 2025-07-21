@@ -67,7 +67,25 @@ export async function deleteReviewById(reviewId: Types.ObjectId | string){
     console.log(err);
     return false;
   }
+}
 
+export async function editReviewById(reviewId: Types.ObjectId | string, newRating: number, newText: string){
+  await dbConnect();
+  try {
+    const review = await Review.findById(reviewId);
+    review.rating = newRating;
+    review.text = newText;
+    try {
+      await review.save();
+      return true;
+    } catch (err) {
+      console.log('Failed updating review:', err);
+      return false
+    }
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
 }
 
 
@@ -108,4 +126,24 @@ export async function updateRatingOnDelete(movieId: string, deletedReviewRating:
     return false
   }
   
+}
+
+export async function updateRatingOnUpdate(movieId: string,  oldRating: number, newRating: number ){
+  await dbConnect();
+  try {
+    const currentRating = await Rating.findOne({movieId});
+    if(!currentRating) return false;
+    const newAverageRating = ((currentRating.averageRating * currentRating.numberOfReviews) - oldRating + newRating )/ currentRating.numberOfReviews;
+    try {
+      currentRating.averageRating = newAverageRating;
+      await currentRating.save();
+      return true
+    } catch (err) {
+      console.log('Failed updating average rating:',err)
+      return false;
+    }
+  } catch (err) {
+    console.log('Database error', err);
+    return false;
+  }
 }

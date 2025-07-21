@@ -78,7 +78,7 @@ const CreateReview = ({
                 <p
                   className={cn(
                     "text-[1.1em]",
-                    state.ok ? "text-blue-300" : "text-error"
+                    state.ok ? "text-blue-300" : "text-red-400"
                   )}
                 >
                   {state.text}
