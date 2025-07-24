@@ -4,7 +4,7 @@ import { cn, handleProfilePicture } from "@/lib/utils";
 import { SquarePen, Star, Trash2, X } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const OwnedReview = ({
   username,

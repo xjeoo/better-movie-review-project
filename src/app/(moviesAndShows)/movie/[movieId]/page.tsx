@@ -69,10 +69,12 @@ const MoviePage = async ({
                   <Calendar className="flex " />{" "}
                   {formatDate(movie.data.release_date)}
                 </span>
-                <span className="flex gap-1.5 items-center">
-                  <Clock />
-                  {movie.data.runtime}m
-                </span>
+                {movie.data.runtime > 0 && (
+                  <span className="flex gap-1.5 items-center">
+                    <Clock />
+                    {movie.data.runtime}m
+                  </span>
+                )}
               </div>
               <div className="flex flex-wrap justify-center md:justify-start w-full md:w-[75%] gap-1 ">
                 {movie.data.genres.map(
@@ -155,6 +157,9 @@ const MoviePage = async ({
                       {movie.directors.map((director: any, index: number) => (
                         <span key={index} className="text-xl">
                           {director.name}
+                          {movie.directors.length > 1 &&
+                            movie.directors[index + 1] &&
+                            ", "}
                         </span>
                       ))}
                     </span>
@@ -179,7 +184,7 @@ const MoviePage = async ({
               <span>Cast</span>
             </h3>
             <div className="w-[90%] mx-auto flex flex-col">
-              <CastCarousel info={movie.cast.cast.slice(0, 50)} />
+              <CastCarousel info={movie.cast.cast.slice(0, 20)} />
             </div>
           </div>
           <div>
@@ -189,7 +194,7 @@ const MoviePage = async ({
               <p>Crew</p>
             </h3>
             <div className="w-[90%] mx-auto flex flex-col">
-              <CrewCarousel info={movie.cast.crew.slice(0, 50)} />
+              <CrewCarousel info={movie.cast.crew.slice(0, 20)} />
             </div>
           </div>
           <div className="flex flex-col w-full">

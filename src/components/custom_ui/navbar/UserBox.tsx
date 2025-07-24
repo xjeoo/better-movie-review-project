@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const UserBox = ({ session }: { session: userInfo | null }) => {
   return (
-    <button className="flex items-center cursor-pointer hover:bg-gray-900 pl-4 pr-1 sm:pr-8 w-fit h-full ">
+    <button className="flex items-center cursor-pointer hover:bg-gray-900 pl-4 pr-1 sm:pr-8 min-w-fit w-fit h-full ">
       {session ? (
         <>
           <Image

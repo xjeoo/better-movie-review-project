@@ -20,3 +20,13 @@
   "11": "Nov",
   "12": "Dec",
  }
+
+ export const TMDB_READ_ACCESS_KEY = process.env.TMDB_READ_ACCESS_KEY;
+
+ export const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${TMDB_READ_ACCESS_KEY}`,
+    },
+  };
