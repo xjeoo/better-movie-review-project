@@ -1,3 +1,4 @@
+import { JWTPayload } from "jose";
 import { userInfo } from "./entites";
 
 
@@ -23,7 +24,7 @@ export type credentialResponse ={
         credential: string,
 }
 
-export type SessionPayload = {
+export interface SessionPayload extends JWTPayload  {
   data: userInfo;
   expiresAt: Date;
 };

@@ -171,7 +171,9 @@ const OwnedReview = ({
           ? Array.from({ length: 5 }).map((star, index) => (
               <Star
                 key={index}
-                className={cn("size-6 cursor-pointer hover:scale-110  ")}
+                className={cn(
+                  "size-6 cursor-pointer scale-105 hover:scale-115  "
+                )}
                 color={index + 1 > newRating ? "#b6c1d4" : "#5fb8eb"}
                 fill={index + 1 <= newRating ? "#5fb8eb" : ""}
                 onClick={() => setNewRating(index + 1)}

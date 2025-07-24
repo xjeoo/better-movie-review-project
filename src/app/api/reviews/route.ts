@@ -1,4 +1,4 @@
-import { decrypt } from "@/lib/jwt";
+import { decrypt } from "@/lib/auth/jwt";
 import { deleteReviewById, editReviewById, updateRatingOnDelete, updateRatingOnUpdate } from "@/lib/movies/reviews";
 import { userOwnsReview } from "@/lib/user/user";
 import { userInfo } from "@/types/entites";
@@ -11,9 +11,9 @@ export async function DELETE(request : NextRequest){
   const token = authorizationHeader.split(' ')[1];
   
   const {reviewId, movieId, rating} = await request.json();
-  if(!reviewId) return NextResponse.json({error:'Review id missing'},{status:401});
-  if(!movieId) return NextResponse.json({error:'Movie id missing'},{status:401});
-  if(!rating) return NextResponse.json({error:'Rating missing'},{status:401});
+  if(!reviewId) return NextResponse.json({error:'Review id missing'},{status:400});
+  if(!movieId) return NextResponse.json({error:'Movie id missing'},{status:400});
+  if(!rating) return NextResponse.json({error:'Rating missing'},{status:400});
 
 
   const userInfo = await decrypt(token);

@@ -1,7 +1,7 @@
 "use server"
 
 import { saveReviewToDatabase } from "@/lib/database";
-import { getSession } from "@/lib/sessionUtils";
+import { getSession } from "@/lib/auth/sessionUtils";
 
 type sumbitResponse={
   ok: boolean,

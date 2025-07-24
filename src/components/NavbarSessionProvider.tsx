@@ -1,4 +1,4 @@
-import { getSession } from "@/lib/sessionUtils";
+import { getSession } from "@/lib/auth/sessionUtils";
 import Navbar from "./custom_ui/navbar/Navbar";
 
 const NavbarSessionProvider = async ({

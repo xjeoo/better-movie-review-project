@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { decrypt, encrypt } from "./jwt";
+import { decrypt, encrypt } from "../auth/jwt";
 import { userInfo } from "@/types/entites";
 
 export async function getToken(){
@@ -34,7 +34,7 @@ export async function updateSession(request : NextRequest){
   // const newExpirationTime = new Date(Date.now() + 1000 * 15) ; //15 sec pentru test
 
   const decrypted = await decrypt(session);
-  if(decrypted === undefined) {
+  if(decrypted === undefined || decrypted === null) {
     console.warn("Session decryption failed.");
     return null; 
   }
@@ -52,7 +52,7 @@ export async function updateSession(request : NextRequest){
 
   decrypted!.expiresAt = newExpirationTime;
  
-  const newPayload = await encrypt(decrypted as userInfo, newExpirationTime);
+  const newPayload = await encrypt(decrypted, newExpirationTime);
 
   const res = NextResponse.next();
   res.cookies.set({

@@ -1,12 +1,12 @@
 "use server";
 
-import { validateLoginForm, validateRegisterForm } from "@/lib/auth";
+import { validateLoginForm, validateRegisterForm } from "@/lib/auth/auth";
 import { loginData, registerData, validateCredentialsResponse } from "../types/auth";
 import dbConnect from "@/lib/database";
 import User from "@/models/User";
 import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
-import { createSession } from "@/lib/session";
+import { createSession } from "@/lib/auth/session";
 
 
 

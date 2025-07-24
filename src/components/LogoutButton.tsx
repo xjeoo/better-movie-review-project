@@ -1,23 +1,23 @@
-import { logout } from "@/lib/sessionUtils";
-import { redirect } from "next/navigation";
-import React from "react";
+"use client";
+import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
-const LogoutButton = () => {
+const LogoutButton = ({ className }: { className?: string }) => {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    const res = await fetch("/api/auth/logout");
+    const data = await res.json();
+    if (data.message) return router.refresh();
+    else return console.log(data.error);
+  };
   return (
-    <form
-      action={async () => {
-        "use server";
-        await logout();
-        redirect("/");
-      }}
+    <button
+      className={cn("bg-red-700 w-fit cursor-pointer", className)}
+      onClick={handleLogout}
     >
-      <button
-        className="px-3 py-1.5 bg-red-700 text-white rounded-xl cursor-pointer hover:bg-red-800 transition-colors"
-        type="submit"
-      >
-        Logout
-      </button>
-    </form>
+      Log out
+    </button>
   );
 };
 

@@ -1,5 +1,5 @@
 
-import { validateCredentialsResponse } from "../types/auth";
+import { validateCredentialsResponse } from "../../types/auth";
 
 
 

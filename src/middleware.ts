@@ -1,7 +1,7 @@
 // app/middleware.ts
 import { cookies } from 'next/headers';
 import { NextResponse, NextRequest } from 'next/server'
-import { updateSession } from './lib/sessionUtils';
+import { updateSession } from './lib/auth/sessionUtils';
   const authRoutes = ["/login", "/register"];
   const protectedRoutes = [""];
 export async function middleware(req: NextRequest) {

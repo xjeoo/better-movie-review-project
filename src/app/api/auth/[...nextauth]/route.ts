@@ -1,5 +1,5 @@
 import { saveUserToDatabase } from '@/lib/database'
-import { createGoogleSession } from '@/lib/session'
+import { createGoogleSession } from '@/lib/auth/session'
 import NextAuth, { NextAuthOptions } from 'next-auth'
 import GoogleProvider, { GoogleProfile } from 'next-auth/providers/google'
 

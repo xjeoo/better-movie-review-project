@@ -1,9 +1,9 @@
 
-import { userInfo } from "../types/entites";
+import { userInfo } from "../../types/entites";
 import { cookies  } from "next/headers";
-import dbConnect from "./database";
+import dbConnect from "../database";
 import  User  from "@/models/User";
-import { encrypt } from "./jwt";
+import { encrypt } from "../auth/jwt";
 
 
 

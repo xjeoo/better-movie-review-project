@@ -1,13 +1,13 @@
-import CastCarousel from "@/components/cast_carousel/CastCarousel";
+import CastCarousel from "@/components/custom_ui/cast_carousel/CastCarousel";
 import CrewCarousel from "@/components/custom_ui/crew_carousel/CrewCarousel";
+import SimilarCarousel from "@/components/custom_ui/similar_carousel/RecommendationCarousel";
+import WatchlistButton from "@/components/watchlist/WatchlistButton";
 import CreateReview from "@/components/reviews/CreateReview";
 import ReviewSection from "@/components/reviews/ReviewSection";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { backDropPath720, starColor } from "@/constants/movies";
-import { formatDate, getMovieById } from "@/lib/movies/movies";
-import { getRatingByMovieId } from "@/lib/movies/reviews";
-import { getSession } from "@/lib/sessionUtils";
+import { formatDate, getInfoForMoviePage } from "@/lib/movies/movies";
 import {
   Calendar,
   Clapperboard,
@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import { existsInWatchlist } from "@/lib/user/watchlist";
 
 const MoviePage = async ({
   params,
@@ -27,9 +28,15 @@ const MoviePage = async ({
   const { movieId } = await params;
   const youtubeUrl = "https://www.youtube.com/embed/";
 
-  const movie = await getMovieById(movieId);
-  const rating = await getRatingByMovieId(movieId);
-  const user = await getSession();
+  const { movie, rating, user, token, reviews } = await getInfoForMoviePage(
+    movieId
+  );
+
+  const addedToWatchList = await existsInWatchlist(
+    movieId,
+    user?.userId.toString(),
+    "movie"
+  );
 
   return (
     <div className="flex flex-col w-full h-full pb-20 bg-black">
@@ -101,7 +108,7 @@ const MoviePage = async ({
                     }).map((_, index) => (
                       <span className="relative" key={index}>
                         <Star
-                          color="#b6c1d4"
+                          color={starColor}
                           className="absolute top-0 left-0"
                         />
                         <StarHalf
@@ -115,14 +122,22 @@ const MoviePage = async ({
                       // map for remaining empty stars
                       length: 5 - Math.floor(rating.averageRating),
                     }).map((_, index) => (
-                      <Star key={index} color="#b6c1d4" />
+                      <Star key={index} color={starColor} />
                     ))}
                   </span>
+                  {/*" old star color: #b6c1d4" */}
                   {parseFloat(rating.averageRating).toFixed(1) || "none"}/5
                 </div>
               ) : (
                 <span className="text-xl">-Not rated yet-</span>
               )}
+              <WatchlistButton
+                token={token}
+                contentId={movieId}
+                userId={user?.userId.toString()}
+                type="movie"
+                isAdded={addedToWatchList}
+              />
               <div>
                 <h3 className="text-xl md:text-2xl w-full text-white mt-10">
                   Overview
@@ -149,7 +164,7 @@ const MoviePage = async ({
             </div>
             <div className="w-full md:w-[80%] lg:w-[55%]  flex justify-center items-center">
               <iframe
-                src={youtubeUrl + movie.video[0].key}
+                src={youtubeUrl + movie.video[0]?.key}
                 className="w-full aspect-video rounded-md border-1 border-neutral-500"
               ></iframe>
             </div>
@@ -168,7 +183,7 @@ const MoviePage = async ({
             </div>
           </div>
           <div>
-            <h3 className="flex gap-2 text-2xl md:text-4xl text-white mb-10">
+            <h3 className="flex gap-2 text-2xl md:text-4xl text-white items-center mb-10">
               <Video className="size-8" />
 
               <p>Crew</p>
@@ -177,11 +192,25 @@ const MoviePage = async ({
               <CrewCarousel info={movie.cast.crew.slice(0, 50)} />
             </div>
           </div>
+          <div className="flex flex-col w-full">
+            <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-10">
+              You might also like:
+            </h3>
+            <div className="mx-auto w-[90%]">
+              <SimilarCarousel info={movie.recommendations} />
+            </div>
+          </div>
+
           <Separator className="bg-neutral-300 my-10" />
           <div className="w-full">
             <CreateReview movieId={movie.data.id} user={user} />
           </div>
-          <ReviewSection movieId={movie.data.id} />
+          <ReviewSection
+            movieId={movie.data.id}
+            reviews={reviews}
+            token={token}
+            user={user}
+          />
         </div>
       </div>
     </div>

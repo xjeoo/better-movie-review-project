@@ -1,17 +1,21 @@
 import { getReviewsByMovieId } from "@/lib/movies/reviews";
 import React from "react";
 import Review from "./Review";
-import { ReviewType } from "@/types/entites";
-import { getSession, getToken } from "@/lib/sessionUtils";
+import { ReviewType, userInfo } from "@/types/entites";
+import { getSession, getToken } from "@/lib/auth/sessionUtils";
 import OwnedReview from "./OwnedReview";
 
-const ReviewSection = async ({ movieId }: { movieId: string }) => {
-  const reviews = await getReviewsByMovieId(movieId);
-  const user = await getSession();
-  const token = await getToken();
-  // E CEVA STRICAT CA NU MA LASA SA TRIMIT PROPS CUM VREAU
-
-  console.log(reviews);
+const ReviewSection = async ({
+  movieId,
+  token,
+  user,
+  reviews,
+}: {
+  movieId: string;
+  token: string | null;
+  user: userInfo | null;
+  reviews: any;
+}) => {
   return (
     <div className="w-full sm:w-[65%] lg:w-[50%] flex flex-col gap-2">
       {reviews && reviews.length > 0 ? (

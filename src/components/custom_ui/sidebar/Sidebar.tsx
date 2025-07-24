@@ -5,8 +5,10 @@ import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { PanelLeftIcon } from "lucide-react";
+import LogoutButton from "@/components/LogoutButton";
+import { userInfo } from "@/types/entites";
 
-const Sidebar = () => {
+const Sidebar = ({ session }: { session: userInfo | null }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
 
@@ -67,7 +69,7 @@ const Sidebar = () => {
       >
         <div
           className={cn(
-            "flex flex-col w-[70%] sm:w-[300px] bg-gradient-to-r from-black to-darker-transparent h-full py-3 px-2 border-r-1 border-neutral-500 rounded-md",
+            "flex flex-col w-[70%] sm:w-[300px] bg-gradient-to-r from-black to-black/90 h-full py-3 px-2 border-r-1 border-neutral-500 rounded-md",
             isOpen
               ? "animate-in slide-in-from-left duration-100"
               : "animate-out slide-out-to-left duration-100"
@@ -87,17 +89,24 @@ const Sidebar = () => {
 
             <Separator className="bg-neutral-500" />
           </div>
-          <div className="flex flex-col gap-5 mt-8 px-1">
-            {items.map((item, index) => (
-              <Link
-                key={index}
-                href={item.url}
-                className="flex items-center w-full rounded-sm hover:bg-neutral-700 h-[2.5em] pl-8"
-              >
-                <item.icon className="mr-4" />
-                {item.title}
-              </Link>
-            ))}
+          <div className="flex flex-col justify-between h-full gap-5 mt-8 px-1">
+            <div>
+              {items.map((item, index) => (
+                <Link
+                  key={index}
+                  href={item.url}
+                  className="flex items-center w-full rounded-sm hover:bg-neutral-700 h-[2.5em] pl-8"
+                >
+                  <item.icon className="mr-4" />
+                  {item.title}
+                </Link>
+              ))}
+            </div>
+            {session && (
+              <div>
+                <LogoutButton className="w-full rounded-md py-2" />
+              </div>
+            )}
           </div>
         </div>
         <div className="flex-1 h-full" onClick={toggle}></div>
