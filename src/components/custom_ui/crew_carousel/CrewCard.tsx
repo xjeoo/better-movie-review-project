@@ -6,7 +6,7 @@ import React from "react";
 const CrewCard = ({ info }: { info: any }) => {
   return (
     <Link
-      href={`/crew/${info.id}`}
+      href={`/person/${info.id}`}
       className="relative flex flex-col w-[180px] mx-auto border-1 border-neutral-400 rounded-xl select-none"
     >
       <div className="group relative w-full aspect-square">

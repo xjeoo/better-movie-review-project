@@ -28,7 +28,6 @@ const OwnedReview = ({
   const [isEditing, setIsEditing] = useState(false);
   const [newRating, setNewRating] = useState(rating);
   const [newText, setNewText] = useState(text);
-  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   if (!username || !image || !text || !rating) return <div>Loading</div>;
 
@@ -78,10 +77,8 @@ const OwnedReview = ({
     const data = await res.json();
     if (data.error) {
       setError(data.error);
-      setMessage("");
     } else if (data.message) {
       setError("");
-      setMessage(data.message);
     }
     setIsEditing(false);
     setError("");

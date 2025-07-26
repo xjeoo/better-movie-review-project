@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Clapperboard, Popcorn, Home, Search, Settings } from "lucide-react";
+import { Clapperboard, Popcorn, Home } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -19,26 +19,21 @@ const Sidebar = ({ session }: { session: userInfo | null }) => {
       icon: Home,
     },
     {
-      title: "Search",
-      url: "#",
-      icon: Search,
-    },
-    {
       title: "Movies",
-      url: "#",
+      url: "/movies",
       icon: Clapperboard,
     },
     {
       title: "TV Shows",
-      url: "#",
+      url: "/tv",
       icon: Popcorn,
     },
 
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings,
-    },
+    // {
+    //   title: "Settings",
+    //   url: "#",
+    //   icon: Settings,
+    // },
   ];
 
   const toggle = () => {

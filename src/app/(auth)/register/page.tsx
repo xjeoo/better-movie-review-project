@@ -21,7 +21,7 @@ const RegisterPage = () => {
             href={"/"}
             className="flex items-center h-full px-1.5 outline-0 outline-white rounded-4xl mb-4 w-fit mx-auto text-[1.2em]"
           >
-            <img src="/logo.svg" className="size-10 " />
+            <img src="/logo.svg" alt="logo" className="size-10 " />
             <span className="ml-0.5 font-semibold ">
               Movie<span className="text-blue-primary font-bold">Hub</span>
             </span>

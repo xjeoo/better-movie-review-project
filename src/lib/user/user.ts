@@ -37,6 +37,7 @@ export async function userOwnsReview(userId: string | Types.ObjectId, reviewId: 
       message:"User does not own review"
     }
   } catch (error) {
+    console.log(error);
     return {
       ok: false,
       message: "Database operation failed"

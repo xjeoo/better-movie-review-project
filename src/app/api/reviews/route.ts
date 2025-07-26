@@ -58,7 +58,7 @@ export async function PATCH(request: NextRequest){
   if(!ratingUpdated)return NextResponse.json({error: 'Failed to update rating'},{status:500});
 
   const reviewUpdated = await editReviewById(reviewId, parseInt(newRating), newText);
-  if(!ratingUpdated)return NextResponse.json({error: 'Failed to update review'},{status:500});
+  if(!reviewUpdated)return NextResponse.json({error: 'Failed to update review'},{status:500});
 
   return NextResponse.json({message: 'Review edited successfuly'},{status:200})
 }

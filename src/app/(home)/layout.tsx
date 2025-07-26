@@ -1,6 +1,4 @@
-import Navbar from "@/components/custom_ui/navbar/Navbar";
 import NavbarSessionProvider from "@/components/NavbarSessionProvider";
-import SessionProvider from "@/components/NavbarSessionProvider";
 
 export default function RootLayout({
   children,

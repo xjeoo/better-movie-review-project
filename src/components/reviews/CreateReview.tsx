@@ -3,8 +3,7 @@ import { submitReview } from "@/actions/reviews";
 import { starColor } from "@/constants/movies";
 import { cn } from "@/lib/utils";
 import { userInfo } from "@/types/entites";
-import { Divide, LoaderCircle, Lock, Star } from "lucide-react";
-import { revalidatePath } from "next/cache";
+import { LoaderCircle, Lock, Star } from "lucide-react";
 import Link from "next/link";
 import { useActionState, useState } from "react";
 

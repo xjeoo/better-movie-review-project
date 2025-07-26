@@ -5,7 +5,7 @@ import Link from "next/link";
 const CastCard = ({ info }: { info: any }) => {
   return (
     <Link
-      href={`/actor/${info.id}`}
+      href={`/person/${info.id}`}
       className="group relative flex flex-col w-[180px] mx-auto border-1 border-neutral-400 rounded-xl select-none "
     >
       <div className="relative w-full aspect-square">

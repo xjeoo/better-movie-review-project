@@ -44,13 +44,13 @@ const Navbar = ({
         href={"/"}
         className="hidden absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 lg:flex  items-center outline-0 outline-white rounded-4xl text-[1.2em] mx-auto"
       >
-        <img src="/logo.svg" className="size-10 " />
+        <img src="/logo.svg" alt="logo" className="size-10 " />
         <span className="ml-0.5 font-semibold text-white ">
           Movie<span className="text-blue-primary font-bold">Hub</span>
         </span>
       </Link>
       <div className="flex gap-0.5 sm:gap-2 justify-end items-center h-full flex-2">
-        <Searchbar />
+        <Searchbar scrolled={scrolled} colorType={colorType} />
         <UserBox session={session} />
       </div>
     </nav>

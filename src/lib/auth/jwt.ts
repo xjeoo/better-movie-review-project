@@ -1,6 +1,5 @@
 import { SessionPayload } from "@/types/auth";
-import { userInfo } from "@/types/entites";
-import { JWTPayload, jwtVerify, SignJWT } from "jose";
+import { jwtVerify, SignJWT } from "jose";
 
 
 const secret = process.env.SESSION_SECRET;

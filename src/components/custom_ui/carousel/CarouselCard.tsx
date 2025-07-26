@@ -6,15 +6,7 @@ import genres from "@/constants/genres";
 import GenrePill from "../GenrePill";
 import { backDropPath1080 } from "@/constants/movies";
 
-const CarouselCard = ({
-  movie,
-  index,
-  maxLength = 20,
-}: {
-  movie: any;
-  index: number;
-  maxLength: number;
-}) => {
+const CarouselCard = ({ movie, index }: { movie: any; index: number }) => {
   return (
     <Card className="!p-0 items-center bg-dark-transparent border-0">
       <CardContent className="flex w-full h-fit justify-center items-center !px-0  ">

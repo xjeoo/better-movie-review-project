@@ -1,17 +1,13 @@
-import { getReviewsByMovieId } from "@/lib/movies/reviews";
 import React from "react";
 import Review from "./Review";
 import { ReviewType, userInfo } from "@/types/entites";
-import { getSession, getToken } from "@/lib/auth/sessionUtils";
 import OwnedReview from "./OwnedReview";
 
 const ReviewSection = async ({
-  movieId,
   token,
   user,
   reviews,
 }: {
-  movieId: string;
   token: string | null;
   user: userInfo | null;
   reviews: any;
