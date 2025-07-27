@@ -2,9 +2,14 @@ import mongoose from 'mongoose';
 
 const RatingSchema = new mongoose.Schema({
   
-  movieId: {
+  contentId: {
     type: String,
     required: true,
+  },
+  type:{
+    type: String,
+    required: true,
+    enum: ["movie", "tv"]
   },
   numberOfReviews:{
     type: Number,

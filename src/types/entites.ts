@@ -11,7 +11,11 @@ export type userInfo = {
 export type ReviewType = {
   _id: Types.ObjectId | string,
   userId: string,
-  movieId: string,
+  contentId: string,
+  type: string,
   rating: number,
   text: string,
+  createdAt: Date,
+  updatedAt: Date,
+
 }

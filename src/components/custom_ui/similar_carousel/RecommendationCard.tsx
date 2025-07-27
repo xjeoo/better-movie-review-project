@@ -11,7 +11,7 @@ const RecommendationCard = ({ info, type }: { info: any; type: string }) => {
     >
       <Image
         src={posterPath500 + info.poster_path}
-        alt={info.title}
+        alt={info.title || info.name}
         width={250}
         height={375}
         loading="lazy"

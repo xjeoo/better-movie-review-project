@@ -1,13 +1,12 @@
 import CastCarousel from "@/components/custom_ui/cast_carousel/CastCarousel";
 import CrewCarousel from "@/components/custom_ui/crew_carousel/CrewCarousel";
-import SimilarCarousel from "@/components/custom_ui/similar_carousel/RecommendationCarousel";
 import WatchlistButton from "@/components/watchlist/WatchlistButton";
 import CreateReview from "@/components/reviews/CreateReview";
 import ReviewSection from "@/components/reviews/ReviewSection";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { backDropPath720, starColor } from "@/constants/movies";
-import { formatDate, getInfoForMoviePage } from "@/lib/movies/movies";
+import { getInfoForMoviePage } from "@/lib/movies/movies";
 import {
   Calendar,
   Clapperboard,
@@ -17,8 +16,10 @@ import {
   Video,
 } from "lucide-react";
 import Image from "next/image";
-import React from "react";
 import { existsInWatchlist } from "@/lib/user/watchlist";
+import AgeRating from "@/components/custom_ui/AgeRating";
+import { formatDate } from "@/lib/utils";
+import RecommendationsCarousel from "@/components/custom_ui/similar_carousel/RecommendationCarousel";
 
 const MoviePage = async ({
   params,
@@ -69,6 +70,7 @@ const MoviePage = async ({
                 </h2>
               </div>
               <div className="flex gap-3">
+                <AgeRating ageRating={movie.ageRating} />
                 {movie.data.release_date && (
                   <span className="flex gap-1.5 items-center">
                     <Calendar className="flex " />{" "}
@@ -150,7 +152,11 @@ const MoviePage = async ({
                 <h3 className="text-xl md:text-2xl w-full text-white mt-10">
                   Overview
                 </h3>
-                <p className="text-[1.05em]">{movie.data.overview}</p>
+                {movie.data.overview ? (
+                  <p className="text-[1.05em]">{movie.data.overview}</p>
+                ) : (
+                  <p className="text-[1.05em] mt-5">No overview yet</p>
+                )}
               </div>
               {movie.directors.length > 0 && (
                 <>
@@ -208,15 +214,27 @@ const MoviePage = async ({
               You might also like:
             </h3>
             <div className="mx-auto w-[90%]">
-              <SimilarCarousel info={movie.recommendations} />
+              <RecommendationsCarousel
+                info={movie.recommendations}
+                type={"movie"}
+              />
             </div>
           </div>
 
           <Separator className="bg-neutral-300 my-10" />
           <div className="w-full">
-            <CreateReview movieId={movie.data.id} user={user} />
+            <CreateReview
+              contentId={movie.data.id}
+              user={user}
+              type={"movie"}
+            />
           </div>
-          <ReviewSection reviews={reviews} token={token} user={user} />
+          <ReviewSection
+            reviews={reviews}
+            token={token}
+            user={user}
+            type={"movie"}
+          />
         </div>
       </div>
     </div>

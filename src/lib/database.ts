@@ -94,17 +94,18 @@ type saveReviewResponse={
   ok: boolean,
   text: string;
 }
-export async function saveReviewToDatabase(movieId: string, userId: mongoose.Types.ObjectId, rating: number, text: string):Promise<saveReviewResponse>{
+export async function saveReviewToDatabase(contentId: string, type: string,userId: mongoose.Types.ObjectId, rating: number, text: string):Promise<saveReviewResponse>{
   await dbConnect();
-  const reviewExists = await Review.findOne({userId, movieId});
+  const reviewExists = await Review.findOne({userId, contentId, type});
 
   if(reviewExists) return {
     ok: false,
-    text: "Movie already reviewed"
+    text: "Item already reviewed"
   }
 
   const newReview = new Review({
-    movieId,
+    contentId,
+    type,
     userId,
     rating,
     text
@@ -112,7 +113,7 @@ export async function saveReviewToDatabase(movieId: string, userId: mongoose.Typ
 
   await newReview.save();
 
-  await updateRatingOnCreate(movieId, rating);
+  await updateRatingOnCreate(contentId, type, rating);
 
 
   return  {

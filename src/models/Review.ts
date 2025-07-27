@@ -2,9 +2,14 @@ import mongoose from 'mongoose';
 
 const ReviewSchema = new mongoose.Schema({
   
-  movieId: {
+  contentId: {
     type: String,
     required: true,
+  },
+  type:{
+    type: String,
+    required: true,
+    enum: ["movie", "tv"]
   },
   userId: {
     type: mongoose.Types.ObjectId,
@@ -24,6 +29,6 @@ const ReviewSchema = new mongoose.Schema({
     maxLength: [1200, "Review can't exceed 1200 characters"],
   }
 
-});
+}, {timestamps: true});
 
 export default mongoose.models.Review || mongoose.model('Review', ReviewSchema);

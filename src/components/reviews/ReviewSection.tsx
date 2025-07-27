@@ -7,10 +7,12 @@ const ReviewSection = async ({
   token,
   user,
   reviews,
+  type,
 }: {
   token: string | null;
   user: userInfo | null;
   reviews: any;
+  type: string;
 }) => {
   return (
     <div className="w-full sm:w-[65%] lg:w-[50%] flex flex-col gap-2">
@@ -24,8 +26,13 @@ const ReviewSection = async ({
               text={review.text}
               rating={review.rating}
               reviewId={review._id.toString()}
-              movieId={review.movieId.toString()}
+              contentId={review.contentId.toString()}
               token={token}
+              type={type}
+              dates={{
+                createdAt: review.createdAt.toISOString(),
+                updatedAt: review.updatedAt.toISOString(),
+              }}
             />
           ) : (
             <Review
@@ -33,6 +40,10 @@ const ReviewSection = async ({
               userId={review.userId}
               rating={review.rating}
               text={review.text}
+              dates={{
+                createdAt: review.createdAt.toISOString(),
+                updatedAt: review.updatedAt.toISOString(),
+              }}
             />
           )
         )

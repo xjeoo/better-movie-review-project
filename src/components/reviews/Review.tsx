@@ -1,6 +1,6 @@
 import { starColor } from "@/constants/movies";
 import { getUserInfoForReview } from "@/lib/user/user";
-import { cn, handleProfilePicture } from "@/lib/utils";
+import { cn, formatDate, handleProfilePicture } from "@/lib/utils";
 import { Star } from "lucide-react";
 import Image from "next/image";
 import React from "react";
@@ -9,10 +9,12 @@ const Review = async ({
   userId,
   rating,
   text,
+  dates,
 }: {
   userId: string;
   rating: number;
   text: string;
+  dates: { createdAt: string; updatedAt: string };
 }) => {
   const userInfo = await getUserInfoForReview(userId);
   return (
@@ -26,7 +28,14 @@ const Review = async ({
           height={32}
           className="rounded-full"
         />
-        <span>{userInfo.username}</span>
+        <div className="flex flex-col">
+          <span className="font-semibold">{userInfo.username}</span>
+          {dates && (
+            <span className="text-[0.9em] text-neutral-400">{`${formatDate(
+              dates.createdAt.split("T")[0]
+            )} ${dates.createdAt !== dates.updatedAt ? "- Edited" : ""}`}</span>
+          )}
+        </div>
       </div>
       <div className="flex gap-0.5 mb-2">
         {Array.from({ length: 5 }).map((star, index) => (
@@ -41,7 +50,7 @@ const Review = async ({
           />
         ))}
       </div>
-      <p>{text}</p>
+      <p className="wrap-break-word">{text}</p>
     </div>
   );
 };

@@ -1,6 +1,6 @@
-import { months } from "@/constants/movies";
 import { getSession, getToken } from "../auth/sessionUtils";
 import { getRatingByMovieId, getReviewsByMovieId } from "./reviews";
+import { videoResult } from "@/types/content";
 
 const TMDB_READ_ACCESS_KEY = process.env.TMDB_READ_ACCESS_KEY;
 
@@ -24,31 +24,12 @@ export async function getDiscoverMovies() {
   }
 }
 
-export function formatDate(date: string) {
-  const newDate = date.split("-");
-  const year = newDate[0];
-  const monthKey = newDate[1] as keyof typeof months;
-  const month = months[monthKey];
-  const day = parseInt(newDate[2]);
 
-  return `${day} ${month} ${year}`;
-}
 
-type videoResult = {
-  id: string;
-  iso_639_1: string;
-  iso_3166_1: string;
-  key: string;
-  name: string;
-  site: string;
-  size: number | string;
-  type: string;
-  official: true;
-  published_at: string | Date;
-};
 
 export async function getMovieById(movieId: string) {
   const videoUrl = `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`;
+  const releaseDatesURL = `https://api.themoviedb.org/3/movie/${movieId}/release_dates`
   const infoUrl = `https://api.themoviedb.org/3/movie/${movieId}`;
   const castUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits`;
   const recommendationsUrl = `https://api.themoviedb.org/3/movie/${movieId}/recommendations`;
@@ -61,20 +42,40 @@ export async function getMovieById(movieId: string) {
     },
   };
 
-  const [detailsRes, videosRes, castRes, recommendationsRes] = await Promise.all([
+  const [detailsRes, videosRes, castRes, recommendationsRes, releaseDatesRes] = await Promise.all([
     fetch(infoUrl, options),
     fetch(videoUrl, options),
     fetch(castUrl, options),
     fetch(recommendationsUrl, options),
+    fetch(releaseDatesURL, options),
   ]);
   if (!detailsRes.ok) console.log("Failed fetching movie details");
   if (!videosRes.ok) console.log("Failed fetching movie videos");
 
-  const trailers = (await videosRes.json()).results.filter(
+  const videos = await videosRes.json();
+  const officialTrailers = videos.results.filter(
     (video: videoResult) =>
       video.name.toLowerCase().includes("trailer") &&
+      video.name.toLowerCase().includes("official")&&
       video.site.toLowerCase().includes("youtube")
   );
+  const finalTrailers = officialTrailers.length === 0 ? videos.results.filter(
+    (video: videoResult) =>
+      video.name.toLowerCase().includes("trailer") &&
+      video.site.toLowerCase().includes("youtube") 
+  ) : officialTrailers;
+
+  const releaseDates = await releaseDatesRes.json();
+  const usCertifications = releaseDates.results.find((r: {iso_3166_1: string, release_dates: Array<{certification: string}>}) => r.iso_3166_1 === "US");
+  const cert = usCertifications?.release_dates.find((r: {certification: string}) => r.certification)?.certification;
+  let ageRatingValue = cert || "N/A";
+  if (!ageRatingValue) {
+    const alt = releaseDates.results.find((r: {iso_3166_1: string, release_dates: Array<{certification: string}>}) =>
+      r.release_dates.find((r2: {certification: string}) => r2.certification !== "")
+    );
+    ageRatingValue = alt?.release_dates.find((r: {certification: string}) => r.certification)?.certification || "N/A";
+  }
+
 
   const cast = await castRes.json();
   const recommendations = await recommendationsRes.json();
@@ -83,10 +84,11 @@ export async function getMovieById(movieId: string) {
 
   const movieInfo = {
     data: await detailsRes.json(),
-    video: trailers,
+    video: finalTrailers,
     cast: cast,
     directors: directors,
     recommendations: recommendations.results.slice(0, 10),
+    ageRating: ageRatingValue
   };
 
   return movieInfo;

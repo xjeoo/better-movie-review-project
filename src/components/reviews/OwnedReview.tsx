@@ -1,6 +1,6 @@
 "use client";
 import { starColor } from "@/constants/movies";
-import { cn, handleProfilePicture } from "@/lib/utils";
+import { cn, formatDate, handleProfilePicture } from "@/lib/utils";
 import { SquarePen, Star, Trash2, X } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -13,7 +13,9 @@ const OwnedReview = ({
   rating,
   token,
   reviewId,
-  movieId,
+  contentId,
+  type,
+  dates,
 }: {
   username: string;
   image: string;
@@ -21,7 +23,9 @@ const OwnedReview = ({
   rating: number;
   token: string | null;
   reviewId: string;
-  movieId: string;
+  contentId: string;
+  type: string;
+  dates: { createdAt: string; updatedAt: string };
 }) => {
   const router = useRouter();
   const [isDeleting, setisDeleting] = useState(false);
@@ -30,7 +34,7 @@ const OwnedReview = ({
   const [newText, setNewText] = useState(text);
   const [error, setError] = useState("");
   if (!username || !image || !text || !rating) return <div>Loading</div>;
-
+  console.log(dates.createdAt);
   const handleDelete = async () => {
     const res = await fetch("/api/reviews", {
       method: "DELETE",
@@ -39,7 +43,8 @@ const OwnedReview = ({
       },
       body: JSON.stringify({
         reviewId: reviewId,
-        movieId: movieId,
+        contentId: contentId,
+        type: type,
         rating: rating,
       }),
     });
@@ -67,7 +72,8 @@ const OwnedReview = ({
       },
       body: JSON.stringify({
         reviewId: reviewId,
-        movieId: movieId,
+        contentId: contentId,
+        type: type,
         oldRating: rating,
         oldText: text,
         newRating: newRating,
@@ -161,7 +167,14 @@ const OwnedReview = ({
           height={32}
           className="rounded-full"
         />
-        <span className="font-semibold">{username}</span>
+        <div className="flex flex-col">
+          <span className="font-semibold">{username}</span>
+          {dates && (
+            <span className="text-[0.9em] text-neutral-400">{`${formatDate(
+              dates.createdAt.split("T")[0]
+            )} ${dates.createdAt !== dates.updatedAt ? "- Edited" : ""}`}</span>
+          )}
+        </div>
       </div>
       <div className="flex gap-0.5 mb-2">
         {isEditing

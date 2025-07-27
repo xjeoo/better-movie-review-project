@@ -5,14 +5,17 @@ import { cn } from "@/lib/utils";
 import { userInfo } from "@/types/entites";
 import { LoaderCircle, Lock, Star } from "lucide-react";
 import Link from "next/link";
-import { useActionState, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useActionState, useEffect, useState } from "react";
 
 const CreateReview = ({
-  movieId,
+  contentId,
   user,
+  type,
 }: {
-  movieId: string;
+  contentId: string;
   user: userInfo | null;
+  type: string;
 }) => {
   const [rating, setRating] = useState<number>(0);
   const [text, setText] = useState("");
@@ -20,6 +23,12 @@ const CreateReview = ({
     submitReview,
     undefined
   );
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state?.ok) router.refresh();
+  }, [state]);
 
   return (
     <>
@@ -55,7 +64,8 @@ const CreateReview = ({
             action={registerAction}
             className="flex flex-col px-6 py-3 bg-black/80 border-1 border-neutral-700 rounded-md"
           >
-            <input type="hidden" name="movieId" value={movieId} />
+            <input type="hidden" name="contentId" value={contentId} />
+            <input type="hidden" name="type" value={type} />
             <input type="hidden" name="rating" value={rating} />
             <div className="flex gap-1 mb-3">
               {Array.from({ length: 5 }).map((_, index) => (

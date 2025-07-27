@@ -3,11 +3,11 @@ import dbConnect from "../database";
 import Rating from "@/models/Rating";
 import { Types } from "mongoose";
 
-export async function getReviewsByMovieId(movieId: string){
+export async function getReviewsByMovieId(contentId: string){
   await dbConnect(); // eventual va trebui sa pun paginare
 
   try {
-    const reviews = await Review.find({movieId});
+    const reviews = await Review.find({contentId, type: "movie"});
     return reviews;
   } catch (err) {
     console.log(err);
@@ -16,20 +16,21 @@ export async function getReviewsByMovieId(movieId: string){
   return false;
 }
 
-export async function getRatingByMovieId(movieId: string){
+export async function getRatingByMovieId(contentId: string){
   await dbConnect();
-  const rating = await Rating.findOne({movieId});
+  const rating = await Rating.findOne({contentId, type: "movie"});
   if(!rating) return "No rating for this movie";
   return rating;
 }
 
-export async function updateRatingOnCreate(movieId: string, rating: number){
+export async function updateRatingOnCreate(contentId: string, type: string, rating: number){
   await dbConnect();
   try {
-  const currentRating = await Rating.findOne({movieId});
+  const currentRating = await Rating.findOne({contentId, type});
   if(!currentRating){
     const firstRating = new Rating({
-      movieId: movieId,
+      contentId: contentId,
+      type: type,
       averageRating: rating,
       numberOfReviews: 1
     });
@@ -91,11 +92,11 @@ export async function editReviewById(reviewId: Types.ObjectId | string, newRatin
 
 
 
-export async function updateRatingOnDelete(movieId: string, deletedReviewRating: number){
+export async function updateRatingOnDelete(contentId: string, type: "movie" | "tv", deletedReviewRating: number){
   await dbConnect();
   
   try {
-    const currentRating = await Rating.findOne({movieId: movieId});
+    const currentRating = await Rating.findOne({contentId: contentId, type: type});
     if(!currentRating) return false;
 
     const newNumberOfReviews = currentRating.numberOfReviews - 1;
@@ -128,10 +129,10 @@ export async function updateRatingOnDelete(movieId: string, deletedReviewRating:
   
 }
 
-export async function updateRatingOnUpdate(movieId: string,  oldRating: number, newRating: number ){
+export async function updateRatingOnUpdate(contentId: string, type: "movie" | "tv", oldRating: number, newRating: number ){
   await dbConnect();
   try {
-    const currentRating = await Rating.findOne({movieId});
+    const currentRating = await Rating.findOne({contentId, type});
     if(!currentRating) return false;
     const newAverageRating = ((currentRating.averageRating * currentRating.numberOfReviews) - oldRating + newRating )/ currentRating.numberOfReviews;
     try {

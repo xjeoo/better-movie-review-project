@@ -9,11 +9,12 @@ type sumbitResponse={
 }
 export async function submitReview(prevState: any, formData: FormData) : Promise<sumbitResponse>{
   const ratingAsString = formData.get("rating")?.toString();
-  const movieId = formData.get("movieId")?.toString();
+  const contentId = formData.get("contentId")?.toString();
   const text = formData.get("text")?.toString();
+  const type = formData.get("type")?.toString();
   
 
-  if(!text || !movieId || !ratingAsString) return {
+  if(!text || !contentId || !ratingAsString) return {
     ok: false,
     text: "Fill in all fields"
   }
@@ -42,7 +43,7 @@ export async function submitReview(prevState: any, formData: FormData) : Promise
   }
 
   try {
-    const reviewSaved = await saveReviewToDatabase(movieId, user.userId, rating, text)
+    const reviewSaved = await saveReviewToDatabase(contentId, type! , user.userId, rating, text)
     if(!reviewSaved.ok) return {
       ok:false,
       text: reviewSaved.text
