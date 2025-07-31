@@ -165,7 +165,7 @@ const MoviePage = async ({
                     <h3 className="w-fit text-xl md:text-2xl text-white">
                       Director:
                     </h3>
-                    <span className="flex items-center">
+                    <span className="flex flex-wrap basis-full gap-2">
                       {movie.directors.map((director: any, index: number) => (
                         <span key={index} className="text-xl">
                           {director.name}

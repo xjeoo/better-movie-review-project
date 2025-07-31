@@ -22,11 +22,7 @@ const HomeCarousel = ({ movies }: { movies: any }) => {
       <CarouselContent className="!p-0 bg-black ">
         {movies.map((movie: any, index: number) => (
           <CarouselItem className="!justify-center !items-center  " key={index}>
-            <CarouselCard
-              movie={movie}
-              index={index}
-              maxLength={movies.length}
-            />
+            <CarouselCard movie={movie} index={index} />
           </CarouselItem>
         ))}
       </CarouselContent>

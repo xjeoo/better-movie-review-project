@@ -1,8 +1,6 @@
 import { options } from "@/constants/movies";
-import { getSession, getToken } from "../auth/sessionUtils";
 import { videoResult } from "@/types/content";
 
-const TMDB_READ_ACCESS_KEY = process.env.TMDB_READ_ACCESS_KEY
 
 export async function getTvShowById(showId: string){
   const infoUrl = `https://api.themoviedb.org/3/tv/${showId}`;

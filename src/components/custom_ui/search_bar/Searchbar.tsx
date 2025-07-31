@@ -41,10 +41,6 @@ const Searchbar = ({
       });
   }, [value]);
 
-  useEffect(() => {
-    console.log(results);
-  }, [results]);
-
   return (
     <div
       className={cn(

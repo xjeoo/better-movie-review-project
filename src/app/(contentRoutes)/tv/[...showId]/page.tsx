@@ -42,7 +42,7 @@ const TvShowPage = async ({
               sizes="100vw"
               loading="eager"
               priority={true}
-              className="relative object-cover blur-xs"
+              className="relative object-cover blur-xs select-none"
             />
           ) : (
             <div className="relative object-cover w-full h-full blur-xs bg-gradient-to-b from-blue-600 to-blue-950"></div>
@@ -177,13 +177,13 @@ const TvShowPage = async ({
       </div>
       <div className="relative xl:border-x-1 border-x-neutral-500 px-2 md:px-6 w-full xl:w-[80%] pt-10 z-10 mx-auto text-shadow-2xs text-shadow-black md:rounded-b-md">
         <div className="flex flex-col gap-15">
-          <div className="w-[80%] pl-4">
+          <div className="w-[80%]">
             <h3 className="flex items-baseline gap-2 text-4xl mb-3">
               <Tv />
               Seasons
             </h3>
-            <section className="max-h-100 overflow-auto scroll-custom">
-              <SeasonsAccordion seasons={tvShow.data.seasons} />
+            <section className="max-h-100 px-2 border-1 border-neutral-700 rounded-md overflow-auto scroll-custom">
+              <SeasonsAccordion seasons={tvShow.data.seasons} showId={showId} />
             </section>
           </div>
 

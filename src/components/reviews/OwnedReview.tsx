@@ -34,7 +34,6 @@ const OwnedReview = ({
   const [newText, setNewText] = useState(text);
   const [error, setError] = useState("");
   if (!username || !image || !text || !rating) return <div>Loading</div>;
-  console.log(dates.createdAt);
   const handleDelete = async () => {
     const res = await fetch("/api/reviews", {
       method: "DELETE",
@@ -172,7 +171,7 @@ const OwnedReview = ({
           {dates && (
             <span className="text-[0.9em] text-neutral-400">{`${formatDate(
               dates.createdAt.split("T")[0]
-            )} ${dates.createdAt !== dates.updatedAt ? "- Edited" : ""}`}</span>
+            )} ${dates.createdAt !== dates.updatedAt ? "| Edited" : ""}`}</span>
           )}
         </div>
       </div>

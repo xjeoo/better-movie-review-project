@@ -22,3 +22,4 @@ export type tvShowSeason ={
   vote_average: number,
   
 }
+
