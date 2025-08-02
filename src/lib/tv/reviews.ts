@@ -12,7 +12,7 @@ export async function getReviewsByTvShowId(contentId: string){
     console.log(err);
   }
 
-  return false;
+  return [];
 }
 
 export async function getRatingByTvShowId(contentId: string){

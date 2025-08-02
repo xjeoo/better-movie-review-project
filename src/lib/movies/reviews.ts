@@ -13,7 +13,7 @@ export async function getReviewsByMovieId(contentId: string){
     console.log(err);
   }
 
-  return false;
+  return [];
 }
 
 export async function getRatingByMovieId(contentId: string){

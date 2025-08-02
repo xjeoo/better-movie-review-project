@@ -1,9 +1,10 @@
 import { posterPath500 } from "@/constants/movies";
+import { MovieCrewMember } from "@/types/movies/movies";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const CrewCard = ({ info }: { info: any }) => {
+const CrewCard = ({ info }: { info: MovieCrewMember }) => {
   return (
     <Link
       href={`/person/${info.id}`}

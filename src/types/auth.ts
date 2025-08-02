@@ -1,6 +1,10 @@
 import { JWTPayload } from "jose";
 import { userInfo } from "./entites";
 
+export interface AuthActionState {
+  ok: boolean;
+  message: string;
+}
 
 export type validateCredentialsResponse={
   ok: boolean,

@@ -14,7 +14,7 @@ genres.set(27, 'Horror');
 genres.set(10402, 'Music');
 genres.set(9648, 'Mystery');
 genres.set(10749, 'Romance');
-genres.set(878, 'SF');
+genres.set(878, 'Science-Fiction');
 genres.set(10770, 'TV Movie');
 genres.set(53, 'Thriller');
 genres.set(10752, 'War');

@@ -11,7 +11,7 @@ const ReviewSection = async ({
 }: {
   token: string | null;
   user: userInfo | null;
-  reviews: any;
+  reviews: Array<ReviewType>;
   type: string;
 }) => {
   return (

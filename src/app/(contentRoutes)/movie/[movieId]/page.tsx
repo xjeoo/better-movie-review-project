@@ -20,6 +20,7 @@ import { existsInWatchlist } from "@/lib/user/watchlist";
 import AgeRating from "@/components/custom_ui/AgeRating";
 import { formatDate } from "@/lib/utils";
 import RecommendationsCarousel from "@/components/custom_ui/similar_carousel/RecommendationCarousel";
+import { MovieCrewMember } from "@/types/movies/movies";
 
 const MoviePage = async ({
   params,
@@ -38,7 +39,7 @@ const MoviePage = async ({
     user?.userId.toString(),
     "movie"
   );
-
+  console.log(movie);
   return (
     <div className="flex flex-col w-full h-full pb-20 bg-black">
       <div className="relative">
@@ -101,7 +102,7 @@ const MoviePage = async ({
                 <div className="flex gap-1.5 mt-4 items-center text-xl">
                   {/*------ASTA O SA O SEPAR INTR-O COMPONENTA------- */}
                   <span className="flex text-xl">
-                    {Array.from({ length: parseInt(rating.averageRating) }).map(
+                    {Array.from({ length: rating.averageRating }).map(
                       //map for full stars
                       (_, index) => (
                         <Star key={index} fill={starColor} color={starColor} />
@@ -110,9 +111,7 @@ const MoviePage = async ({
                     {Array.from({
                       // map for decimal part with half star
                       length:
-                        parseFloat(rating.averageRating) -
-                          parseInt(rating.averageRating) >
-                        0.25
+                        rating.averageRating - rating.averageRating > 0.25
                           ? 1
                           : 0,
                     }).map((_, index) => (
@@ -136,7 +135,7 @@ const MoviePage = async ({
                     ))}
                   </span>
                   {/*" old star color: #b6c1d4" */}
-                  {parseFloat(rating.averageRating).toFixed(1) || "none"}/5
+                  {rating.averageRating.toFixed(1) || "none"}/5
                 </div>
               ) : (
                 <span className="text-xl">-Not rated yet-</span>
@@ -166,14 +165,16 @@ const MoviePage = async ({
                       Director:
                     </h3>
                     <span className="flex flex-wrap basis-full gap-2">
-                      {movie.directors.map((director: any, index: number) => (
-                        <span key={index} className="text-xl">
-                          {director.name}
-                          {movie.directors.length > 1 &&
-                            movie.directors[index + 1] &&
-                            ", "}
-                        </span>
-                      ))}
+                      {movie.directors.map(
+                        (director: MovieCrewMember, index: number) => (
+                          <span key={index} className="text-xl">
+                            {director.name}
+                            {movie.directors.length > 1 &&
+                              movie.directors[index + 1] &&
+                              ", "}
+                          </span>
+                        )
+                      )}
                     </span>
                   </div>
                 </>
@@ -224,7 +225,7 @@ const MoviePage = async ({
           <Separator className="bg-neutral-300 my-10" />
           <div className="w-full">
             <CreateReview
-              contentId={movie.data.id}
+              contentId={movie.data.id.toString()}
               user={user}
               type={"movie"}
             />

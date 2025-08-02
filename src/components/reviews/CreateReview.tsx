@@ -1,5 +1,5 @@
 "use client";
-import { submitReview } from "@/actions/reviews";
+import { submitResponse, submitReview } from "@/actions/reviews";
 import { starColor } from "@/constants/movies";
 import { cn } from "@/lib/utils";
 import { userInfo } from "@/types/entites";
@@ -19,10 +19,13 @@ const CreateReview = ({
 }) => {
   const [rating, setRating] = useState<number>(0);
   const [text, setText] = useState("");
-  const [state, registerAction, isPending] = useActionState(
-    submitReview,
-    undefined
-  );
+  const [state, registerAction, isPending] = useActionState<
+    submitResponse,
+    FormData
+  >(submitReview, {
+    ok: false,
+    text: "",
+  });
 
   const router = useRouter();
 

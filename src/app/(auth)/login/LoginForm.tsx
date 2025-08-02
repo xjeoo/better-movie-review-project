@@ -3,8 +3,15 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useActionState } from "react";
 import { login } from "@/actions/auth";
+import { AuthActionState } from "@/types/auth";
 const LoginForm = () => {
-  const [state, loginAction, isPending] = useActionState(login, undefined);
+  const [state, loginAction, isPending] = useActionState<
+    AuthActionState,
+    FormData
+  >(login, {
+    ok: false,
+    message: "",
+  });
 
   return (
     <form
@@ -54,7 +61,7 @@ const LoginForm = () => {
             />
           </div>
         </div>
-        {state && (
+        {state.message && (
           <h3 className="w-full text-center py-1 rounded-md bg-red-800 text-white text-wrap">
             {state.message}
           </h3>
@@ -77,7 +84,7 @@ const LoginForm = () => {
       </Button>
 
       <p className="mt-10 text-[0.95em] text-pretty text-center">
-        Don't have an account?<span> </span>
+        Don&#39;t have an account?<span> </span>
         <Link href={"/register"} className="underline hover:text-blue-300 ">
           Register now!
         </Link>

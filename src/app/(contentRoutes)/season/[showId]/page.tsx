@@ -2,16 +2,16 @@
 
 import EpisodeCard from "@/components/custom_ui/season/EpisodeCard";
 import EpisodeModal from "@/components/custom_ui/season/EpisodeModal";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { posterPath500 } from "@/constants/movies";
 import {
   getSeasonInfoForTvShow,
   getTvShowInfoForSeasonsPage,
 } from "@/lib/tv/tvshows_client";
+import { cn } from "@/lib/utils";
 import { tvShowSeason } from "@/types/content";
 import { Season } from "@/types/tvshows/season";
 import { LoaderCircle, Popcorn } from "lucide-react";
-import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
@@ -28,9 +28,14 @@ const SeasonPage = () => {
     seasons: Array<tvShowSeason>;
     backdrop_path: string;
   } | null>(null);
-  const [selectedEpisode, setSelectedEpisode] = useState<any>(null);
+  const [selectedEpisode, setSelectedEpisode] = useState<number | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [drawerClosed, setDrawerClosed] = useState(true);
   if (!showId || !seasonNumber) return <div>Info missing</div>;
+
+  const toggleDrawer = () => {
+    setDrawerClosed((prev) => !prev);
+  };
 
   useEffect(() => {
     getTvShowInfoForSeasonsPage(showId)
@@ -51,7 +56,12 @@ const SeasonPage = () => {
   }, [selectedEpisode]);
 
   useEffect(() => {
-    if (!modalVisible) setSelectedEpisode(null);
+    if (!modalVisible) {
+      setSelectedEpisode(null);
+      document.body.style.overflow = "auto";
+    } else {
+      document.body.style.overflow = "hidden";
+    }
   }, [modalVisible]);
 
   if (!data)
@@ -62,6 +72,7 @@ const SeasonPage = () => {
     );
 
   return (
+    // pe tel copiez pagina asta https://arkhamcity.fandom.com/wiki/The_Season_of_Infamy
     <>
       {modalVisible && (
         <EpisodeModal
@@ -72,9 +83,11 @@ const SeasonPage = () => {
         />
       )}
       <main className="w-full gap-4 pr-6 bg-gray-900/70">
-        <div className="flex flex-col-reverse min-h-[350px] md:flex-row gap-4 h-full  ">
-          <div className="flex flex-col gap-4 w-auto mx-auto pt-5 md:pt-7 pl-6 bg-gray-950/70 py-2 px-1 ">
-            <Link href={`/tv/${showId}`}>
+        <div className="flex flex-col min-h-[350px] md:flex-row gap-4 h-full  ">
+          <div className="flex flex-col items-center gap-4 w-auto pt-5 md:pt-7 px-4 md:bg-gray-950/70 py-2 ">
+            <Link href={`/tv/${showId}`} className="relative">
+              <div className="absolute top-0 left-0 w-full h-full  opacity-0 hover:opacity-15 transition-opacity z-10 "></div>
+
               <Image
                 src={
                   data.poster_path
@@ -89,44 +102,73 @@ const SeasonPage = () => {
               />
             </Link>
 
-            <div className="flex flex-col gap-2 w-full">
-              <h4 className="text-2xl">Other seasons</h4>
-              <ScrollArea className="h-80">
-                {showInfo?.seasons
-                  .filter(
-                    (item) =>
-                      item.name.toLowerCase() !== "specials" &&
-                      item.name !== data?.name
-                  )
-                  .map((season) => (
-                    <Link
-                      key={season.id}
-                      href={`/season/${showId}?number=${season.season_number}`}
-                      className="relative flex gap-1.5 items-center text-nowrap w-[220px]  text-[1.1em] rounded-xs overflow-hidden"
-                    >
-                      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-30 transition-opacity z-10 "></div>
-                      <div className="relative h-[80px] aspect-3/4">
-                        <Image
-                          src={
-                            season.poster_path
-                              ? posterPath500 + season.poster_path
-                              : "/posterplaceholder.svg"
-                          }
-                          alt="poster"
-                          fill
-                          className="object-contain rounded-md"
-                        />
-                      </div>
-                      <span className="text-ellipsis w-full overflow-hidden">
-                        {season.name}
-                      </span>
-                    </Link>
-                  ))}
-              </ScrollArea>
+            <div
+              className={cn(
+                "fixed left-0 bottom-0 md:static  gap-2 w-dvw border-t-1  md:border-0 md:w-fit bg-gray-900 md:bg-transparent z-100 md:translate-y-0 ",
+                drawerClosed
+                  ? "translate-y-[70%] border-t-blue-500 "
+                  : "border-t-0"
+              )}
+            >
+              <div className="flex justify-between w-[90%] mx-auto md:w-auto md:block">
+                <h4 className="text-2xl py-1.5">Other seasons</h4>
+                <button onClick={toggleDrawer} className="md:hidden">
+                  {drawerClosed ? "Open" : "Close"}
+                </button>
+              </div>
+              {showInfo &&
+              showInfo.seasons.filter(
+                (item) =>
+                  item.name.toLowerCase() !== "specials" &&
+                  item.name !== data?.name
+              ).length! > 1 ? (
+                <ScrollArea
+                  className={cn(
+                    "whitespace-nowrap w-dvw px-4 pb-2 pt-3   md:px-0 md:w-[200px] bg-gray-800 md:bg-transparent md:whitespace-normal md:h-80 md:translate-y-0"
+                  )}
+                >
+                  <div className="relative flex md:flex-col gap-2 z-100 ">
+                    {showInfo?.seasons
+                      .filter(
+                        (item) =>
+                          item.name.toLowerCase() !== "specials" &&
+                          item.name !== data?.name
+                      )
+                      .map((season) => (
+                        <Link
+                          key={season.id}
+                          href={`/season/${showId}?number=${season.season_number}`}
+                          className="relative flex gap-1.5 items-center text-nowrap w-fit mb-1  text-[1.1em] rounded-xs overflow-hidden"
+                        >
+                          <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-30 transition-opacity z-100 "></div>
+                          <div className="relative h-[80px] aspect-3/4">
+                            <Image
+                              src={
+                                season.poster_path
+                                  ? posterPath500 + season.poster_path
+                                  : "/posterplaceholder.svg"
+                              }
+                              alt="poster"
+                              sizes="10vw"
+                              fill
+                              className="object-contain rounded-md"
+                            />
+                          </div>
+                          <span className="text-ellipsis w-[90px] overflow-hidden">
+                            {season.name}
+                          </span>
+                        </Link>
+                      ))}
+                  </div>
+                  <ScrollBar orientation="horizontal" className="md:hidden" />
+                </ScrollArea>
+              ) : (
+                <p className="w-fit py-12 pl-5">No other seasons</p>
+              )}
             </div>
           </div>
 
-          <div className="flex flex-col pt-6 gap-5 w-full pl-3">
+          <div className="flex flex-col pt-6 gap-5 w-full pl-3 pb-10">
             <div>
               <h1 className="text-4xl font-semibold">{data.name}</h1>
               {data.air_date && (
@@ -146,7 +188,7 @@ const SeasonPage = () => {
               </h2>
               <ScrollArea className="flex h-80 mx-auto md:mx-0 w-fit p-0 sm:p-0.5 rounded-md">
                 <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 w-full">
-                  {data.episodes.map((episode, index) => (
+                  {data.episodes.map((episode) => (
                     <EpisodeCard
                       key={episode.id}
                       episode={episode}

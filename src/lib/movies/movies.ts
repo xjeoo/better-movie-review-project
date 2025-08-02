@@ -1,3 +1,4 @@
+import { Movie, MovieCrewMember, MoviePageData } from "@/types/movies/movies";
 import { getSession, getToken } from "../auth/sessionUtils";
 import { getRatingByMovieId, getReviewsByMovieId } from "./reviews";
 import { videoResult } from "@/types/content";
@@ -27,7 +28,7 @@ export async function getDiscoverMovies() {
 
 
 
-export async function getMovieById(movieId: string) {
+export async function getMovieById(movieId: string): Promise<Movie> {
   const videoUrl = `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`;
   const releaseDatesURL = `https://api.themoviedb.org/3/movie/${movieId}/release_dates`
   const infoUrl = `https://api.themoviedb.org/3/movie/${movieId}`;
@@ -80,7 +81,7 @@ export async function getMovieById(movieId: string) {
   const cast = await castRes.json();
   const recommendations = await recommendationsRes.json();
 
-  const directors = cast.crew.filter((dude: any) => dude.job === "Director");
+  const directors = cast.crew.filter((dude: MovieCrewMember) => dude.job === "Director");
 
   const movieInfo = {
     data: await detailsRes.json(),
@@ -94,13 +95,13 @@ export async function getMovieById(movieId: string) {
   return movieInfo;
 }
 
-export async function getInfoForMoviePage(movieId: string) {
+export async function getInfoForMoviePage(movieId: string): Promise<MoviePageData> {
   const [movie, rating, user, token, reviews] = await Promise.all([
-    await getMovieById(movieId),
-    await getRatingByMovieId(movieId),
-    await getSession(),
-    await getToken(),
-    await getReviewsByMovieId(movieId),
+    getMovieById(movieId),
+    getRatingByMovieId(movieId),
+    getSession(),
+    getToken(),
+    getReviewsByMovieId(movieId),
   ]);
 
   return {

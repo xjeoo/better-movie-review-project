@@ -80,7 +80,7 @@ const SearchItem = ({ item }: { item: any }) => {
             alt="poster"
             width={50}
             height={70}
-            className="rounded-full"
+            className="rounded-xs"
           />
           <div className="flex flex-col w-full ">
             <span className="text-center">{item.name}</span>

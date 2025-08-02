@@ -3,11 +3,11 @@
 import { saveReviewToDatabase } from "@/lib/database";
 import { getSession } from "@/lib/auth/sessionUtils";
 
-type sumbitResponse={
+export type submitResponse={
   ok: boolean,
   text: string;
 }
-export async function submitReview(prevState: any, formData: FormData) : Promise<sumbitResponse>{
+export async function submitReview(prevState: submitResponse, formData: FormData) : Promise<submitResponse>{
   const ratingAsString = formData.get("rating")?.toString();
   const contentId = formData.get("contentId")?.toString();
   const text = formData.get("text")?.toString();

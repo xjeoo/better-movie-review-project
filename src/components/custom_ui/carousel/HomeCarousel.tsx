@@ -1,4 +1,5 @@
 // import Autoplay from "embla-carousel-autoplay";
+import { DiscoverMovie } from "@/types/movies/movies";
 import {
   Carousel,
   CarouselContent,
@@ -8,7 +9,7 @@ import {
 } from "../../ui/carousel";
 import CarouselCard from "./CarouselCard";
 
-const HomeCarousel = ({ movies }: { movies: any }) => {
+const HomeCarousel = ({ movies }: { movies: Array<DiscoverMovie> }) => {
   return (
     <Carousel
       orientation="horizontal"
@@ -20,7 +21,7 @@ const HomeCarousel = ({ movies }: { movies: any }) => {
       // ]}
     >
       <CarouselContent className="!p-0 bg-black ">
-        {movies.map((movie: any, index: number) => (
+        {movies.map((movie: DiscoverMovie, index: number) => (
           <CarouselItem className="!justify-center !items-center  " key={index}>
             <CarouselCard movie={movie} index={index} />
           </CarouselItem>

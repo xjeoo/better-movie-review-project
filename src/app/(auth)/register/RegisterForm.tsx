@@ -1,14 +1,18 @@
 "use client";
 import { register } from "@/actions/auth";
 import { Button } from "@/components/ui/button";
+import { AuthActionState } from "@/types/auth";
 import Link from "next/link";
 import React, { useActionState } from "react";
 
 const RegisterForm = () => {
-  const [state, registerAction, isPending] = useActionState(
-    register,
-    undefined
-  );
+  const [state, registerAction, isPending] = useActionState<
+    AuthActionState,
+    FormData
+  >(register, {
+    ok: false,
+    message: "",
+  });
 
   return (
     <form
@@ -72,7 +76,7 @@ const RegisterForm = () => {
             />
           </div>
         </div>
-        {state && (
+        {state.message && (
           <h3 className="w-full text-center py-1 rounded-md bg-red-800 text-white text-wrap">
             {state.message}
           </h3>

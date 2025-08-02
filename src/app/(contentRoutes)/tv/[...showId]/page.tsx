@@ -70,15 +70,17 @@ const TvShowPage = async ({
                 )}
               </div>
               <div className="flex flex-wrap justify-center md:justify-start w-full md:w-[75%] gap-1 ">
-                {tvShow.data.genres.map((genre: any, index: number) => (
-                  <Badge
-                    key={index}
-                    variant={"outline"}
-                    className="text-[0.9em] text-white h-fit"
-                  >
-                    {genre.name}
-                  </Badge>
-                ))}
+                {tvShow.data.genres.map(
+                  (genre: { id: string; name: string }, index: number) => (
+                    <Badge
+                      key={index}
+                      variant={"outline"}
+                      className="text-[0.9em] text-white h-fit"
+                    >
+                      {genre.name}
+                    </Badge>
+                  )
+                )}
               </div>
               {tvShow.data.status && (
                 <div className="text-xl">Status: {tvShow.data.status}</div>

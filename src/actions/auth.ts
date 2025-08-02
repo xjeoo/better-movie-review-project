@@ -1,7 +1,7 @@
 "use server";
 
 import { validateLoginForm, validateRegisterForm } from "@/lib/auth/auth";
-import { loginData, registerData, validateCredentialsResponse } from "../types/auth";
+import { AuthActionState, loginData, registerData, validateCredentialsResponse } from "../types/auth";
 import dbConnect from "@/lib/database";
 import User from "@/models/User";
 import bcrypt from "bcryptjs";
@@ -87,7 +87,7 @@ export async function validateLoginData( userData : loginData) : Promise<validat
 
 
 
-export async function login( prevState: any, formData: FormData){
+export async function login( prevState: AuthActionState, formData: FormData):Promise<AuthActionState>{
   const isValid = validateLoginForm(formData);
 
   if(!isValid.ok){
@@ -133,7 +133,7 @@ export async function login( prevState: any, formData: FormData){
   
 }
 
-export async function register( prevState: any, formData: FormData ){
+export async function register( prevState: AuthActionState, formData: FormData ):Promise<AuthActionState>{
   const isValid = validateRegisterForm(formData);
 
   if(!isValid.ok){

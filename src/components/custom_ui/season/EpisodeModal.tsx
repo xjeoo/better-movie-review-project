@@ -4,6 +4,7 @@ import { posterPath500 } from "@/constants/movies";
 import { Episode } from "@/types/tvshows/season";
 import { Calendar, Clapperboard, Clock, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const EpisodeModal = ({
   episode,
@@ -19,7 +20,7 @@ const EpisodeModal = ({
         className="fixed w-screen h-screen -mt-3 bg-black/50 z-500"
         onClick={() => setModalVisible(false)}
       />
-      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[80%]  pt-6 pb-3 mt-[150px] mx-auto border-1 bg-black/80 backdrop-blur-xs border-neutral-500 rounded-md z-1000">
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[80%]  pt-6 pb-3 mt-[80px] md:mt-[150px] mx-auto border-1 bg-black/80 backdrop-blur-xs border-neutral-500 rounded-md z-1000">
         <button
           className="absolute top-1 right-3 cursor-pointer"
           onClick={() => setModalVisible(false)}
@@ -27,8 +28,8 @@ const EpisodeModal = ({
           <X size={16} />
         </button>
         <div className="flex h-full">
-          <div className="flex flex-col h-full justify-between flex-3/5 pl-4 pr-2 pb-5">
-            <div>
+          <div className="flex flex-col h-full min-h-[300px] justify-between flex-3/5 pl-4 pr-2 pb-5">
+            <div className="mb-6">
               <h3 className="text-3xl font-semibold text-center">
                 {episode.name}
               </h3>
@@ -61,8 +62,12 @@ const EpisodeModal = ({
                 </h4>
                 <ScrollArea className="h-[130px] w-full">
                   <div className="flex gap-2 flex-wrap basis-full">
-                    {episode.crew.map((guy) => (
-                      <div className="flex gap-2 items-center border-1 border-neutral-500 h-fit rounded-md pr-2">
+                    {episode.crew.map((guy, index) => (
+                      <Link
+                        key={index}
+                        href={`/person/${guy.id}`}
+                        className="flex gap-2 items-center border-1 border-neutral-500 h-fit rounded-md pr-2"
+                      >
                         <div className="relative h-[70px] w-[70px] ">
                           <Image
                             src={
@@ -71,6 +76,7 @@ const EpisodeModal = ({
                                 : "/posterplaceholder.svg"
                             }
                             alt={guy.name}
+                            sizes="15vw"
                             fill
                             className="object-cover rounded-md "
                           />
@@ -82,7 +88,7 @@ const EpisodeModal = ({
                           <Separator orientation="horizontal" />
                           <span className="text-center">{guy.job}</span>
                         </div>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 </ScrollArea>
@@ -99,7 +105,7 @@ const EpisodeModal = ({
               <Image
                 src={posterPath500 + episode.still_path}
                 alt="backdrop"
-                sizes="40vw"
+                sizes="50vw"
                 fill
                 className="object-cover h-full"
               />

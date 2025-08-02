@@ -5,8 +5,16 @@ import Link from "next/link";
 import genres from "@/constants/genres";
 import GenrePill from "../GenrePill";
 import { backDropPath1080 } from "@/constants/movies";
+import { DiscoverMovie } from "@/types/movies/movies";
 
-const CarouselCard = ({ movie, index }: { movie: any; index: number }) => {
+const CarouselCard = ({
+  movie,
+  index,
+}: {
+  movie: DiscoverMovie;
+  index: number;
+}) => {
+  console.log(movie);
   return (
     <Card className="!p-0 items-center bg-dark-transparent border-0">
       <CardContent className="flex w-full h-fit justify-center items-center !px-0  ">
