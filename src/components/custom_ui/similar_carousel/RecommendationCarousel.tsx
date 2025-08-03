@@ -1,3 +1,4 @@
+import { MovieData } from "@/types/movies/movies";
 import {
   Carousel,
   CarouselContent,
@@ -6,12 +7,13 @@ import {
   CarouselPrevious,
 } from "../../ui/carousel";
 import RecommendationCard from "./RecommendationCard";
+import { TvShowData } from "@/types/tvshows/tvshows";
 
 const RecommendationsCarousel = ({
   info,
   type = "movie",
 }: {
-  info: any;
+  info: Array<MovieData | TvShowData>;
   type?: string;
 }) => {
   // sa pun props pentru type: movie sau tv-show
@@ -22,7 +24,7 @@ const RecommendationsCarousel = ({
 
       <Carousel opts={{ dragFree: true }}>
         <CarouselContent className="px-1">
-          {info.map((item: any, index: number) => (
+          {info.map((item: MovieData | TvShowData, index: number) => (
             <CarouselItem
               className="!justify-center !items-center basis-auto "
               key={index}

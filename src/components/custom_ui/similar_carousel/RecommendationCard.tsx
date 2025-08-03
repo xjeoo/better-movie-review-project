@@ -1,9 +1,17 @@
 import { posterPath500 } from "@/constants/movies";
+import { MovieData } from "@/types/movies/movies";
+import { TvShowData } from "@/types/tvshows/tvshows";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const RecommendationCard = ({ info, type }: { info: any; type: string }) => {
+const RecommendationCard = ({
+  info,
+  type,
+}: {
+  info: TvShowData | MovieData;
+  type: string;
+}) => {
   return (
     <Link
       href={`/${type === "movie" ? "movie" : "tv"}/${info.id}`}
@@ -11,6 +19,7 @@ const RecommendationCard = ({ info, type }: { info: any; type: string }) => {
     >
       <Image
         src={posterPath500 + info.poster_path}
+        //@ts-expect-error - name varies according to type
         alt={info.title || info.name}
         width={250}
         height={375}

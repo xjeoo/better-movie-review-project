@@ -5,6 +5,7 @@ import { Search } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import SearchItem from "./SearchItem";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { SearchResult } from "@/types/search/search";
 
 const Searchbar = ({
   scrolled,
@@ -16,7 +17,7 @@ const Searchbar = ({
   const [text, setText] = useState("");
   const [visible, setVisible] = useState(false);
   const value = useDebouncedValue(text);
-  const [results, setResults] = useState<any>(null); // trb definit tip
+  const [results, setResults] = useState<SearchResult[] | null>(null); // trb definit tip
   const inputRef = useRef<HTMLInputElement>(null);
 
   const searchRoute = "https://api.themoviedb.org/3/search/multi";
@@ -78,7 +79,7 @@ const Searchbar = ({
           )}
         >
           {results.length > 0 ? (
-            results.map((item: any, index: number) => (
+            results.map((item: SearchResult, index: number) => (
               <SearchItem key={index} item={item} />
             ))
           ) : (

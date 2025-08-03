@@ -1,5 +1,4 @@
 import { options } from "@/constants/movies"
-import { CombinedCredit, CombinedCredits } from "@/types/people/people";
 
 
 async function getPersonById(personId: string){

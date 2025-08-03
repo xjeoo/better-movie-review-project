@@ -1,9 +1,10 @@
 import { posterPath500 } from "@/constants/movies";
+import { SearchResult } from "@/types/search/search";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const SearchItem = ({ item }: { item: any }) => {
+const SearchItem = ({ item }: { item: SearchResult }) => {
   const type = item.media_type;
 
   if (type === "movie") {

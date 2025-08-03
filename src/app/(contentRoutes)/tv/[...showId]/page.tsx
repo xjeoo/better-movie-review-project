@@ -28,7 +28,6 @@ const TvShowPage = async ({
     "tv"
   );
   const youtubeUrl = "https://www.youtube.com/embed/";
-
   return (
     <div className="flex flex-col w-full h-full pb-20 bg-black">
       <div className="relative">
@@ -89,7 +88,7 @@ const TvShowPage = async ({
                 <div className="flex gap-1.5 mt-4 items-center text-xl">
                   {/*------ASTA O SA O SEPAR INTR-O COMPONENTA------- */}
                   <span className="flex text-xl">
-                    {Array.from({ length: parseInt(rating.averageRating) }).map(
+                    {Array.from({ length: rating.averageRating }).map(
                       //map for full stars
                       (_, index) => (
                         <Star key={index} fill={starColor} color={starColor} />
@@ -98,9 +97,7 @@ const TvShowPage = async ({
                     {Array.from({
                       // map for decimal part with half star
                       length:
-                        parseFloat(rating.averageRating) -
-                          parseInt(rating.averageRating) >
-                        0.25
+                        rating.averageRating - rating.averageRating > 0.25
                           ? 1
                           : 0,
                     }).map((_, index) => (
@@ -124,7 +121,7 @@ const TvShowPage = async ({
                     ))}
                   </span>
                   {/*" old star color: #b6c1d4" */}
-                  {parseFloat(rating.averageRating).toFixed(1) || "none"}/5
+                  {rating.averageRating.toFixed(1) || "none"}/5
                 </div>
               ) : (
                 <span className="text-xl">-Not rated yet-</span>

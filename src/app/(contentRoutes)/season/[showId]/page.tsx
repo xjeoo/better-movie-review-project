@@ -31,13 +31,13 @@ const SeasonPage = () => {
   const [selectedEpisode, setSelectedEpisode] = useState<number | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [drawerClosed, setDrawerClosed] = useState(true);
-  if (!showId || !seasonNumber) return <div>Info missing</div>;
 
   const toggleDrawer = () => {
     setDrawerClosed((prev) => !prev);
   };
 
   useEffect(() => {
+    if (!showId || !seasonNumber) return;
     getTvShowInfoForSeasonsPage(showId)
       .then((info) => setShowInfo(info))
       .catch((err) => console.log(err));
@@ -55,14 +55,14 @@ const SeasonPage = () => {
     console.log(showInfo);
   }, [selectedEpisode]);
 
-  useEffect(() => {
-    if (!modalVisible) {
-      setSelectedEpisode(null);
-      document.body.style.overflow = "auto";
-    } else {
-      document.body.style.overflow = "hidden";
-    }
-  }, [modalVisible]);
+  // useEffect(() => {
+  //   if (!modalVisible) {
+  //     setSelectedEpisode(null);
+  //     document.body.style.overflow = "auto";
+  //   } else {
+  //     document.body.style.overflow = "hidden";
+  //   }
+  // }, [modalVisible]);
 
   if (!data)
     return (
@@ -206,9 +206,3 @@ const SeasonPage = () => {
 };
 
 export default SeasonPage;
-
-// useEffect(() => {
-//   // mai ma gandesc daca vreau asta
-//   if (modalVisible) document.body.style.overflow = "hidden";
-//   else document.body.style.overflow = "auto";
-// }, [modalVisible]);

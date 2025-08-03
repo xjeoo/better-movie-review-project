@@ -7,13 +7,13 @@ const EpisodeCard = ({
   setSelectedEpisode,
 }: {
   episode: Episode;
-  setSelectedEpisode?: (episode: any) => void;
+  setSelectedEpisode?: (episode: number) => void;
 }) => {
   return (
     <button
       className="relative flex flex-col border-1 border-white rounded-md overflow-hidden p-0.5 cursor-pointer"
       onClick={() => {
-        setSelectedEpisode && setSelectedEpisode(episode.id);
+        if (setSelectedEpisode) setSelectedEpisode(episode.id);
       }}
     >
       <div className="relative aspect-video w-[130px]">
