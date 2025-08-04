@@ -8,22 +8,22 @@ import Link from "next/link";
 
 const EpisodeModal = ({
   episode,
-  setModalVisible,
+  setSelectedEpisode,
 }: {
   episode: Episode;
-  setModalVisible: (state: boolean) => void;
+  setSelectedEpisode: (state: number | null) => void;
 }) => {
   console.log(episode);
   return (
     <>
       <div
         className="fixed w-screen h-screen -mt-3 bg-black/50 z-500"
-        onClick={() => setModalVisible(false)}
+        onClick={() => setSelectedEpisode(null)}
       />
       <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[80%]  pt-6 pb-3 mt-[80px] md:mt-[150px] mx-auto border-1 bg-black/80 backdrop-blur-xs border-neutral-500 rounded-md z-1000">
         <button
           className="absolute top-1 right-3 cursor-pointer"
-          onClick={() => setModalVisible(false)}
+          onClick={() => setSelectedEpisode(null)}
         >
           <X size={16} />
         </button>

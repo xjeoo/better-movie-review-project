@@ -29,7 +29,6 @@ const SeasonPage = () => {
     backdrop_path: string;
   } | null>(null);
   const [selectedEpisode, setSelectedEpisode] = useState<number | null>(null);
-  const [modalVisible, setModalVisible] = useState(false);
   const [drawerClosed, setDrawerClosed] = useState(true);
 
   const toggleDrawer = () => {
@@ -50,11 +49,6 @@ const SeasonPage = () => {
     }
   }, [searchParams]);
 
-  useEffect(() => {
-    if (selectedEpisode) setModalVisible(true);
-    console.log(showInfo);
-  }, [selectedEpisode]);
-
   // useEffect(() => {
   //   if (!modalVisible) {
   //     setSelectedEpisode(null);
@@ -74,12 +68,12 @@ const SeasonPage = () => {
   return (
     // pe tel copiez pagina asta https://arkhamcity.fandom.com/wiki/The_Season_of_Infamy
     <>
-      {modalVisible && (
+      {selectedEpisode && (
         <EpisodeModal
           episode={
             data?.episodes.filter((item) => item.id === selectedEpisode)[0]
           }
-          setModalVisible={setModalVisible}
+          setSelectedEpisode={setSelectedEpisode}
         />
       )}
       <main className="w-full gap-4 pr-6 bg-gray-900/70">
