@@ -31,7 +31,7 @@ const Searchbar = ({
 
   const toggle = () => {
     setVisible((prev) => !prev);
-    inputRef.current?.focus();
+    if (!visible) inputRef.current?.focus(); // !visible is still previous value so its actually visible
   };
   useEffect(() => {
     if (value.trim() === "") return;
