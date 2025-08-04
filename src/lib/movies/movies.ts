@@ -83,12 +83,14 @@ export async function getMovieById(movieId: string): Promise<Movie> {
 
   const directors = cast.crew.filter((dude: MovieCrewMember) => dude.job === "Director");
 
+  const finalReccomendations = recommendations.results && recommendations.results.length > 0 ? recommendations.results.slice(0, 10) : []
+
   const movieInfo = {
     data: await detailsRes.json(),
     video: finalTrailers,
     cast: cast,
     directors: directors,
-    recommendations: recommendations.results.slice(0, 10),
+    recommendations: finalReccomendations,
     ageRating: ageRatingValue
   };
 
