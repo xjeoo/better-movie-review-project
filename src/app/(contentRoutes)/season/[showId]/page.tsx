@@ -76,11 +76,11 @@ const SeasonPage = () => {
           setSelectedEpisode={setSelectedEpisode}
         />
       )}
-      <main className="w-full gap-4 pr-6 bg-gray-900/70">
+      <main className="w-full gap-4 md:pr-6 bg-gray-900/70 ">
         <div className="flex flex-col min-h-[350px] md:flex-row gap-4 h-full  ">
           <div className="flex flex-col items-center gap-4 w-auto pt-5 md:pt-7 px-4 md:bg-gray-950/70 py-2 ">
             <Link href={`/tv/${showId}`} className="relative">
-              <div className="absolute top-0 left-0 w-full h-full  opacity-0 hover:opacity-15 transition-opacity z-10 "></div>
+              <div className="absolute top-0 left-0 w-full h-full  opacity-0 hover:opacity-15 transition-opacity z-10"></div>
 
               <Image
                 src={
@@ -92,7 +92,7 @@ const SeasonPage = () => {
                 width={200}
                 height={300}
                 loading="eager"
-                className="rounded-md w-full"
+                className="rounded-md w-full max-w-[250px]"
               />
             </Link>
 
