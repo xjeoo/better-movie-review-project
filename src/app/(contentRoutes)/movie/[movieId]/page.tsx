@@ -210,17 +210,19 @@ const MoviePage = async ({
               <CrewCarousel info={movie.cast.crew.slice(0, 20)} />
             </div>
           </div>
-          <div className="flex flex-col w-full">
-            <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-10">
-              You might also like:
-            </h3>
-            <div className="mx-auto w-[90%]">
-              <RecommendationsCarousel
-                info={movie.recommendations}
-                type={"movie"}
-              />
+          {movie.recommendations.length > 0 && (
+            <div className="flex flex-col w-full">
+              <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-10">
+                You might also like:
+              </h3>
+              <div className="mx-auto w-[90%]">
+                <RecommendationsCarousel
+                  info={movie.recommendations}
+                  type={"movie"}
+                />
+              </div>
             </div>
-          </div>
+          )}
 
           <Separator className="bg-neutral-300 my-10" />
           <div className="w-full">
