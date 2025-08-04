@@ -10,6 +10,7 @@ const HomePage = async () => {
   return (
     <>
       <div className="flex-1 sm:flex w-full h-full flex-col">
+        {/* need to make carousel smaller and maybe non existent */}
         <HomeCarousel movies={movies} />
         <Footer />
       </div>
