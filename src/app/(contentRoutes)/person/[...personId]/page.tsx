@@ -46,7 +46,9 @@ const PersonPage = async ({
               </span>
             )}
             {data.place_of_birth && (
-              <span>{"Place of birth: " + data.place_of_birth}</span>
+              <span className="text-center">
+                {"Place of birth: " + data.place_of_birth}
+              </span>
             )}
             {data.deathday && (
               <span>{"Died on " + formatDate(data.deathday)}</span>
