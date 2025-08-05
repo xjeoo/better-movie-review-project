@@ -1,12 +1,6 @@
 // import Autoplay from "embla-carousel-autoplay";
 import { DiscoverMovie } from "@/types/movies/movies";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "../../ui/carousel";
+import { Carousel, CarouselContent, CarouselItem } from "../../ui/carousel";
 import MovieCard from "./MovieCard";
 import TvShowCard from "./TvShowCard";
 import { PopularTvShow } from "@/types/home_page/home_page_types";
