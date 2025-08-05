@@ -17,7 +17,7 @@ const CarouselCard = ({
   return (
     <Card className="!p-0 items-center bg-dark-transparent border-0">
       <CardContent className="flex w-full h-fit justify-center items-center !px-0  ">
-        <div className="relative w-full h-[900px] sm:h-[1080px] items-center justify-center overflow-hidden select-none">
+        <div className="relative w-full h-[480px] sm:h-[900px] items-center justify-center overflow-hidden select-none">
           <Image
             src={backDropPath1080 + movie.backdrop_path}
             alt={movie.title}
@@ -26,10 +26,9 @@ const CarouselCard = ({
             priority={index === 0}
             className="object-cover"
           />
-          <div className="absolute bg-gradient-to-r from-gray-900 to-transparent h-full w-full "></div>
-          <div className="sm:hidden flex absolute bg-gradient-to-l from-gray-900 to-transparent h-full w-full "></div>
-          <div className="absolute bg-gradient-to-t from-black to-transparent h-full w-full "></div>
-          <div className="z-20 absolute left-[5%] bottom-[35%]">
+          <div className="absolute bg-gradient-to-r from-black/70 to-transparent h-full w-3/5 sm:w-full "></div>
+          <div className="absolute bg-gradient-to-t from-black to-transparent -bottom-1 h-full w-full"></div>
+          <div className="z-20 absolute left-[5%]  bottom-[15%] sm:bottom-[35%]">
             <div className="flex flex-col max-w-full sm:max-w-[55vw] gap-4 ">
               <h2 className="text-3xl sm:text-6xl font-semibold text-white text-pretty">
                 {movie.title}
