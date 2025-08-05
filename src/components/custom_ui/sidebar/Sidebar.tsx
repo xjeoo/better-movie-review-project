@@ -58,7 +58,7 @@ const Sidebar = ({ session }: { session: userInfo | null }) => {
       </button>
       <div
         className={cn(
-          "fixed top-0 left-0 w-screen h-screen bg-light-dark-transparent z-1000 ",
+          "fixed top-0 left-0 w-screen h-dvh bg-light-dark-transparent z-1000 ",
           shouldRender ? "flex" : "hidden"
         )}
       >
