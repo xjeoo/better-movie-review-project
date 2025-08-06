@@ -1,4 +1,4 @@
-import { posterPath500 } from "@/constants/movies";
+import { profilePath185 } from "@/constants/movies";
 import { MovieCrewMember } from "@/types/movies/movies";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,7 +14,7 @@ const CrewCard = ({ info }: { info: MovieCrewMember }) => {
         <Image
           src={
             info.profile_path
-              ? posterPath500 + info.profile_path
+              ? profilePath185 + info.profile_path
               : "/defaultavatar.png"
           }
           alt={info.name}

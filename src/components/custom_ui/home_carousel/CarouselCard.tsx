@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import genres from "@/constants/genres";
 import GenrePill from "../GenrePill";
-import { backDropPath1080 } from "@/constants/movies";
+import { backDropPathOriginal } from "@/constants/movies";
 import { DiscoverMovie } from "@/types/movies/movies";
 
 const CarouselCard = ({
@@ -19,7 +19,7 @@ const CarouselCard = ({
       <CardContent className="flex w-full h-fit justify-center items-center !px-0  ">
         <div className="relative w-full h-[480px] sm:h-[900px] items-center justify-center overflow-hidden select-none">
           <Image
-            src={backDropPath1080 + movie.backdrop_path}
+            src={backDropPathOriginal + movie.backdrop_path}
             alt={movie.title}
             fill
             loading={index === 0 ? "eager" : "lazy"}

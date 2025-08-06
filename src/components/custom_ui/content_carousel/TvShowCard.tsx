@@ -1,4 +1,4 @@
-import { posterPath500 } from "@/constants/movies";
+import { posterPath342 } from "@/constants/movies";
 import { PopularTvShow } from "@/types/home_page/home_page_types";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,7 +11,7 @@ const TvShowCard = ({ tvshow }: { tvshow: PopularTvShow }) => {
         <Image
           src={
             tvshow.poster_path
-              ? posterPath500 + tvshow.poster_path
+              ? posterPath342 + tvshow.poster_path
               : "/posterplaceholder.svg"
           }
           alt={tvshow.name}

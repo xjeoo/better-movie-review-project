@@ -1,12 +1,16 @@
- export const backDropPath1080 = "https://image.tmdb.org/t/p/original";
- export const backDropPath720 = "https://image.tmdb.org/t/p/w1280";
+export const backDropPathOriginal = "https://image.tmdb.org/t/p/original";
+export const backDropPath720 = "https://image.tmdb.org/t/p/w1280";
 
- export const posterPathOriginal = "https://image.tmdb.org/t/p/original/"
- export const posterPath500 = "https://image.tmdb.org/t/p/w500/"
+export const posterPathOriginal = "https://image.tmdb.org/t/p/original/";
+export const posterPath500 = "https://image.tmdb.org/t/p/w500/";
+export const posterPath342 = "https://image.tmdb.org/t/p/w342/";
+export const posterPath154 = "https://image.tmdb.org/t/p/w154/";
 
- export const starColor = "#5f9beb";
- 
- export const months = {
+export const profilePath185 = "https://image.tmdb.org/t/p/w185/";
+
+export const starColor = "#5f9beb";
+
+export const months = {
   "01": "Jan",
   "02": "Feb",
   "03": "Mar",
@@ -19,14 +23,14 @@
   "10": "Oct",
   "11": "Nov",
   "12": "Dec",
- }
+};
 
- export const TMDB_READ_ACCESS_KEY = process.env.TMDB_READ_ACCESS_KEY;
+export const TMDB_READ_ACCESS_KEY = process.env.TMDB_READ_ACCESS_KEY;
 
- export const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${TMDB_READ_ACCESS_KEY}`,
-    },
-  };
+export const options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization: `Bearer ${TMDB_READ_ACCESS_KEY}`,
+  },
+};
