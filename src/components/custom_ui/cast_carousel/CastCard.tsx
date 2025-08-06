@@ -21,7 +21,7 @@ const CastCard = ({ info }: { info: MovieCastMember }) => {
           sizes="180px"
           className="object-cover rounded-xl"
         />
-        <div className=" absolute opacity-0 group-hover:opacity-15 w-full h-full bg-black transition-opacity"></div>
+        <div className=" absolute opacity-0 group-md:hover:opacity-15 w-full h-full bg-black transition-opacity"></div>
       </div>
 
       <div className="absolute text-center bottom-0 flex flex-col justify-center items-center w-full bg-neutral-700/60 rounded-b-xl">

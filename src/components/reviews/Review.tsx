@@ -42,7 +42,7 @@ const Review = async ({
           <Star
             key={index}
             className={cn(
-              "size-6 cursor-pointer hover:scale-110 transition-all"
+              "size-6 cursor-pointer md:hover:scale-110 transition-all"
             )}
             color={index + 1 > rating ? "#b6c1d4" : starColor}
             fill={index + 1 <= rating ? starColor : ""}

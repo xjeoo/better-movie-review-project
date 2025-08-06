@@ -40,8 +40,8 @@ const ContentCarousel = ({
             </CarouselItem>
           ))}
         </CarouselContent>
-        {/* <CarouselPrevious className="hidden lg:flex h-full w-15 absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-transparent text-white p-2 border-0 hover:!bg-dark-transparent hover:!text-white hover:opacity-50 cursor-pointer rounded-md" />
-        <CarouselNext className="hidden lg:flex h-full w-15 !lg:absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-transparent text-white p-2 border-0 hover:!bg-dark-transparent hover:!text-white hover:opacity-50 cursor-pointer rounded-md" /> */}
+        {/* <CarouselPrevious className="hidden lg:flex h-full w-15 absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-transparent text-white p-2 border-0 md:hover:!bg-dark-transparent md:hover:!text-white md:hover:opacity-50 cursor-pointer rounded-md" />
+        <CarouselNext className="hidden lg:flex h-full w-15 !lg:absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-transparent text-white p-2 border-0 md:hover:!bg-dark-transparent md:hover:!text-white md:hover:opacity-50 cursor-pointer rounded-md" /> */}
       </Carousel>
     </div>
   );

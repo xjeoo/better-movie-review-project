@@ -33,7 +33,7 @@ const EpisodeCard = ({
       <p className="w-[130px] text-nowrap text-ellipsis overflow-hidden">
         {episode.episode_number}-{episode.name}
       </p>
-      <div className="absolute w-full h-full flex justify-center items-center bg-black opacity-0 hover:opacity-30 transition-opacity">
+      <div className="absolute w-full h-full flex justify-center items-center bg-black opacity-0 md:hover:opacity-30 transition-opacity">
         <div className="flex flex-col">
           {/* <span>{episode.episode_number}</span> */}
         </div>

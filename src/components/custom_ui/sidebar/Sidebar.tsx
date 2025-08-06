@@ -53,7 +53,7 @@ const Sidebar = ({ session }: { session: userInfo | null }) => {
   return (
     <>
       <button onClick={toggle} className="flex gap-4">
-        <PanelLeftIcon className="size-[1.7em] hover:bg-neutral-200 hover:text-black p-1 rounded-md cursor-pointer transition-colors" />
+        <PanelLeftIcon className="size-[1.7em] md:hover:bg-neutral-200 md:hover:text-black p-1 rounded-md cursor-pointer transition-colors" />
         <Separator orientation="vertical" />
       </button>
       <div
@@ -73,7 +73,7 @@ const Sidebar = ({ session }: { session: userInfo | null }) => {
           <div className="flex flex-col items-end justify-start w-full h-fit bg-red gap-4 mt-2">
             <button
               onClick={toggle}
-              className="p-2 mx-4 bg-neutral-800 cursor-pointer rounded-full hover:bg-black hover:invert"
+              className="p-2 mx-4 bg-neutral-800 cursor-pointer rounded-full md:hover:bg-black md:hover:invert"
             >
               <img
                 src="/icons/leftarrow.svg"
@@ -90,7 +90,7 @@ const Sidebar = ({ session }: { session: userInfo | null }) => {
                 <Link
                   key={index}
                   href={item.url}
-                  className="flex items-center w-full rounded-sm hover:bg-neutral-700 h-[2.5em] pl-8"
+                  className="flex items-center w-full rounded-sm md:hover:bg-neutral-700 h-[2.5em] pl-8"
                 >
                   <item.icon className="mr-4" />
                   {item.title}

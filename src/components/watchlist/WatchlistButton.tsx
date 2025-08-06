@@ -53,7 +53,7 @@ const WatchlistButton = ({
     <>
       {addedState ? (
         <button
-          className="flex items-center gap-0.5 px-3 py-1.5 rounded-full bg-blue-primary-darker hover:bg-blue-primary-darker-100 transition-colors text-white cursor-pointer mt-3"
+          className="flex items-center gap-0.5 px-3 py-1.5 rounded-full bg-blue-primary-darker md:hover:bg-blue-primary-darker-100 transition-colors text-white cursor-pointer mt-3"
           onClick={handleDelete}
         >
           <BookmarkCheck />
@@ -61,7 +61,7 @@ const WatchlistButton = ({
         </button>
       ) : (
         <button
-          className="flex items-center gap-0.5 px-3 py-1.5 rounded-full border-1 border-white hover:border-blue-primary-darker hover:bg-blue-primary-darker transition-colors text-white cursor-pointer mt-3"
+          className="flex items-center gap-0.5 px-3 py-1.5 rounded-full border-1 border-white md:hover:border-blue-primary-darker md:hover:bg-blue-primary-darker transition-colors text-white cursor-pointer mt-3"
           onClick={handleAdd}
         >
           <BookmarkPlus />

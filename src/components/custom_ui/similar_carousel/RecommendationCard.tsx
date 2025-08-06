@@ -25,7 +25,7 @@ const RecommendationCard = ({
         height={375}
         loading="lazy"
       />
-      <div className=" absolute opacity-0 group-hover:opacity-15 w-full h-full bg-black transition-opacity"></div>
+      <div className=" absolute opacity-0 group-md:hover:opacity-15 w-full h-full bg-black transition-opacity"></div>
     </Link>
   );
 };

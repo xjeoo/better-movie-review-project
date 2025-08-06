@@ -47,7 +47,7 @@ const CarouselCard = ({
               </p>
               <Link
                 href={`/movie/${movie.id}`}
-                className="py-1.5 px-5 w-fit text-2xl bg-blue-primary-darker text-white rounded-md mt-6 hover:bg-blue-primary-darker-100"
+                className="py-1.5 px-5 w-fit text-2xl bg-blue-primary-darker text-white rounded-md mt-6 md:hover:bg-blue-primary-darker-100"
               >
                 View
               </Link>
