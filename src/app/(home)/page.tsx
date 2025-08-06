@@ -17,11 +17,11 @@ const HomePage = async () => {
         </section>
         <section className="w-full px-5 sm:px-10 flex flex-col gap-[80px] sm:-mt-[150px] z-10 pb-40">
           <div>
-            <h2 className="text-2xl sm:text-4xl mb-3">Popular Movies</h2>
+            <h2 className="text-2xl sm:text-4xl mb-3">Trending Movies</h2>
             <ContentCarousel content={popularMovies} type="movie" />
           </div>
           <div>
-            <h2 className="text-2xl sm:text-4xl mb-3">Popular Tv Shows</h2>
+            <h2 className="text-2xl sm:text-4xl mb-3">Trending TV Shows</h2>
             <ContentCarousel content={popularTvShows} type="tv" />
           </div>
         </section>
