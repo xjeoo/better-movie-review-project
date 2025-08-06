@@ -1,4 +1,4 @@
-import { posterPath500 } from "@/constants/movies";
+import { posterPath342 } from "@/constants/movies";
 import { DiscoverMovie } from "@/types/movies/movies";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,7 +11,7 @@ const MovieCard = ({ movie }: { movie: DiscoverMovie }) => {
         <Image
           src={
             movie.poster_path
-              ? posterPath500 + movie.poster_path
+              ? posterPath342 + movie.poster_path
               : "/posterplaceholder.svg"
           }
           alt={movie.title}

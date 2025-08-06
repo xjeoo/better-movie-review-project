@@ -1,4 +1,4 @@
-import { posterPath500 } from "@/constants/movies";
+import { posterPath154, profilePath185 } from "@/constants/movies";
 import { SearchResult } from "@/types/search/search";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,7 +18,7 @@ const SearchItem = ({ item }: { item: SearchResult }) => {
           <Image
             src={
               item.poster_path
-                ? posterPath500 + item.poster_path
+                ? posterPath154 + item.poster_path
                 : "/posterplaceholder.svg"
             }
             alt="poster"
@@ -47,7 +47,7 @@ const SearchItem = ({ item }: { item: SearchResult }) => {
           <Image
             src={
               item.poster_path
-                ? posterPath500 + item.poster_path
+                ? posterPath154 + item.poster_path
                 : "/posterplaceholder.svg"
             }
             alt="poster"
@@ -75,7 +75,7 @@ const SearchItem = ({ item }: { item: SearchResult }) => {
           <Image
             src={
               item.profile_path
-                ? posterPath500 + item.profile_path
+                ? profilePath185 + item.profile_path
                 : "/defaultavatar.png"
             }
             alt="poster"
