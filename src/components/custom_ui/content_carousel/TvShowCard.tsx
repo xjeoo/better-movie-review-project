@@ -7,7 +7,7 @@ import React from "react";
 const TvShowCard = ({ tvshow }: { tvshow: PopularTvShow }) => {
   return (
     <Link href={`/tv/${tvshow.id}`} className="">
-      <div className="relative w-[200px] sm:w-[250px] aspect-2/3 select-none rounded-md overflow-hidden hover:opacity-90">
+      <div className="relative w-[200px] sm:w-[250px] aspect-2/3 select-none rounded-md overflow-hidden md:hover:opacity-90">
         <Image
           src={
             tvshow.poster_path

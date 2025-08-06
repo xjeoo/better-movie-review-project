@@ -75,7 +75,7 @@ const CreateReview = ({
                 <Star
                   key={index}
                   className={cn(
-                    "size-8 lg:size-7 cursor-pointer hover:scale-110 active:opacity-80 transition-all"
+                    "size-8 lg:size-7 cursor-pointer md:hover:scale-110 active:opacity-80 transition-all"
                   )}
                   color={index + 1 > rating ? "#b6c1d4" : starColor}
                   fill={index + 1 <= rating ? starColor : ""}
@@ -109,7 +109,7 @@ const CreateReview = ({
               <button
                 disabled={isPending}
                 className={cn(
-                  "w-full text-xl py-2 flex justify-center bg-gradient-to-br from-[#5f9beb]/90 to-[#5f9beb]/60 hover:opacity-95 active:opacity-85 rounded-xs cursor-pointer transition-opacity",
+                  "w-full text-xl py-2 flex justify-center bg-gradient-to-br from-[#5f9beb]/90 to-[#5f9beb]/60 md:hover:opacity-95 active:opacity-85 rounded-xs cursor-pointer transition-opacity",
                   isPending && "cursor-auto"
                 )}
               >

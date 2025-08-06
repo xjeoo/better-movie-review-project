@@ -13,7 +13,7 @@ const SearchItem = ({ item }: { item: SearchResult }) => {
         href={`/${item.media_type}/${item.id}`}
         className="relative flex justify-between px-2 mb-2 border-1 border-neutral-600 rounded-md py-1"
       >
-        <div className="absolute w-full h-full bg-black opacity-0 hover:opacity-10 z-10" />
+        <div className="absolute w-full h-full bg-black opacity-0 md:hover:opacity-10 z-10" />
         <div className="flex items-center gap-2">
           <Image
             src={
@@ -41,7 +41,7 @@ const SearchItem = ({ item }: { item: SearchResult }) => {
         href={`/${item.media_type}/${item.id}`}
         className="relative flex justify-between px-2 mb-2 border-1 border-neutral-600 rounded-md py-1"
       >
-        <div className="absolute w-full h-full bg-black opacity-0 hover:opacity-10 z-10" />
+        <div className="absolute w-full h-full bg-black opacity-0 md:hover:opacity-10 z-10" />
 
         <div className="flex items-center gap-2">
           <Image
@@ -70,7 +70,7 @@ const SearchItem = ({ item }: { item: SearchResult }) => {
         href={`/${item.media_type}/${item.id}`}
         className="relative flex justify-between px-2 mb-2 border-1 border-neutral-600 rounded-md py-1"
       >
-        <div className="absolute w-full h-full bg-black opacity-0 hover:opacity-10 z-10" />
+        <div className="absolute w-full h-full bg-black opacity-0 md:hover:opacity-10 z-10" />
         <div className="flex items-center gap-2">
           <Image
             src={

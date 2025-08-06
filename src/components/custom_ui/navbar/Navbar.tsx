@@ -38,7 +38,7 @@ const Navbar = ({
     >
       <div className="flex  gap-6 text-[1.1em] pl-4 flex-1">
         {sidebar && <Sidebar session={session} />}
-        {/* <SidebarTrigger className="cursor-pointer hover:bg-blue-primary" /> */}
+        {/* <SidebarTrigger className="cursor-pointer md:hover:bg-blue-primary" /> */}
       </div>
       <Link
         href={"/"}
