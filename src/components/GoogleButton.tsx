@@ -16,7 +16,7 @@ const GoogleButton = () => {
 
   return (
     <button
-      className="flex bg-gray-100 text-black w-full rounded-sm justify-center items-center py-1.5 hover:bg-white cursor-pointer"
+      className="flex bg-gray-100 text-black w-full rounded-sm justify-center items-center py-1.5 md:hover:bg-white cursor-pointer"
       onClick={handleGoogleLogin}
     >
       <img src="/icons/google.svg" alt="google" className="size-7" />

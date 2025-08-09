@@ -80,7 +80,7 @@ const SeasonPage = () => {
         <div className="flex flex-col min-h-[350px] md:flex-row gap-4 h-full  ">
           <div className="flex flex-col items-center gap-4 w-auto pt-5 md:pt-7 px-4 md:bg-gray-950/70 py-2 ">
             <Link href={`/tv/${showId}`} className="relative">
-              <div className="absolute top-0 left-0 w-full h-full  opacity-0 hover:opacity-15 transition-opacity z-10"></div>
+              <div className="absolute top-0 left-0 w-full h-full  opacity-0 md:hover:opacity-15 transition-opacity z-10"></div>
 
               <Image
                 src={
@@ -134,7 +134,7 @@ const SeasonPage = () => {
                               "font-semibold bg-gray-900 rounded-md overflow-hidden"
                           )}
                         >
-                          <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-30 transition-opacity z-100 "></div>
+                          <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 md:hover:opacity-30 transition-opacity z-100 "></div>
                           <div className="relative h-[80px] aspect-3/4">
                             <Image
                               src={

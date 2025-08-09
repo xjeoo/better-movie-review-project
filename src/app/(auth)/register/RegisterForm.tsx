@@ -85,7 +85,7 @@ const RegisterForm = () => {
       <Button
         type="submit"
         disabled={isPending}
-        className="w-full mx-auto mt-10 hover:cursor-pointer text-xl bg-transparent ring-1 ring-white hover:text-black hover:bg-white"
+        className="w-full mx-auto mt-10 md:hover:cursor-pointer text-xl bg-transparent ring-1 ring-white md:hover:text-black md:hover:bg-white"
       >
         {isPending ? (
           <img
@@ -102,7 +102,7 @@ const RegisterForm = () => {
         Already have an account?<span> </span>
         <Link
           href={"/login"}
-          className="underline hover:text-blue-300 text-pretty "
+          className="underline md:hover:text-blue-300 text-pretty "
         >
           Sign in!
         </Link>

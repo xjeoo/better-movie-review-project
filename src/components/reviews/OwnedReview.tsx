@@ -110,13 +110,13 @@ const OwnedReview = ({
               <p className="font-bold text-2xl">Delete review?</p>
               <div className="flex gap-4">
                 <button
-                  className="text-[1.1em] w-12 bg-blue-primary py-1 rounded-xl cursor-pointer hover:opacity-85 transition-opacity"
+                  className="text-[1.1em] w-12 bg-blue-primary py-1 rounded-xl cursor-pointer md:hover:opacity-85 transition-opacity"
                   onClick={handleDelete}
                 >
                   Yes
                 </button>
                 <button
-                  className="text-[1.1em] w-12 bg-error py-1 rounded-xl cursor-pointer hover:opacity-85 transition-opacity"
+                  className="text-[1.1em] w-12 bg-error py-1 rounded-xl cursor-pointer md:hover:opacity-85 transition-opacity"
                   onClick={() => setisDeleting(false)}
                 >
                   No
@@ -181,7 +181,7 @@ const OwnedReview = ({
               <Star
                 key={index}
                 className={cn(
-                  "size-6 cursor-pointer scale-105 hover:scale-115  "
+                  "size-6 cursor-pointer scale-105 md:hover:scale-115  "
                 )}
                 color={index + 1 > newRating ? "#b6c1d4" : "#5fb8eb"}
                 fill={index + 1 <= newRating ? "#5fb8eb" : ""}
@@ -192,7 +192,7 @@ const OwnedReview = ({
           : Array.from({ length: 5 }).map((star, index) => (
               <Star
                 key={index}
-                className={cn("size-6 cursor-pointer hover:scale-110")}
+                className={cn("size-6 cursor-pointer md:hover:scale-110")}
                 color={index + 1 > rating ? "#b6c1d4" : starColor}
                 fill={index + 1 <= rating ? starColor : ""}
                 aria-label={`${index + 1} star`}
@@ -210,7 +210,7 @@ const OwnedReview = ({
             onChange={(e) => setNewText(e.currentTarget.value)}
           />
           <button
-            className="w-full py-1 flex justify-center bg-gradient-to-br from-[#5f9beb]/90 to-[#5f9beb]/60 hover:opacity-95 active:opacity-85 rounded-md cursor-pointer"
+            className="w-full py-1 flex justify-center bg-gradient-to-br from-[#5f9beb]/90 to-[#5f9beb]/60 md:hover:opacity-95 active:opacity-85 rounded-md cursor-pointer"
             onClick={handleEdit}
           >
             Save changes

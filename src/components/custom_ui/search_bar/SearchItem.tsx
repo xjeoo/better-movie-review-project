@@ -1,4 +1,4 @@
-import { posterPath500 } from "@/constants/movies";
+import { posterPath154, profilePath185 } from "@/constants/movies";
 import { SearchResult } from "@/types/search/search";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,12 +13,12 @@ const SearchItem = ({ item }: { item: SearchResult }) => {
         href={`/${item.media_type}/${item.id}`}
         className="relative flex justify-between px-2 mb-2 border-1 border-neutral-600 rounded-md py-1"
       >
-        <div className="absolute w-full h-full bg-black opacity-0 hover:opacity-10 z-10" />
+        <div className="absolute w-full h-full bg-black opacity-0 md:hover:opacity-10 z-10" />
         <div className="flex items-center gap-2">
           <Image
             src={
               item.poster_path
-                ? posterPath500 + item.poster_path
+                ? posterPath154 + item.poster_path
                 : "/posterplaceholder.svg"
             }
             alt="poster"
@@ -41,13 +41,13 @@ const SearchItem = ({ item }: { item: SearchResult }) => {
         href={`/${item.media_type}/${item.id}`}
         className="relative flex justify-between px-2 mb-2 border-1 border-neutral-600 rounded-md py-1"
       >
-        <div className="absolute w-full h-full bg-black opacity-0 hover:opacity-10 z-10" />
+        <div className="absolute w-full h-full bg-black opacity-0 md:hover:opacity-10 z-10" />
 
         <div className="flex items-center gap-2">
           <Image
             src={
               item.poster_path
-                ? posterPath500 + item.poster_path
+                ? posterPath154 + item.poster_path
                 : "/posterplaceholder.svg"
             }
             alt="poster"
@@ -70,12 +70,12 @@ const SearchItem = ({ item }: { item: SearchResult }) => {
         href={`/${item.media_type}/${item.id}`}
         className="relative flex justify-between px-2 mb-2 border-1 border-neutral-600 rounded-md py-1"
       >
-        <div className="absolute w-full h-full bg-black opacity-0 hover:opacity-10 z-10" />
+        <div className="absolute w-full h-full bg-black opacity-0 md:hover:opacity-10 z-10" />
         <div className="flex items-center gap-2">
           <Image
             src={
               item.profile_path
-                ? posterPath500 + item.profile_path
+                ? profilePath185 + item.profile_path
                 : "/defaultavatar.png"
             }
             alt="poster"

@@ -1,4 +1,4 @@
-import { posterPath500 } from "@/constants/movies";
+import { profilePath185 } from "@/constants/movies";
 import { MovieCrewMember } from "@/types/movies/movies";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,7 +14,7 @@ const CrewCard = ({ info }: { info: MovieCrewMember }) => {
         <Image
           src={
             info.profile_path
-              ? posterPath500 + info.profile_path
+              ? profilePath185 + info.profile_path
               : "/defaultavatar.png"
           }
           alt={info.name}
@@ -22,7 +22,7 @@ const CrewCard = ({ info }: { info: MovieCrewMember }) => {
           sizes="180px"
           className="object-cover rounded-xl"
         />
-        <div className=" absolute opacity-0 group-hover:opacity-15 w-full h-full bg-black transition-opacity"></div>
+        <div className=" absolute opacity-0 group-md:hover:opacity-15 w-full h-full bg-black transition-opacity"></div>
       </div>
 
       <div className="absolute text-center bottom-0 flex flex-col justify-center items-center w-full bg-neutral-700/60 rounded-b-xl">
