@@ -60,8 +60,8 @@ const SeasonPage = () => {
 
   if (!data)
     return (
-      <div className="w-screen h-screen flex justify-center mt-[200px]">
-        <LoaderCircle className="animate-spin" size={55} />
+      <div className="w-fit h-[75dvh] mx-auto pt-[220px]">
+        <LoaderCircle size={60} className="animate-spin" color="white" />
       </div>
     );
 
@@ -115,7 +115,7 @@ const SeasonPage = () => {
                 (item) =>
                   item.name.toLowerCase() !== "specials" &&
                   item.name !== data?.name
-              ).length! > 1 ? (
+              ).length! > 0 ? (
                 <ScrollArea
                   className={cn(
                     "whitespace-nowrap w-dvw px-4 pb-2 pt-3   md:px-0 md:w-[200px] bg-gray-800 md:bg-transparent md:whitespace-normal md:h-80 md:translate-y-0"
@@ -123,16 +123,16 @@ const SeasonPage = () => {
                 >
                   <div className="relative flex md:flex-col gap-2 z-100 ">
                     {showInfo?.seasons
-                      .filter(
-                        (item) =>
-                          item.name.toLowerCase() !== "specials" &&
-                          item.name !== data?.name
-                      )
+                      .filter((item) => item.name.toLowerCase() !== "specials")
                       .map((season) => (
                         <Link
                           key={season.id}
                           href={`/season/${showId}?number=${season.season_number}`}
-                          className="relative flex gap-1.5 items-center text-nowrap w-fit mb-1  text-[1.1em] rounded-xs overflow-hidden"
+                          className={cn(
+                            "relative flex gap-1.5 items-center text-nowrap w-fit mb-1  text-[1.1em] rounded-xs overflow-hidden",
+                            parseInt(season.season_number) === seasonNumber &&
+                              "font-semibold bg-gray-900 rounded-md overflow-hidden"
+                          )}
                         >
                           <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-30 transition-opacity z-100 "></div>
                           <div className="relative h-[80px] aspect-3/4">
