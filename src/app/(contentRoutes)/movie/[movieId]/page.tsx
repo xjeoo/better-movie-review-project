@@ -28,7 +28,7 @@ const MoviePage = async ({
   params: Promise<{ movieId: string }>;
 }) => {
   const { movieId } = await params;
-  const youtubeUrl = "https://www.youtube.com/embed/";
+  // const youtubeUrl = "https://www.youtube.com/embed/";
 
   const { movie, rating, user, token, reviews } = await getInfoForMoviePage(
     movieId
