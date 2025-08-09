@@ -5,7 +5,7 @@ import CreateReview from "@/components/reviews/CreateReview";
 import ReviewSection from "@/components/reviews/ReviewSection";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { backDropPath720, starColor } from "@/constants/movies";
+import { backDropPath720, posterPath500, starColor } from "@/constants/movies";
 import { getInfoForMoviePage } from "@/lib/movies/movies";
 import {
   Calendar,
@@ -63,8 +63,8 @@ const MoviePage = async ({
         </div>
 
         <main className="relative xl:border-x-1 border-x-neutral-500 backdrop-blur-md px-2 md:px-0 w-full xl:w-[70%] bg-black/70 md:bg-black/80 pt-15 -mt-1 pb-10 z-10 mx-auto text-shadow-2xs text-shadow-black ">
-          <div className="flex flex-col items-center lg:flex-row gap-10 md:gap-5 px-2 md:px-2 xl:px-6">
-            <div className="flex flex-col gap-2 items-center md:items-start w-full md:w-[80%] lg:w-[55%] text-neutral-200">
+          <div className="flex flex-col-reverse items-center md:flex-row gap-10 md:gap-5 px-2 md:px-2 xl:px-6">
+            <div className="flex flex-col gap-2 items-center md:items-start w-full md:w-[80%] md:flex-3 lg:w-[55%] text-neutral-200">
               <div>
                 <h2 className="text-4xl text-white md:text-5xl font-semibold text-center mb-2">
                   {movie.data.title}
@@ -180,11 +180,22 @@ const MoviePage = async ({
                 </>
               )}
             </div>
-            <div className="w-full md:w-[80%] lg:w-[55%]  flex justify-center items-center">
-              <iframe
+            <div className="w-full md:w-[80%] lg:w-[55%]  flex justify-center items-center md:flex-2">
+              {/* <iframe
                 src={youtubeUrl + movie.video[0]?.key}
                 className="w-full aspect-video rounded-md border-1 border-neutral-500"
-              ></iframe>
+              ></iframe> */}
+              <div className="relative w-[50%] aspect-2/3 sm:w-[50%] md:w-[90%] lg:w-[70%] rounded-md overflow-hidden outline-1 outline-neutral-800 shadow-2xl shadow-neutral-800">
+                <Image
+                  src={
+                    movie.data.poster_path
+                      ? posterPath500 + movie.data.poster_path
+                      : "/posterplaceholder.svg"
+                  }
+                  alt="poster"
+                  fill
+                />
+              </div>
             </div>
           </div>
         </main>
