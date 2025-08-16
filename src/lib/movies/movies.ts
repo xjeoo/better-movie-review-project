@@ -1,4 +1,4 @@
-import { Movie, MovieCrewMember, MoviePageData } from "@/types/movies/movies";
+import { ImageType, Movie, MovieCrewMember, MoviePageData } from "@/types/movies/movies";
 import { getSession, getToken } from "../auth/sessionUtils";
 import { getRatingByMovieId, getReviewsByMovieId } from "./reviews";
 import { videoResult } from "@/types/content";
@@ -13,6 +13,7 @@ export async function getMovieById(movieId: string): Promise<Movie> {
   const infoUrl = `https://api.themoviedb.org/3/movie/${movieId}`;
   const castUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits`;
   const recommendationsUrl = `https://api.themoviedb.org/3/movie/${movieId}/recommendations`;
+  const imageUrl = `https://api.themoviedb.org/3/movie/${movieId}/images`;
 
   const options = {
     method: "GET",
@@ -22,8 +23,9 @@ export async function getMovieById(movieId: string): Promise<Movie> {
     },
   };
 
-  const [detailsRes, videosRes, castRes, recommendationsRes, releaseDatesRes] = await Promise.all([
+  const [detailsRes,imageRes, videosRes, castRes, recommendationsRes, releaseDatesRes] = await Promise.all([
     fetch(infoUrl, options),
+    fetch(imageUrl, options),
     fetch(videoUrl, options),
     fetch(castUrl, options),
     fetch(recommendationsUrl, options),
@@ -31,6 +33,16 @@ export async function getMovieById(movieId: string): Promise<Movie> {
   ]);
   if (!detailsRes.ok) console.log("Failed fetching movie details");
   if (!videosRes.ok) console.log("Failed fetching movie videos");
+
+  const imagesJson: ImageType = await imageRes.json() || [];
+  const backdrops = imagesJson ? imagesJson.backdrops.slice(0,50): [];
+  const logos = imagesJson.logos ? imagesJson.logos.slice(0,50): [];
+  const posters = imagesJson ? imagesJson.posters.slice(0,50) : [];
+  const images = {
+    backdrops,
+    logos,
+    posters,
+  }
 
   const videos = await videosRes.json();
   const officialTrailers = videos.results.filter(
@@ -66,6 +78,7 @@ export async function getMovieById(movieId: string): Promise<Movie> {
 
   const movieInfo = {
     data: await detailsRes.json(),
+    images: images,
     video: finalTrailers,
     cast: cast,
     directors: directors,

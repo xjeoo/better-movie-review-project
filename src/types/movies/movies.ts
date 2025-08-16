@@ -3,6 +3,38 @@ import { videoResult } from "../content";
 
 // ...existing code...
 
+export interface ImageType{
+  
+  backdrops: Array<{
+    aspect_ratio: number;
+    height: number;
+    iso_639_1: string | null;
+    file_path: string;
+    vote_average: number;
+    vote_count: number;
+      width: number;
+ }>;
+  logos: Array<{
+    aspect_ratio: number;
+   height: number;
+    iso_639_1: string | null;
+    file_path: string;
+    vote_average: number;
+    vote_count: number;
+    width: number;
+ }>;
+   posters: Array<{
+     aspect_ratio: number;
+     height: number;
+    iso_639_1: string | null;
+    file_path: string;
+     vote_average: number;
+     vote_count: number;
+     width: number;
+  }>;
+};
+
+
 export interface DiscoverMovie {
   adult: boolean;
   backdrop_path: string | null;
@@ -51,6 +83,7 @@ export interface MovieData {
 
 export interface Movie {
   data: MovieData;
+  images: ImageType,
   video: videoResult[];
   cast: {
     cast: MovieCastMember[];

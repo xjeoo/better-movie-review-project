@@ -1,4 +1,5 @@
 import AgeRating from "@/components/custom_ui/AgeRating";
+import ImageSection from "@/components/custom_ui/movie_media/ImageSection";
 import SeasonsAccordion from "@/components/custom_ui/seasons_accordion/SeasonsAccordion";
 import RecommendationsCarousel from "@/components/custom_ui/similar_carousel/RecommendationCarousel";
 import CreateReview from "@/components/reviews/CreateReview";
@@ -6,10 +7,10 @@ import ReviewSection from "@/components/reviews/ReviewSection";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import WatchlistButton from "@/components/watchlist/WatchlistButton";
-import { backDropPath720, posterPath500, starColor } from "@/constants/movies";
+import { backDropPath1280, posterPath500, starColor } from "@/constants/movies";
 import { getInfoForTvShowPage } from "@/lib/tv/tvshows";
 import { existsInWatchlist } from "@/lib/user/watchlist";
-import { Calendar, Star, StarHalf, Tv } from "lucide-react";
+import { Calendar, ImageIcon, Star, StarHalf, Tv } from "lucide-react";
 import Image from "next/image";
 
 const TvShowPage = async ({
@@ -28,6 +29,7 @@ const TvShowPage = async ({
     "tv"
   );
   // const youtubeUrl = "https://www.youtube.com/embed/";
+  console.log(tvShow);
   return (
     <div className="flex flex-col w-full h-full pb-20 bg-black">
       <div className="relative">
@@ -35,7 +37,7 @@ const TvShowPage = async ({
         <div className="absolute h-full w-full flex justify-center items-center ">
           {tvShow.data.backdrop_path ? (
             <Image
-              src={backDropPath720 + tvShow.data.backdrop_path}
+              src={backDropPath1280 + tvShow.data.backdrop_path}
               alt="backdrop"
               fill
               sizes="100vw"
@@ -195,6 +197,12 @@ const TvShowPage = async ({
             <section className="max-h-100 px-2 border-1 border-neutral-700 rounded-md overflow-auto scroll-custom">
               <SeasonsAccordion seasons={tvShow.data.seasons} showId={showId} />
             </section>
+          </div>
+          <div className="flex flex-col gap-5 ">
+            <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-3">
+              <ImageIcon className="size-8" /> Images
+            </h3>
+            {tvShow.images && <ImageSection images={tvShow.images} />}
           </div>
 
           {/* <div>

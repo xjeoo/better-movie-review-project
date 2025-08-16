@@ -1,5 +1,11 @@
 export const backDropPathOriginal = "https://image.tmdb.org/t/p/original";
-export const backDropPath720 = "https://image.tmdb.org/t/p/w1280";
+export const backDropPath300 = "https://image.tmdb.org/t/p/w300";
+export const backDropPath780 = "https://image.tmdb.org/t/p/w780";
+export const backDropPath1280 = "https://image.tmdb.org/t/p/w1280";
+export const backDropPath1920 = "https://image.tmdb.org/t/p/w1920"; // unofficial
+
+
+
 
 export const posterPathOriginal = "https://image.tmdb.org/t/p/original/";
 export const posterPath500 = "https://image.tmdb.org/t/p/w500/";

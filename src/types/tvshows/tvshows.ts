@@ -1,6 +1,6 @@
 import { ReviewType, userInfo } from "../entites";
 import { videoResult, tvShowSeason } from "../content";
-import { Rating } from "../movies/movies";
+import { ImageType, Rating } from "../movies/movies";
 
 export interface TvShowCastMember {
   id: number;
@@ -79,6 +79,7 @@ export interface TvShowData {
 
 export interface TvShow {
   data: TvShowData;
+  images: ImageType;
   video: videoResult[];
   cast: {
     cast: TvShowCastMember[];

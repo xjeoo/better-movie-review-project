@@ -5,12 +5,14 @@ import CreateReview from "@/components/reviews/CreateReview";
 import ReviewSection from "@/components/reviews/ReviewSection";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { backDropPath720, posterPath500, starColor } from "@/constants/movies";
+import { backDropPath1280, posterPath500, starColor } from "@/constants/movies";
 import { getInfoForMoviePage } from "@/lib/movies/movies";
 import {
   Calendar,
+  Camera,
   Clapperboard,
   Clock,
+  ImageIcon,
   Star,
   StarHalf,
   Video,
@@ -21,6 +23,7 @@ import AgeRating from "@/components/custom_ui/AgeRating";
 import { formatDate } from "@/lib/utils";
 import RecommendationsCarousel from "@/components/custom_ui/similar_carousel/RecommendationCarousel";
 import { MovieCrewMember } from "@/types/movies/movies";
+import ImageSection from "@/components/custom_ui/movie_media/ImageSection";
 
 const MoviePage = async ({
   params,
@@ -28,7 +31,7 @@ const MoviePage = async ({
   params: Promise<{ movieId: string }>;
 }) => {
   const { movieId } = await params;
-  // const youtubeUrl = "https://www.youtube.com/embed/";
+  const youtubeUrl = "https://www.youtube.com/embed/";
 
   const { movie, rating, user, token, reviews } = await getInfoForMoviePage(
     movieId
@@ -39,7 +42,8 @@ const MoviePage = async ({
     user?.userId.toString(),
     "movie"
   );
-  console.log(movie);
+  console.log("Images: ", movie.images);
+  console.log("Videos: ", movie.video);
   return (
     <div className="flex flex-col w-full h-full pb-20 bg-black">
       <div className="relative">
@@ -47,7 +51,7 @@ const MoviePage = async ({
         <div className="absolute h-full w-full flex justify-center items-center ">
           {movie.data.backdrop_path ? (
             <Image
-              src={backDropPath720 + movie.data.backdrop_path}
+              src={backDropPath1280 + movie.data.backdrop_path}
               alt="backdrop"
               fill
               sizes="100vw"
@@ -63,7 +67,7 @@ const MoviePage = async ({
         </div>
 
         <main className="relative xl:border-x-1 border-x-neutral-500 backdrop-blur-md px-2 md:px-0 w-full xl:w-[70%] bg-black/70 md:bg-black/80 pt-15 -mt-1 pb-10 z-10 mx-auto text-shadow-2xs text-shadow-black ">
-          <div className="flex flex-col-reverse items-center md:flex-row gap-10 md:gap-5 px-2 md:px-2 xl:px-6">
+          <div className="flex flex-col-reverse items-center md:flex-row gap-10 md:gap-5 px-2 md:px-6 xl:px-6">
             <div className="flex flex-col gap-2 items-center md:items-start w-full md:w-[80%] md:flex-3 lg:w-[55%] text-neutral-200">
               <div>
                 <h2 className="text-4xl text-white md:text-5xl font-semibold text-center mb-2">
@@ -181,10 +185,6 @@ const MoviePage = async ({
               )}
             </div>
             <div className="w-full md:w-[80%] lg:w-[55%]  flex justify-center items-center md:flex-2">
-              {/* <iframe
-                src={youtubeUrl + movie.video[0]?.key}
-                className="w-full aspect-video rounded-md border-1 border-neutral-500"
-              ></iframe> */}
               <div className="relative w-[50%] aspect-2/3 sm:w-[50%] md:w-[90%] lg:w-[70%] rounded-md overflow-hidden outline-1 outline-neutral-800 shadow-2xl shadow-neutral-800">
                 <Image
                   src={
@@ -202,28 +202,50 @@ const MoviePage = async ({
       </div>
       <div className="relative xl:border-x-1 border-x-neutral-500 px-2 md:px-6 w-full xl:w-[70%] pt-15 z-10 mx-auto text-shadow-2xs text-shadow-black md:rounded-b-md">
         <div className="flex flex-col gap-15">
-          <div>
-            <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-10">
-              <Clapperboard className="size-8" />
-              <span>Cast</span>
+          <div className="flex flex-col gap-5 ">
+            {movie.video.length > 0 && (
+              <>
+                {/* <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-3">
+                  <Camera /> Trailer
+                </h3> */}
+                {/* <iframe
+                  src={youtubeUrl + movie.video[0]?.key}
+                  className="w-[90%] md:max-w-[75%] mx-auto aspect-video rounded-md border-1 border-neutral-500"
+                ></iframe> */}
+              </>
+            )}
+            <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-3">
+              <ImageIcon className="size-8" /> Images
             </h3>
-            <div className="w-[90%] mx-auto flex flex-col">
-              <CastCarousel info={movie.cast.cast.slice(0, 20)} />
-            </div>
+            {movie.images && <ImageSection images={movie.images} />}
           </div>
-          <div>
-            <h3 className="flex gap-2 text-2xl md:text-4xl text-white items-center mb-10">
-              <Video className="size-8" />
 
-              <p>Crew</p>
-            </h3>
-            <div className="w-[90%] mx-auto flex flex-col">
-              <CrewCarousel info={movie.cast.crew.slice(0, 20)} />
+          {movie.cast.cast.length > 0 && (
+            <div>
+              <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-10">
+                <Clapperboard className="size-8" />
+                <span>Cast</span>
+              </h3>
+              <div className="w-[90%] mx-auto flex flex-col">
+                <CastCarousel info={movie.cast.cast.slice(0, 20)} />
+              </div>
             </div>
-          </div>
+          )}
+          {movie.cast.crew.length > 0 && (
+            <div>
+              <h3 className="flex gap-2 text-2xl md:text-4xl text-white items-center mb-10">
+                <Video className="size-8" />
+
+                <span>Crew</span>
+              </h3>
+              <div className="w-[90%] mx-auto flex flex-col">
+                <CrewCarousel info={movie.cast.crew.slice(0, 20)} />
+              </div>
+            </div>
+          )}
           {movie.recommendations.length > 0 && (
             <div className="flex flex-col w-full">
-              <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-10">
+              <h3 className="flex gaspan-2 items-center text-2xl md:text-4xl text-white mb-10">
                 You might also like:
               </h3>
               <div className="mx-auto w-[90%]">
