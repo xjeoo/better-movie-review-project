@@ -7,7 +7,7 @@ import React from "react";
 const MovieCard = ({ movie }: { movie: DiscoverMovie }) => {
   return (
     <Link href={`/movie/${movie.id}`} className="">
-      <div className="relative w-[200px] sm:w-[250px] aspect-2/3 select-none rounded-md overflow-hidden md:hover:opacity-90">
+      <div className="relative w-[150px] sm:w-[220px] aspect-2/3 select-none rounded-md overflow-hidden md:hover:opacity-90">
         <Image
           src={
             movie.poster_path
