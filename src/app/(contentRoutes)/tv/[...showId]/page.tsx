@@ -1,5 +1,6 @@
 import AgeRating from "@/components/custom_ui/AgeRating";
 import ImageSection from "@/components/custom_ui/content_media/images/ImageSection";
+import VideoSection from "@/components/custom_ui/content_media/videos/VideoSection";
 import SeasonsAccordion from "@/components/custom_ui/seasons_accordion/SeasonsAccordion";
 import RecommendationsCarousel from "@/components/custom_ui/similar_carousel/RecommendationCarousel";
 import CreateReview from "@/components/reviews/CreateReview";
@@ -10,7 +11,7 @@ import WatchlistButton from "@/components/watchlist/WatchlistButton";
 import { backDropPath1280, posterPath500, starColor } from "@/constants/movies";
 import { getInfoForTvShowPage } from "@/lib/tv/tvshows";
 import { existsInWatchlist } from "@/lib/user/watchlist";
-import { Calendar, ImageIcon, Star, StarHalf, Tv } from "lucide-react";
+import { Calendar, Camera, ImageIcon, Star, StarHalf, Tv } from "lucide-react";
 import Image from "next/image";
 
 const TvShowPage = async ({
@@ -198,14 +199,22 @@ const TvShowPage = async ({
               <SeasonsAccordion seasons={tvShow.data.seasons} showId={showId} />
             </section>
           </div>
-          <div className="flex flex-col gap-5 ">
+          <div className="flex flex-col gap-8 ">
             {tvShow.images.backdrops.length > 0 && (
-              <>
-                <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-3">
+              <div>
+                <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-4">
                   <ImageIcon className="size-8" /> Images
                 </h3>
                 <ImageSection images={tvShow.images} />
-              </>
+              </div>
+            )}
+            {tvShow.video.length > 0 && (
+              <div>
+                <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-4">
+                  <Camera /> Trailers
+                </h3>{" "}
+                <VideoSection videos={tvShow.video} />
+              </div>
             )}
           </div>
 

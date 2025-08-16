@@ -204,20 +204,20 @@ const MoviePage = async ({
         <div className="flex flex-col gap-15">
           <div className="flex flex-col gap-5 ">
             {movie.images.backdrops.length > 0 && (
-              <>
+              <div>
                 <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-3">
                   <ImageIcon className="size-8" /> Images
                 </h3>
                 <ImageSection images={movie.images} />
-              </>
+              </div>
             )}
             {movie.video.length > 0 && (
-              <>
+              <div>
                 <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-3">
                   <Camera /> Trailers
                 </h3>
                 <VideoSection videos={movie.video} />
-              </>
+              </div>
             )}
           </div>
 
