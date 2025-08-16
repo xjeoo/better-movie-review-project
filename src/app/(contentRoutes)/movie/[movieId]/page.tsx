@@ -9,6 +9,7 @@ import { backDropPath1280, posterPath500, starColor } from "@/constants/movies";
 import { getInfoForMoviePage } from "@/lib/movies/movies";
 import {
   Calendar,
+  Camera,
   Clapperboard,
   Clock,
   ImageIcon,
@@ -23,6 +24,7 @@ import { formatDate } from "@/lib/utils";
 import RecommendationsCarousel from "@/components/custom_ui/similar_carousel/RecommendationCarousel";
 import { MovieCrewMember } from "@/types/movies/movies";
 import ImageSection from "@/components/custom_ui/content_media/images/ImageSection";
+import VideoSection from "@/components/custom_ui/content_media/videos/VideoSection";
 
 const MoviePage = async ({
   params,
@@ -201,23 +203,20 @@ const MoviePage = async ({
       <div className="relative xl:border-x-1 border-x-neutral-500 px-2 md:px-6 w-full xl:w-[70%] pt-15 z-10 mx-auto text-shadow-2xs text-shadow-black md:rounded-b-md">
         <div className="flex flex-col gap-15">
           <div className="flex flex-col gap-5 ">
-            {movie.video.length > 0 && (
-              <>
-                {/* <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-3">
-                  <Camera /> Trailer
-                </h3> */}
-                {/* <iframe
-                  src={youtubeUrl + movie.video[0]?.key}
-                  className="w-[90%] md:max-w-[75%] mx-auto aspect-video rounded-md border-1 border-neutral-500"
-                ></iframe> */}
-              </>
-            )}
             {movie.images.backdrops.length > 0 && (
               <>
                 <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-3">
                   <ImageIcon className="size-8" /> Images
                 </h3>
                 <ImageSection images={movie.images} />
+              </>
+            )}
+            {movie.video.length > 0 && (
+              <>
+                <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-3">
+                  <Camera /> Trailers
+                </h3>
+                <VideoSection videos={movie.video} />
               </>
             )}
           </div>
