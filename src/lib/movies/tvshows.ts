@@ -1,18 +1,21 @@
 import { options } from "@/constants/movies";
 import { videoResult } from "@/types/content";
+import { ImageType } from "@/types/movies/movies";
 
 
 export async function getTvShowById(showId: string){
   const infoUrl = `https://api.themoviedb.org/3/tv/${showId}`;
-  const videoUrl = `https://api.themoviedb.org/3/tv/${showId}/videos`
-  const contentRatingsUrl = `https://api.themoviedb.org/3/tv/${showId}/content_ratings`
+  const imageUrl = `https://api.themoviedb.org/3/tv/${showId}/images`;
+  const videoUrl = `https://api.themoviedb.org/3/tv/${showId}/videos`;
+  const contentRatingsUrl = `https://api.themoviedb.org/3/tv/${showId}/content_ratings`;
   const recommendationsUrl = `https://api.themoviedb.org/3/tv/${showId}/recommendations`;
   const castUrl = `https://api.themoviedb.org/3/tv/${showId}/aggregate_credits`;
 
 
   
-  const [infoRes, videoRes, contentRatingsRes, recommendationRes, castRes] = await Promise.all([
+  const [infoRes, imageRes, videoRes, contentRatingsRes, recommendationRes, castRes] = await Promise.all([
     await fetch(infoUrl, options),
+    await fetch(imageUrl, options),
     await fetch(videoUrl, options),
     await fetch(contentRatingsUrl, options),
     await fetch(recommendationsUrl, options),
@@ -24,6 +27,16 @@ export async function getTvShowById(showId: string){
   const contentRatingsJson = await contentRatingsRes.json()
   const usRating = contentRatingsJson.results.filter((rating: {iso_3166_1: string, rating: string})=>rating.iso_3166_1 === 'US') ;
   const finalRating = usRating ? usRating : contentRatingsJson.results.filter((rating: {iso_3166_1: string, rating: string})=>rating.rating)
+
+  const imagesJson: ImageType = await imageRes.json() || [];
+    const backdrops = imagesJson ? imagesJson.backdrops.slice(0,50): [];
+    const logos = imagesJson.logos ? imagesJson.logos.slice(0,50): [];
+    const posters = imagesJson ? imagesJson.posters.slice(0,50) : [];
+    const images = {
+      backdrops,
+      logos,
+      posters,
+    }
 
   const videos = await videoRes.json();
   const officialTrailers = videos.results.filter(
@@ -45,6 +58,7 @@ export async function getTvShowById(showId: string){
 
   return {
     data: await infoRes.json(),
+    images: images,
     video: finalTrailers,
     ageRating: finalRating[0]?.rating || 'N/A',
     recommendations: recommendations.results.slice(0,10),

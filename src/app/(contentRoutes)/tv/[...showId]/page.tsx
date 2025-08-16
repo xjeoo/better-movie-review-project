@@ -1,4 +1,5 @@
 import AgeRating from "@/components/custom_ui/AgeRating";
+import ImageSection from "@/components/custom_ui/content_media/images/ImageSection";
 import SeasonsAccordion from "@/components/custom_ui/seasons_accordion/SeasonsAccordion";
 import RecommendationsCarousel from "@/components/custom_ui/similar_carousel/RecommendationCarousel";
 import CreateReview from "@/components/reviews/CreateReview";
@@ -6,10 +7,10 @@ import ReviewSection from "@/components/reviews/ReviewSection";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import WatchlistButton from "@/components/watchlist/WatchlistButton";
-import { backDropPath720, starColor } from "@/constants/movies";
+import { backDropPath1280, posterPath500, starColor } from "@/constants/movies";
 import { getInfoForTvShowPage } from "@/lib/tv/tvshows";
 import { existsInWatchlist } from "@/lib/user/watchlist";
-import { Calendar, Star, StarHalf, Tv } from "lucide-react";
+import { Calendar, ImageIcon, Star, StarHalf, Tv } from "lucide-react";
 import Image from "next/image";
 
 const TvShowPage = async ({
@@ -27,7 +28,8 @@ const TvShowPage = async ({
     user?.userId.toString(),
     "tv"
   );
-  const youtubeUrl = "https://www.youtube.com/embed/";
+  // const youtubeUrl = "https://www.youtube.com/embed/";
+  console.log(tvShow);
   return (
     <div className="flex flex-col w-full h-full pb-20 bg-black">
       <div className="relative">
@@ -35,7 +37,7 @@ const TvShowPage = async ({
         <div className="absolute h-full w-full flex justify-center items-center ">
           {tvShow.data.backdrop_path ? (
             <Image
-              src={backDropPath720 + tvShow.data.backdrop_path}
+              src={backDropPath1280 + tvShow.data.backdrop_path}
               alt="backdrop"
               fill
               sizes="100vw"
@@ -51,8 +53,8 @@ const TvShowPage = async ({
         </div>
 
         <main className="relative xl:border-x-1 border-x-neutral-500 backdrop-blur-md px-2 md:px-0 w-full xl:w-[80%] bg-black/70 md:bg-black/80 pt-15 -mt-1 pb-10 z-10 mx-auto text-shadow-2xs text-shadow-black ">
-          <div className="flex flex-col items-center lg:flex-row gap-10 md:gap-5 px-2 md:px-2 xl:px-6">
-            <div className="flex flex-col gap-2 items-center md:items-start w-full md:w-[80%] lg:w-[55%] text-neutral-200">
+          <div className="flex flex-col-reverse items-center md:flex-row gap-10 md:gap-5 px-2 md:px-2 xl:px-6">
+            <div className="flex flex-col gap-2 items-center md:items-start w-full md:w-[80%] md:flex-3 xl:flex-4 lg:w-[55%] text-neutral-200">
               <div>
                 <h2 className="text-4xl text-white md:text-5xl font-semibold text-center mb-2">
                   {tvShow.data.name}
@@ -165,11 +167,22 @@ const TvShowPage = async ({
                 </>
               )}
             </div>
-            <div className="w-full md:w-[80%] lg:w-[55%]  flex justify-center items-center">
-              <iframe
-                src={youtubeUrl + tvShow.video[0]?.key}
-                className="w-full aspect-video rounded-md border-1 border-neutral-500"
-              ></iframe>
+            <div className="w-full md:w-[80%] lg:w-[55%]  flex justify-center items-center md:flex-2">
+              {/* <iframe
+                            src={youtubeUrl + movie.video[0]?.key}
+                            className="w-full aspect-video rounded-md border-1 border-neutral-500"
+                          ></iframe> */}
+              <div className="relative w-[50%] aspect-2/3 sm:w-[50%] md:w-[90%] lg:w-[70%] rounded-md overflow-hidden outline-1 outline-neutral-800 shadow-2xl shadow-neutral-800">
+                <Image
+                  src={
+                    tvShow.data.poster_path
+                      ? posterPath500 + tvShow.data.poster_path
+                      : "/posterplaceholder.svg"
+                  }
+                  alt="poster"
+                  fill
+                />
+              </div>
             </div>
           </div>
         </main>
@@ -184,6 +197,16 @@ const TvShowPage = async ({
             <section className="max-h-100 px-2 border-1 border-neutral-700 rounded-md overflow-auto scroll-custom">
               <SeasonsAccordion seasons={tvShow.data.seasons} showId={showId} />
             </section>
+          </div>
+          <div className="flex flex-col gap-5 ">
+            {tvShow.images.backdrops.length > 0 && (
+              <>
+                <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-3">
+                  <ImageIcon className="size-8" /> Images
+                </h3>
+                <ImageSection images={tvShow.images} />
+              </>
+            )}
           </div>
 
           {/* <div>
