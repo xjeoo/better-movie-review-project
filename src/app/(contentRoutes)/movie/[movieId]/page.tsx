@@ -9,7 +9,6 @@ import { backDropPath1280, posterPath500, starColor } from "@/constants/movies";
 import { getInfoForMoviePage } from "@/lib/movies/movies";
 import {
   Calendar,
-  Camera,
   Clapperboard,
   Clock,
   ImageIcon,
@@ -31,7 +30,6 @@ const MoviePage = async ({
   params: Promise<{ movieId: string }>;
 }) => {
   const { movieId } = await params;
-  const youtubeUrl = "https://www.youtube.com/embed/";
 
   const { movie, rating, user, token, reviews } = await getInfoForMoviePage(
     movieId
