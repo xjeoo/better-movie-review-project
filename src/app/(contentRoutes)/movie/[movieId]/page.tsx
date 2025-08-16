@@ -22,7 +22,7 @@ import AgeRating from "@/components/custom_ui/AgeRating";
 import { formatDate } from "@/lib/utils";
 import RecommendationsCarousel from "@/components/custom_ui/similar_carousel/RecommendationCarousel";
 import { MovieCrewMember } from "@/types/movies/movies";
-import ImageSection from "@/components/custom_ui/movie_media/ImageSection";
+import ImageSection from "@/components/custom_ui/content_media/images/ImageSection";
 
 const MoviePage = async ({
   params,

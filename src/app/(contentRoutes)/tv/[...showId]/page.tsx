@@ -1,5 +1,5 @@
 import AgeRating from "@/components/custom_ui/AgeRating";
-import ImageSection from "@/components/custom_ui/movie_media/ImageSection";
+import ImageSection from "@/components/custom_ui/content_media/images/ImageSection";
 import SeasonsAccordion from "@/components/custom_ui/seasons_accordion/SeasonsAccordion";
 import RecommendationsCarousel from "@/components/custom_ui/similar_carousel/RecommendationCarousel";
 import CreateReview from "@/components/reviews/CreateReview";
