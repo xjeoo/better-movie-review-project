@@ -212,10 +212,14 @@ const MoviePage = async ({
                 ></iframe> */}
               </>
             )}
-            <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-3">
-              <ImageIcon className="size-8" /> Images
-            </h3>
-            {movie.images && <ImageSection images={movie.images} />}
+            {movie.images.backdrops.length > 0 && (
+              <>
+                <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-3">
+                  <ImageIcon className="size-8" /> Images
+                </h3>
+                <ImageSection images={movie.images} />
+              </>
+            )}
           </div>
 
           {movie.cast.cast.length > 0 && (

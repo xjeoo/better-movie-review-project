@@ -199,10 +199,14 @@ const TvShowPage = async ({
             </section>
           </div>
           <div className="flex flex-col gap-5 ">
-            <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-3">
-              <ImageIcon className="size-8" /> Images
-            </h3>
-            {tvShow.images && <ImageSection images={tvShow.images} />}
+            {tvShow.images.backdrops.length > 0 && (
+              <>
+                <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-3">
+                  <ImageIcon className="size-8" /> Images
+                </h3>
+                <ImageSection images={tvShow.images} />
+              </>
+            )}
           </div>
 
           {/* <div>
