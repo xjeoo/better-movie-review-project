@@ -13,19 +13,17 @@ const RecommendationCard = ({
   type: string;
 }) => {
   return (
-    <Link
-      href={`/${type === "movie" ? "movie" : "tv"}/${info.id}`}
-      className="group relative flex flex-col rounded-xl overflow-hidden select-none"
-    >
-      <Image
-        src={posterPath500 + info.poster_path}
-        //@ts-expect-error - name varies according to type
-        alt={info.title || info.name}
-        width={250}
-        height={375}
-        loading="lazy"
-      />
-      <div className=" absolute opacity-0 group-md:hover:opacity-15 w-full h-full bg-black transition-opacity"></div>
+    <Link href={`/${type === "movie" ? "movie" : "tv"}/${info.id}`}>
+      <div className="relative w-[170px] md:w-[240px] aspect-2/3 md:hover:opacity-90 rounded-xl overflow-hidden select-none">
+        <Image
+          src={posterPath500 + info.poster_path}
+          //@ts-expect-error - name varies according to type
+          alt={info.title || info.name}
+          fill
+          sizes="(max-width: 640px) 25vw, (max-width: 1200px) 20vw, 33vw"
+          loading="lazy"
+        />
+      </div>
     </Link>
   );
 };
