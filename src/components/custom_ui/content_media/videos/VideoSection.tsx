@@ -42,7 +42,7 @@ const VideoSection = ({ videos }: { videos: videoResult[] }) => {
                   fill
                   sizes="20vw"
                   loading={index > 4 ? "lazy" : "eager"}
-                  className="h-full aspect-auto select-none"
+                  className="object-cover select-none"
                 />
               </button>
             </CarouselItem>
