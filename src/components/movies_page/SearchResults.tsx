@@ -20,7 +20,7 @@ const SearchResults = async ({
 
       <div className="flex gap-7 flex-wrap basis-full justify-center sm:justify-start ">
         {data.results.map((movie) => (
-          //@ts-expect-error
+          //@ts-expect-error: works
           <MovieCard key={movie.id} movie={movie as DiscoverMovie} />
         ))}
       </div>
