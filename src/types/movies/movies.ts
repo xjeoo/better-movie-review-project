@@ -99,6 +99,12 @@ export interface Rating {
   count: number;
 }
 
+export interface MoviesPageDefaultData{
+  popular: DiscoverMovie[], 
+  top_rated: DiscoverMovie[], 
+  upcoming: DiscoverMovie[]
+}
+
 export interface MoviePageData {
   movie: Movie;
   rating: Rating;
