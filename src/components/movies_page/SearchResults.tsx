@@ -1,6 +1,7 @@
 import { MovieSearch } from "@/lib/movies/movies";
 import MovieCard from "../custom_ui/content_carousel/MovieCard";
 import { DiscoverMovie } from "@/types/movies/movies";
+import Pagination from "../pagination/Pagination";
 
 const SearchResults = async ({
   search,
@@ -24,6 +25,7 @@ const SearchResults = async ({
           <MovieCard key={movie.id} movie={movie as DiscoverMovie} />
         ))}
       </div>
+      <Pagination page={page} maxPage={data.total_pages} />
     </div>
   );
 };

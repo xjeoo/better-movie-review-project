@@ -91,7 +91,7 @@ export async function getMovieById(movieId: string): Promise<Movie> {
   return movieInfo;
 }
 
-export async function MovieSearch(query: string, page?: string):Promise<{results: SearchResult[], total_pages: number}>{
+export async function MovieSearch(query: string, page?: string):Promise<{results: SearchResult[], total_pages: string}>{
   const url = 'https://api.themoviedb.org/3/search/movie'
   const pageNumber = page || '1';
 
