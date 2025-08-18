@@ -2,6 +2,8 @@ import { ImageType, Movie, MovieCrewMember, MoviePageData } from "@/types/movies
 import { getSession, getToken } from "../auth/sessionUtils";
 import { getRatingByMovieId, getReviewsByMovieId } from "./reviews";
 import { videoResult } from "@/types/content";
+import { SearchResult } from "@/types/search/search";
+import { options } from "@/constants/movies";
 
 const TMDB_READ_ACCESS_KEY = process.env.TMDB_READ_ACCESS_KEY;
 
@@ -87,6 +89,19 @@ export async function getMovieById(movieId: string): Promise<Movie> {
   };
 
   return movieInfo;
+}
+
+export async function MovieSearch(query: string, page?: string):Promise<{results: SearchResult[], total_pages: string}>{
+  const url = 'https://api.themoviedb.org/3/search/movie'
+  const pageNumber = page || '1';
+
+  const resultsRes = await fetch(url + `?query=${query}&page=${pageNumber}`, options);
+  const resultsJson = await resultsRes.json();
+
+  return {
+    results: resultsJson.results,
+    total_pages: resultsJson.total_pages 
+  }
 }
 
 export async function getInfoForMoviePage(movieId: string): Promise<MoviePageData> {
