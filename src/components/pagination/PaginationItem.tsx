@@ -10,6 +10,7 @@ const PaginationItem = ({
   pathName: string;
   search: string;
 }) => {
+  console.log(search, " ");
   return (
     <Link
       href={pathName + `?search=${search}&page=${page}`}
