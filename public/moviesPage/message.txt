@@ -1,0 +1,112 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <queue>
+
+
+using namespace std;
+
+class Unitate {
+public:
+    string nume;
+    string tip;
+    int atac;
+    int aparare;
+
+    Unitate(string anume,string atip, int aatac, int aaparare) {
+
+        nume=anume;
+        tip=atip;
+        atac=aatac;
+        aparare=aaparare;
+    }
+
+
+};
+
+    bool comparator1(Unitate unitate1, Unitate unitate2) {
+        if(unitate1.atac!=unitate2.atac) {
+            return unitate1.atac<unitate2.atac;
+        }
+        else {
+            return unitate1.aparare> unitate2.aparare;
+        }
+    }
+
+void    Analiza() {
+    vector<Unitate> unitati;
+    int inamici=0;
+    cin>>inamici;
+
+    string nume;
+    string tip;
+    int atac;
+    int aparare;
+
+    for(int i=0;i<inamici;i++) {
+
+        cin>>nume;
+        cin>>tip;
+        cin>>atac;
+        cin>>aparare;
+
+        Unitate inamic(nume, tip, atac, aparare);
+        unitati.push_back(inamic);
+    }
+
+        sort(unitati.begin(),unitati.end(),comparator1);
+
+        for(auto it:unitati) {
+            cout<<it.nume<<' '<<it.tip<<' '<<it.atac<<' '<<it.aparare<<'\n';
+        }
+
+}
+
+void Intarire() {
+        int num_militar_command=0;
+        int numar_soldat=0;
+         queue<int> unitati;
+        cin>>num_militar_command;
+
+        string militar_command;
+
+        cin>>militar_command;
+
+        for(int i=0;i<num_militar_command;i++) {
+            if(militar_command=="ARRIVE") {
+                cin>>numar_soldat;
+                unitati.push(numar_soldat);
+            }
+            else if(militar_command=="DEPLOY") {
+                unitati.pop();
+            }
+        }
+
+        if(unitati.empty()) {
+            cout<<"NO REINFORCEMENTS";
+        }
+        else {
+            while(!unitati.empty()) {
+                cout<<unitati.front()<<' ';
+                unitati.pop();
+            }
+        }
+
+
+    }
+
+int main () {
+
+    int comanda;
+    cin>>comanda;
+
+    if(comanda==1) {
+        Analiza();
+    }
+
+    if(comanda==2) {
+        Intarire();
+    }
+
+    return 0;
+}
