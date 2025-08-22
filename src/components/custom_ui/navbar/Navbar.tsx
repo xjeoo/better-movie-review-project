@@ -32,7 +32,9 @@ const Navbar = ({
       className={cn(
         "fixed w-full px-2 flex justify-between  h-[50px] items-center z-2000 [transition:background-color,550ms] backdrop-blur-md",
         scrolled || colorType === "static" ? "bg-black/80" : "bg-black/0",
-        !scrolled && "backdrop-blur-none bg-transparent sm:bg-black/10"
+        !scrolled &&
+          colorType === "dynamic" &&
+          "backdrop-blur-none bg-transparent sm:bg-black/10"
       )}
     >
       <div className="flex  gap-6 text-[1.1em] pl-4 flex-1">
