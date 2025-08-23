@@ -100,7 +100,9 @@ const TvShowPage = async ({
                     {Array.from({
                       // map for decimal part with half star
                       length:
-                        rating.averageRating - rating.averageRating > 0.25
+                        rating.averageRating -
+                          Math.floor(rating.averageRating) >
+                        0.25
                           ? 1
                           : 0,
                     }).map((_, index) => (
