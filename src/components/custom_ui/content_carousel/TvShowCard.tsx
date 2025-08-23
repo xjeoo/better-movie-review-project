@@ -1,4 +1,5 @@
 import { posterPath342 } from "@/constants/movies";
+import { cn } from "@/lib/utils";
 import { PopularTvShow } from "@/types/home_page/home_page_types";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,6 +9,14 @@ const TvShowCard = ({ tvshow }: { tvshow: PopularTvShow }) => {
   return (
     <Link href={`/tv/${tvshow.id}`} className="">
       <div className="relative w-[150px] sm:w-[220px] aspect-2/3 select-none rounded-md overflow-hidden md:hover:opacity-90">
+        <div
+          className={cn(
+            "hidden absolute bottom-0 w-full text-center text-xl bg-gray-600 opacity-60",
+            !tvshow.poster_path && "block z-10"
+          )}
+        >
+          {tvshow.name}
+        </div>
         <Image
           src={
             tvshow.poster_path
@@ -17,7 +26,7 @@ const TvShowCard = ({ tvshow }: { tvshow: PopularTvShow }) => {
           alt={tvshow.name}
           sizes="15vw"
           fill
-          className="object-fit"
+          className={cn(!tvshow.poster_path && "object-cover")}
         />
       </div>
     </Link>

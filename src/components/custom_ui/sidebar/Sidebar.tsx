@@ -25,7 +25,7 @@ const Sidebar = ({ session }: { session: userInfo | null }) => {
     },
     {
       title: "TV Shows",
-      url: "/tv",
+      url: "/shows",
       icon: Popcorn,
     },
 

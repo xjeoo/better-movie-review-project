@@ -1,6 +1,7 @@
 import { ReviewType, userInfo } from "../entites";
 import { videoResult, tvShowSeason } from "../content";
 import { ImageType, Rating } from "../movies/movies";
+import { PopularTvShow } from "../home_page/home_page_types";
 
 export interface TvShowCastMember {
   id: number;
@@ -95,4 +96,10 @@ export interface TvShowPageData {
   user: userInfo | null;
   token: string | null;
   reviews: ReviewType[];
+}
+
+export interface TvShowsPageDefaultData{
+  on_the_air: PopularTvShow[], 
+  popular:  PopularTvShow[], 
+  top_rated:PopularTvShow[],
 }
