@@ -27,7 +27,11 @@ const CrewCard = ({ info }: { info: MovieCrewMember }) => {
 
       <div className="absolute text-center bottom-0 flex flex-col justify-center items-center w-full bg-neutral-700/60 rounded-b-xl">
         <span>{info.name}</span>
-        <span>-{info.job}-</span>
+        <div className="flex w-fit gap-0 px-1.5 text-[0.9em]">
+          <span>{"- "}</span>
+          <span>{info.job}</span>
+          <span>{" -"}</span>
+        </div>
       </div>
     </Link>
   );
