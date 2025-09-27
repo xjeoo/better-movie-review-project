@@ -7,9 +7,10 @@ export async function getTvShowById(showId: string){
   const infoUrl = `https://api.themoviedb.org/3/tv/${showId}`;
   const imageUrl = `https://api.themoviedb.org/3/tv/${showId}/images`;
   const videoUrl = `https://api.themoviedb.org/3/tv/${showId}/videos`;
+  
   const contentRatingsUrl = `https://api.themoviedb.org/3/tv/${showId}/content_ratings`;
   const recommendationsUrl = `https://api.themoviedb.org/3/tv/${showId}/recommendations`;
-  const castUrl = `https://api.themoviedb.org/3/tv/${showId}/aggregate_credits`;
+  const creditsUrl = `https://api.themoviedb.org/3/tv/${showId}/aggregate_credits`;
 
 
   
@@ -19,7 +20,7 @@ export async function getTvShowById(showId: string){
     await fetch(videoUrl, options),
     await fetch(contentRatingsUrl, options),
     await fetch(recommendationsUrl, options),
-    await fetch(castUrl, options),
+    await fetch(creditsUrl, options),
   ])
   const recommendations = await recommendationRes.json();
   
@@ -52,8 +53,8 @@ export async function getTvShowById(showId: string){
   ) : officialTrailers;
   
   const credits = await castRes.json()
-  const cast = credits.cast.slice(0,15);
-  const crew = credits.crew.slice(0,15);
+  const cast = credits.cast.slice(0,20);
+  const crew = credits.crew.slice(0,20);
 
 
   return {

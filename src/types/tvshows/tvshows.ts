@@ -3,17 +3,33 @@ import { videoResult, tvShowSeason } from "../content";
 import { ImageType, Rating } from "../movies/movies";
 import { PopularTvShow } from "../home_page/home_page_types";
 
+export interface Role{
+credit_id: string;
+character: string;
+episode_count: number;
+
+}
+
 export interface TvShowCastMember {
   id: number;
   name: string;
   profile_path: string | null;
   character: string;
+  roles: Role[];
+  total_episode_count: number;
+
+}
+
+export interface Job{
+  credit_id: string,
+  episode_count: number,
+  job: string,
 }
 
 export interface TvShowCrewMember {
   id: number;
   name: string;
-  job: string;
+  jobs: Job[];
   profile_path: string | null;
 }
 export interface TvShowData {
@@ -82,10 +98,8 @@ export interface TvShow {
   data: TvShowData;
   images: ImageType;
   video: videoResult[];
-  cast: {
-    cast: TvShowCastMember[];
-    crew: TvShowCrewMember[];
-  };
+  cast: TvShowCastMember[];
+  crew: TvShowCrewMember[];
   recommendations: TvShowData[];
   ageRating: string;
 }

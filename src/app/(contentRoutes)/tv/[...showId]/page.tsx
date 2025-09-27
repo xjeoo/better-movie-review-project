@@ -5,6 +5,7 @@ import SeasonsAccordion from "@/components/custom_ui/seasons_accordion/SeasonsAc
 import RecommendationsCarousel from "@/components/custom_ui/similar_carousel/RecommendationCarousel";
 import CreateReview from "@/components/reviews/CreateReview";
 import ReviewSection from "@/components/reviews/ReviewSection";
+import CreditsSection from "@/components/tv_show/credits_section/CreditsSection";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import WatchlistButton from "@/components/watchlist/WatchlistButton";
@@ -30,7 +31,6 @@ const TvShowPage = async ({
     "tv"
   );
   // const youtubeUrl = "https://www.youtube.com/embed/";
-  console.log(tvShow);
   return (
     <div className="flex flex-col w-full h-full pb-20 bg-black">
       <div className="relative">
@@ -219,26 +219,8 @@ const TvShowPage = async ({
               </div>
             )}
           </div>
+          <CreditsSection cast={tvShow.cast} crew={tvShow.crew} />
 
-          {/* <div>
-            <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-10">
-              <Clapperboard className="size-8" />
-              <span>Cast</span>
-            </h3>
-            <div className="w-[90%] mx-auto flex flex-col">
-              <CastCarousel info={movie.cast.cast.slice(0, 20)} />
-            </div>
-          </div>
-          <div>
-            <h3 className="flex gap-2 text-2xl md:text-4xl text-white items-center mb-10">
-              <Video className="size-8" />
-
-              <p>Crew</p>
-            </h3>
-            <div className="w-[90%] mx-auto flex flex-col">
-              <CrewCarousel info={movie.cast.crew.slice(0, 20)} />
-            </div>
-          </div> */}
           <div className="flex flex-col w-full">
             <h3 className="flex gap-2 items-center text-2xl md:text-4xl text-white mb-10">
               You might also like:
