@@ -32,7 +32,8 @@ To run this project on your local machine, follow these steps:
 
 ### 1. Clone the repository
 
-## 📸 Screenshots
+```bash
+git clone <link-of-this-re## 📸 Screenshots
 <img width="1900" height="915" alt="image" src="https://github.com/user-attachments/assets/1a2df95a-f1c1-47d4-aeb2-dd76bf86dea2" />
 <img width="1905" height="917" alt="image" src="https://github.com/user-attachments/assets/b9cae646-9438-4d28-9725-4d96daf82177" />
 
@@ -58,8 +59,7 @@ To run this project on your local machine, follow these steps:
 To run this project on your local machine, follow these steps:
 
 ### 1. Clone the repository
-```bash
-git clone <link-of-this-repository>
+pository>
 ```
 
 ### 2. Install dependencies
