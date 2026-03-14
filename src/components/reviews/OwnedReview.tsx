@@ -11,7 +11,6 @@ const OwnedReview = ({
   image,
   text,
   rating,
-  token,
   reviewId,
   contentId,
   type,
@@ -37,9 +36,6 @@ const OwnedReview = ({
   const handleDelete = async () => {
     const res = await fetch("/api/reviews", {
       method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
       body: JSON.stringify({
         reviewId: reviewId,
         contentId: contentId,
@@ -66,9 +62,6 @@ const OwnedReview = ({
       return setError("Review must be shorter than 1200 characters");
     const res = await fetch("/api/reviews", {
       method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
       body: JSON.stringify({
         reviewId: reviewId,
         contentId: contentId,
@@ -94,7 +87,7 @@ const OwnedReview = ({
     <div
       className={cn(
         "relative flex flex-col gap-1 px-3 py-2 rounded-md border-1 border-neutral-800",
-        isEditing && "border-neutral-500"
+        isEditing && "border-neutral-500",
       )}
     >
       {isDeleting && (
@@ -170,7 +163,7 @@ const OwnedReview = ({
           <span className="font-semibold">{username}</span>
           {dates && (
             <span className="text-[0.9em] text-neutral-400">{`${formatDate(
-              dates.createdAt.split("T")[0]
+              dates.createdAt.split("T")[0],
             )} ${dates.createdAt !== dates.updatedAt ? "| Edited" : ""}`}</span>
           )}
         </div>
@@ -181,7 +174,7 @@ const OwnedReview = ({
               <Star
                 key={index}
                 className={cn(
-                  "size-6 cursor-pointer scale-105 md:hover:scale-115  "
+                  "size-6 cursor-pointer scale-105 md:hover:scale-115  ",
                 )}
                 color={index + 1 > newRating ? "#b6c1d4" : "#5fb8eb"}
                 fill={index + 1 <= newRating ? "#5fb8eb" : ""}

@@ -3,15 +3,19 @@ import { BookmarkCheck, BookmarkPlus } from "lucide-react";
 import { useState } from "react";
 
 const WatchlistButton = ({
-  token,
   contentId,
   userId,
+  title,
+  poster_path,
+  background_path,
   type,
   isAdded,
 }: {
-  token: string | null;
   contentId: string;
   userId: string | undefined;
+  title: string;
+  poster_path: string | undefined;
+  background_path: string | undefined;
   type: string;
   isAdded: boolean;
 }) => {
@@ -20,11 +24,11 @@ const WatchlistButton = ({
   const handleAdd = async () => {
     const res = await fetch("/api/watchlist", {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
       body: JSON.stringify({
         contentId: contentId,
+        title: title,
+        poster_path: poster_path,
+        background_path: background_path,
         type: type,
       }),
     });
@@ -35,9 +39,6 @@ const WatchlistButton = ({
   const handleDelete = async () => {
     const res = await fetch("/api/watchlist", {
       method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
       body: JSON.stringify({
         contentId: contentId,
         type: type,

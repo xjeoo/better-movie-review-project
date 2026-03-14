@@ -23,3 +23,15 @@ export type tvShowSeason ={
   
 }
 
+export interface WatchlistItem {
+  contentId: string;
+  title: string;
+  type: 'movie' | 'tv';
+  poster_path: string | undefined,
+  background_path: string | undefined,
+  userId: string;
+  watchStatus: 'Not watched' | 'Currently watching' | 'Watched';
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+

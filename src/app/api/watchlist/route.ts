@@ -1,24 +1,27 @@
 import { decrypt } from "@/lib/auth/jwt";
+import { getToken } from "@/lib/auth/sessionUtils";
 import { deleteIfExistsFromWatchlist, existsInWatchlist, savetoWatchlist } from "@/lib/user/watchlist";
 import { NextRequest, NextResponse } from "next/server";
 
 
 export async function POST(request : NextRequest){
-  const token = request.headers.get('Authorization')?.split(' ')[1];
+
+
+  const token = await getToken();
   if(!token) return NextResponse.json({error: "Token missing"}, {status:401});
 
-  const {contentId, type} = await request.json();
+  const {contentId, title, background_path, poster_path, type} = await request.json();
 
   const jwt  = await decrypt(token);
   if(!jwt) return NextResponse.json({error: "Invalid token"}, {status:403});
-  const userId = jwt?.data.userId.toString();
+  const userId = jwt.data.userId.toString();
 
   if(!contentId || !userId )return NextResponse.json({error: "Item or user id missing"}, {status:400});
   
   const exists = await existsInWatchlist(contentId, userId, type);
   if(exists) return NextResponse.json({error: "Item already in watchlist"}, {status:401});
 
-  const savedToWatchlist = await savetoWatchlist(contentId, userId, type)
+  const savedToWatchlist = await savetoWatchlist(contentId, userId, title, type, poster_path, background_path)
   if(!savedToWatchlist)return NextResponse.json({error: "Failed saving to watchlist"}, {status:500});
 
 
@@ -29,7 +32,7 @@ export async function POST(request : NextRequest){
 
 export async function DELETE(request: NextRequest){
 
-  const token = request.headers.get('Authorization')?.split(' ')[1];
+  const token = await getToken();
   if(!token) return NextResponse.json({error: "Token missing"}, {status:401});
 
   const {contentId, type} = await request.json();

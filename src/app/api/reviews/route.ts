@@ -1,4 +1,5 @@
 import { decrypt } from "@/lib/auth/jwt";
+import { getToken } from "@/lib/auth/sessionUtils";
 import { deleteReviewById, editReviewById, updateRatingOnDelete, updateRatingOnUpdate } from "@/lib/movies/reviews";
 import { userOwnsReview } from "@/lib/user/user";
 import { userInfo } from "@/types/entites";
@@ -6,10 +7,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 
 export async function DELETE(request : NextRequest){
-  const authorizationHeader = request.headers.get('Authorization');
-  if(!authorizationHeader) return NextResponse.json({error:'Token missing'},{status:401});
-  const token = authorizationHeader.split(' ')[1];
-  
+
+  const token = await getToken();
+  if(!token) return NextResponse.json({error:'Access token missing'},{status:401});
+
   const {reviewId, contentId, type, rating} = await request.json();
   if(!reviewId) return NextResponse.json({error:'Review id missing'},{status:400});
   if(!contentId) return NextResponse.json({error:'Content id missing'},{status:400});
@@ -33,9 +34,9 @@ export async function DELETE(request : NextRequest){
 }
 
 export async function PATCH(request: NextRequest){
-  const authorizationHeader = request.headers.get('Authorization');
-  if(!authorizationHeader) return NextResponse.json({error:'Token missing'},{status:401});
-  const token = authorizationHeader.split(' ')[1];
+  
+  const token = await getToken();
+  if(!token) return NextResponse.json({error:'Access token missing'},{status:401});
   
   const {reviewId, contentId, type, oldRating, oldText, newRating, newText} = await request.json();
   if(!reviewId) return NextResponse.json({error:'Review id missing'},{status:401});

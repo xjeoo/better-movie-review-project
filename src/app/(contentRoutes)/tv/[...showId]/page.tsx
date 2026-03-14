@@ -21,14 +21,13 @@ const TvShowPage = async ({
   params: Promise<{ showId: string }>;
 }) => {
   const showId = (await params).showId[0];
-  const { tvShow, rating, reviews, user, token } = await getInfoForTvShowPage(
-    showId
-  );
+  const { tvShow, rating, reviews, user, token } =
+    await getInfoForTvShowPage(showId);
 
   const addedToWatchList = await existsInWatchlist(
     showId,
     user?.userId.toString(),
-    "tv"
+    "tv",
   );
   // const youtubeUrl = "https://www.youtube.com/embed/";
   return (
@@ -81,7 +80,7 @@ const TvShowPage = async ({
                     >
                       {genre.name}
                     </Badge>
-                  )
+                  ),
                 )}
               </div>
               {tvShow.data.status && (
@@ -95,7 +94,7 @@ const TvShowPage = async ({
                       //map for full stars
                       (_, index) => (
                         <Star key={index} fill={starColor} color={starColor} />
-                      )
+                      ),
                     )}
                     {Array.from({
                       // map for decimal part with half star
@@ -132,9 +131,11 @@ const TvShowPage = async ({
                 <span className="text-xl">-Not rated yet-</span>
               )}
               <WatchlistButton
-                token={token}
                 contentId={showId}
                 userId={user?.userId.toString()}
+                title={tvShow.data.name}
+                poster_path={tvShow.data.poster_path || undefined}
+                background_path={tvShow.data.backdrop_path || undefined}
                 type="tv"
                 isAdded={addedToWatchList}
               />
@@ -163,7 +164,7 @@ const TvShowPage = async ({
                               ? tvShow.data.created_by[0].name
                               : `, ${tvShow.data.created_by[index].name}`}
                           </span>
-                        )
+                        ),
                       )}
                     </span>
                   </div>

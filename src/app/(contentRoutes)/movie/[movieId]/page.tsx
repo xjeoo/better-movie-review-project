@@ -33,17 +33,16 @@ const MoviePage = async ({
 }) => {
   const { movieId } = await params;
 
-  const { movie, rating, user, token, reviews } = await getInfoForMoviePage(
-    movieId
-  );
+  const { movie, rating, user, token, reviews } =
+    await getInfoForMoviePage(movieId);
 
   const addedToWatchList = await existsInWatchlist(
     movieId,
     user?.userId.toString(),
-    "movie"
+    "movie",
   );
-  console.log("Images: ", movie.images);
-  console.log("Videos: ", movie.video);
+  // console.log("Images: ", movie.images);
+  // console.log("Videos: ", movie.video);
   return (
     <div className="flex flex-col w-full h-full pb-20 bg-black">
       <div className="relative">
@@ -99,7 +98,7 @@ const MoviePage = async ({
                     >
                       {genre.name}
                     </Badge>
-                  )
+                  ),
                 )}
               </div>
               {rating.averageRating ? (
@@ -110,7 +109,7 @@ const MoviePage = async ({
                       //map for full stars
                       (_, index) => (
                         <Star key={index} fill={starColor} color={starColor} />
-                      )
+                      ),
                     )}
                     {Array.from({
                       // map for decimal part with half star
@@ -147,9 +146,11 @@ const MoviePage = async ({
                 <span className="text-xl">-Not rated yet-</span>
               )}
               <WatchlistButton
-                token={token}
                 contentId={movieId}
                 userId={user?.userId.toString()}
+                title={movie.data.title}
+                poster_path={movie.data.poster_path || undefined}
+                background_path={movie.data.backdrop_path || undefined}
                 type="movie"
                 isAdded={addedToWatchList}
               />
@@ -179,7 +180,7 @@ const MoviePage = async ({
                               movie.directors[index + 1] &&
                               ", "}
                           </span>
-                        )
+                        ),
                       )}
                     </span>
                   </div>

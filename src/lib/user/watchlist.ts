@@ -27,13 +27,19 @@ export async function existsInWatchlist(
 export async function savetoWatchlist(
   contentId: string,
   userId: string,
-  type: string
+  title: string,
+  type: string,
+  poster_path?: string,
+  background_path?: string,
 ) {
   await dbConnect();
   try {
     const toSave = new Watchlist({
       contentId: contentId,
       userId: userId,
+      title: title,
+      poster_path: poster_path,
+      background_path: background_path,
       type: type,
     });
     await toSave.save();
