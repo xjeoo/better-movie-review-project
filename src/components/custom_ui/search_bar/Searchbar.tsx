@@ -20,22 +20,13 @@ const Searchbar = ({
   const [results, setResults] = useState<SearchResult[] | null>(null); // trb definit tip
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const searchRoute = "https://api.themoviedb.org/3/search/multi";
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_READ_ACCESS_KEY}`,
-    },
-  };
-
   const toggle = () => {
     setVisible((prev) => !prev);
     if (!visible) inputRef.current?.focus(); // !visible is still previous value so its actually visible
   };
   useEffect(() => {
     if (value.trim() === "") return;
-    fetch(searchRoute + `?query=${value}`, options)
+    fetch(`/api/search?search=${value}`)
       .then((res) => res.json())
       .then((data) => {
         setResults(data.results.slice(0, 10));
@@ -46,7 +37,7 @@ const Searchbar = ({
     <div
       className={cn(
         "relative group  outline-neutral-500 flex gap-1 items-center px-1.5 py-0.5 h-[40px] rounded-full",
-        visible && "bg-dark-transparent focus-within:outline-1"
+        visible && "bg-dark-transparent focus-within:outline-1",
       )}
     >
       <button
@@ -66,7 +57,7 @@ const Searchbar = ({
         onChange={(e) => setText(e.currentTarget.value)}
         className={cn(
           "relative transition-[width] w-0 rounded-r-full outline-0",
-          visible && "w-[110px] sm:w-60 pl-1.5"
+          visible && "w-[110px] sm:w-60 pl-1.5",
         )}
       />
       {results && visible && (
@@ -75,7 +66,7 @@ const Searchbar = ({
             "!absolute right-0 py-2 hidden group-focus-within:flex flex-col gap-10 w-[200px] sm:w-full max-h-[400px] bottom-0 translate-y-full  rounded-xl border-x-1 border-b-1 border-neutral-500",
             scrolled || colorType === "static"
               ? "bg-black/90"
-              : "bg-dark-transparent"
+              : "bg-dark-transparent",
           )}
         >
           {results.length > 0 ? (
