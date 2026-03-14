@@ -27,7 +27,7 @@ const SearchBar = () => {
             <input
               type="text"
               name="search_bar"
-              placeholder="Search for any movie"
+              placeholder="Search for any show"
               className="pl-3 py-1.5 text-[1.1rem] text-black w-[200px] md:w-[400px] bg-gray-200 shadow-2xl shadow-white/40 outline-0 border-2 border-blue-primary-darker rounded-l-full"
             />
             <button
