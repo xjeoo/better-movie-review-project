@@ -1,0 +1,36 @@
+# .clineignore
+
+# Securitate (NICIODATĂ să nu lași AI-ul să îți citească parolele)
+.env
+.env.local
+.env.development
+.env.production
+
+# Dependențe (Nu are ce căuta în zecile de mii de fișiere de aici)
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build & Cache de la Next.js
+.next/
+out/
+build/
+dist/
+
+# Git (Să nu modifice istoricul intern)
+.git/
+
+# Fisiere media mari sau statice (Nu are nevoie sa le "citeasca")
+public/images/
+public/videos/
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.ico
+*.svg
+
+# Log-uri
+*.log
+npm-debug.log*
