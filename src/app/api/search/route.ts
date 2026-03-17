@@ -9,7 +9,6 @@ export async function GET(request: NextRequest){
   const search = searchParams.get("search")
   const response = await fetch(multiSearchRoute + `?query=${search}`, options)
   const data = await response.json();
-  console.log('ceva', data)
 
   return NextResponse.json(data);
 

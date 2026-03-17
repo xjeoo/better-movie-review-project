@@ -101,7 +101,7 @@ const SeasonPage = () => {
                 "fixed left-0 bottom-0 md:static  gap-2 w-dvw border-t-1  md:border-0 md:w-fit bg-gray-900 md:bg-transparent z-100 md:translate-y-0 ",
                 drawerClosed
                   ? "translate-y-[70%] border-t-blue-500 "
-                  : "border-t-0"
+                  : "border-t-0",
               )}
             >
               <div className="flex justify-between w-[90%] mx-auto md:w-auto md:block">
@@ -114,11 +114,11 @@ const SeasonPage = () => {
               showInfo.seasons.filter(
                 (item) =>
                   item.name.toLowerCase() !== "specials" &&
-                  item.name !== data?.name
+                  item.name !== data?.name,
               ).length! > 0 ? (
                 <ScrollArea
                   className={cn(
-                    "whitespace-nowrap w-dvw px-4 pb-2 pt-3   md:px-0 md:w-[200px] bg-gray-800 md:bg-transparent md:whitespace-normal md:h-80 md:translate-y-0"
+                    "whitespace-nowrap w-dvw px-4 pb-2 pt-3   md:px-0 md:w-[200px] bg-gray-800 md:bg-transparent md:whitespace-normal md:h-80 md:translate-y-0",
                   )}
                 >
                   <div className="relative flex md:flex-col gap-2 z-100 ">
@@ -131,7 +131,7 @@ const SeasonPage = () => {
                           className={cn(
                             "relative flex gap-1.5 items-center text-nowrap w-fit mb-1  text-[1.1em] rounded-xs overflow-hidden",
                             parseInt(season.season_number) === seasonNumber &&
-                              "font-semibold bg-gray-900 rounded-md overflow-hidden"
+                              "font-semibold bg-gray-900 rounded-md overflow-hidden",
                           )}
                         >
                           <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 md:hover:opacity-30 transition-opacity z-100 "></div>
