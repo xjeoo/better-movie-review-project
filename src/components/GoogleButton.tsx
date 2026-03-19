@@ -1,13 +1,17 @@
 "use client";
 import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 
 const GoogleButton = () => {
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
+
   const handleGoogleLogin = async () => {
     try {
       // Autentifică cu Google
       await signIn("google", {
         redirect: false,
-        callbackUrl: "/",
+        callbackUrl: callbackUrl || "/",
       });
     } catch (error) {
       console.error("Eroare login:", error);

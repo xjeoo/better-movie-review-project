@@ -2,13 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import GoogleButton from "@/components/GoogleButton";
 import LoginForm from "./LoginForm";
+import { Suspense } from "react";
 
-const LoginPage = () => {
-  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   const formData = new FormData(e?.currentTarget);
-  //   validateLoginForm(formData);
-  // };
+const LoginPage = async ({
+  searchParams,
+}: {
+  searchParams?: Promise<{ callbackUrl?: string }>;
+}) => {
+  const resolvedSearchParams = await searchParams;
+  const callbackUrl = resolvedSearchParams?.callbackUrl || "/";
 
   return (
     <>
@@ -37,7 +39,9 @@ const LoginPage = () => {
             <GoogleButton />
             <p className="text-xl font-semibold">or</p>
           </div>
-          <LoginForm />
+          <Suspense fallback={<div>Loading form...</div>}>
+            <LoginForm initialCallbackUrl={callbackUrl} />
+          </Suspense>
         </div>
       </div>
     </>

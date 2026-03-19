@@ -5,7 +5,11 @@ import { AuthActionState } from "@/types/auth";
 import Link from "next/link";
 import React, { useActionState } from "react";
 
-const RegisterForm = () => {
+interface RegisterFormProps {
+  initialCallbackUrl: string;
+}
+
+const RegisterForm = ({ initialCallbackUrl }: RegisterFormProps) => {
   const [state, registerAction, isPending] = useActionState<
     AuthActionState,
     FormData
@@ -13,6 +17,8 @@ const RegisterForm = () => {
     ok: false,
     message: "",
   });
+
+  const callbackUrl = initialCallbackUrl;
 
   return (
     <form
@@ -107,6 +113,7 @@ const RegisterForm = () => {
           Sign in!
         </Link>
       </p>
+      <input type="hidden" name="callbackUrl" value={callbackUrl} />
     </form>
   );
 };

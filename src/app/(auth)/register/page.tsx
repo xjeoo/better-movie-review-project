@@ -2,8 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import RegisterForm from "./RegisterForm";
 import GoogleButton from "@/components/GoogleButton";
+import { Suspense } from "react";
 
-const RegisterPage = () => {
+const RegisterPage = async ({
+  searchParams,
+}: {
+  searchParams?: Promise<{ callbackUrl?: string }>;
+}) => {
+  const resolvedSearchParams = await searchParams;
+  const callbackUrl = resolvedSearchParams?.callbackUrl || "/";
+
   return (
     <>
       <div className="min-h-screen overflow-hidden pb-[70px] lg:pb-[140px] px-2 sm:px-0">
@@ -31,7 +39,9 @@ const RegisterPage = () => {
             <GoogleButton />
             <p className="text-xl font-semibold">or</p>
           </div>
-          <RegisterForm />
+          <Suspense fallback={<div>Loading form...</div>}>
+            <RegisterForm initialCallbackUrl={callbackUrl} />
+          </Suspense>
         </div>
       </div>
     </>
