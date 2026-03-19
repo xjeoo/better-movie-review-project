@@ -105,7 +105,8 @@ const RegisterForm = () => {
       <p className="mt-10 text-[0.95em] text-pretty text-center">
         Already have an account?<span> </span>
         <Link
-          href={"/login"}
+          href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}
+          `}
           className="underline md:hover:text-blue-300 text-pretty "
         >
           Sign in!
