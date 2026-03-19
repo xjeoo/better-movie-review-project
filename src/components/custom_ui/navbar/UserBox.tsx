@@ -1,9 +1,12 @@
-// "use client"; // fac client cand fac dropdown-ul
+"use client";
 import { userInfo } from "@/types/entites";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const UserBox = ({ session }: { session: userInfo | null }) => {
+  const pathname = usePathname();
+
   return (
     <button className="flex items-center cursor-pointer md:hover:bg-gray-900 pl-4 pr-1 sm:pr-8 min-w-fit w-fit h-full ">
       {session ? (
@@ -25,7 +28,10 @@ const UserBox = ({ session }: { session: userInfo | null }) => {
         </>
       ) : (
         <>
-          <Link href={"/login"} className="size-full flex items-center">
+          <Link
+            href={`/login?callbackUrl=${encodeURIComponent(pathname)}`}
+            className="size-full flex items-center"
+          >
             Log In
           </Link>
         </>

@@ -3,6 +3,7 @@ import { register } from "@/actions/auth";
 import { Button } from "@/components/ui/button";
 import { AuthActionState } from "@/types/auth";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import React, { useActionState } from "react";
 
 const RegisterForm = () => {
@@ -13,6 +14,9 @@ const RegisterForm = () => {
     ok: false,
     message: "",
   });
+
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   return (
     <form
@@ -107,6 +111,7 @@ const RegisterForm = () => {
           Sign in!
         </Link>
       </p>
+      <input type="hidden" name="callbackUrl" value={callbackUrl} />
     </form>
   );
 };

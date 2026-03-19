@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import RegisterForm from "./RegisterForm";
 import GoogleButton from "@/components/GoogleButton";
+import { Suspense } from "react";
 
 const RegisterPage = () => {
   return (
@@ -28,10 +29,14 @@ const RegisterPage = () => {
           </Link>
           <hr className="text-black border-gray-300 mb-4 w-full" />
           <div className="flex flex-col gap-5 mt-7 mb-4 items-center">
-            <GoogleButton />
+            <Suspense fallback={<p>Loading...</p>}>
+              <GoogleButton />
+            </Suspense>
             <p className="text-xl font-semibold">or</p>
           </div>
-          <RegisterForm />
+          <Suspense fallback={<p>Loading...</p>}>
+            <RegisterForm />
+          </Suspense>
         </div>
       </div>
     </>

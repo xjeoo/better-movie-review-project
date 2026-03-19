@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { userInfo } from "@/types/entites";
 import { LoaderCircle, Lock, Star } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";
 
 const CreateReview = ({
@@ -28,6 +28,7 @@ const CreateReview = ({
   });
 
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (state?.ok) router.refresh();
@@ -45,14 +46,14 @@ const CreateReview = ({
             </p>
             <div className="flex items-center gap-1.5 text-[1.1em]">
               <Link
-                href={"/login"}
+                href={`/login?callbackUrl=${encodeURIComponent(pathname)}`}
                 className="text-[1.15em] text-white underline"
               >
                 Sign in
               </Link>
               <span>or</span>
               <Link
-                href={"/register"}
+                href={`/register?callbackUrl=${encodeURIComponent(pathname)}`}
                 className="text-[1.15em] text-white underline"
               >
                 Register
@@ -75,7 +76,7 @@ const CreateReview = ({
                 <Star
                   key={index}
                   className={cn(
-                    "size-8 lg:size-7 cursor-pointer md:hover:scale-110 active:opacity-80 transition-all"
+                    "size-8 lg:size-7 cursor-pointer md:hover:scale-110 active:opacity-80 transition-all",
                   )}
                   color={index + 1 > rating ? "#b6c1d4" : starColor}
                   fill={index + 1 <= rating ? starColor : ""}
@@ -89,7 +90,7 @@ const CreateReview = ({
                 <p
                   className={cn(
                     "text-[1.1em]",
-                    state.ok ? "text-blue-300" : "text-red-400"
+                    state.ok ? "text-blue-300" : "text-red-400",
                   )}
                 >
                   {state.text}
@@ -110,7 +111,7 @@ const CreateReview = ({
                 disabled={isPending}
                 className={cn(
                   "w-full text-xl py-2 flex justify-center bg-gradient-to-br from-[#5f9beb]/90 to-[#5f9beb]/60 md:hover:opacity-95 active:opacity-85 rounded-xs cursor-pointer transition-opacity",
-                  isPending && "cursor-auto"
+                  isPending && "cursor-auto",
                 )}
               >
                 {!isPending ? (

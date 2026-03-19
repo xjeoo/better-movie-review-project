@@ -99,6 +99,7 @@ export async function login( prevState: AuthActionState, formData: FormData):Pro
 
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
+  const callbackUrl = formData.get("callbackUrl")?.toString()
 
   await dbConnect();
   
@@ -129,11 +130,13 @@ export async function login( prevState: AuthActionState, formData: FormData):Pro
 
     await createSession(userInfo);
  
-   redirect("/");
+   // Ensure callbackUrl is an absolute path for redirect
+   const redirectPath = callbackUrl && callbackUrl.startsWith('/') ? callbackUrl : `/${callbackUrl || ''}`;
+   redirect(redirectPath);
   
 }
 
-export async function register( prevState: AuthActionState, formData: FormData ):Promise<AuthActionState>{
+export async function register( prevState: AuthActionState, formData: FormData):Promise<AuthActionState>{
   const isValid = validateRegisterForm(formData);
 
   if(!isValid.ok){
@@ -146,6 +149,7 @@ export async function register( prevState: AuthActionState, formData: FormData )
   const username = formData.get("username")?.toString();
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
+  const callbackUrl = formData.get("callbackUrl")?.toString();
 
   await dbConnect();
 
@@ -170,7 +174,9 @@ export async function register( prevState: AuthActionState, formData: FormData )
   
     await newUser.save();
 
-    redirect("/login")
+    // Redirect to login page with callbackUrl as query parameter
+    const redirectUrl = callbackUrl ? `/login?callbackUrl=${encodeURIComponent(callbackUrl)}` : '/login';
+    redirect(redirectUrl);
 
 
 }

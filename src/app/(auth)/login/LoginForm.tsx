@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useActionState } from "react";
 import { login } from "@/actions/auth";
 import { AuthActionState } from "@/types/auth";
+import { useSearchParams } from "next/navigation";
 const LoginForm = () => {
   const [state, loginAction, isPending] = useActionState<
     AuthActionState,
@@ -12,7 +13,8 @@ const LoginForm = () => {
     ok: false,
     message: "",
   });
-
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
   return (
     <form
       className="flex flex-col text-[1.2em] lg:text-[1.1em] items-center  "
@@ -85,10 +87,14 @@ const LoginForm = () => {
 
       <p className="mt-10 text-[0.95em] text-pretty text-center">
         Don&#39;t have an account?<span> </span>
-        <Link href={"/register"} className="underline md:hover:text-blue-300 ">
+        <Link
+          href={`/register?callbackUrl=${encodeURIComponent(callbackUrl)}`}
+          className="underline md:hover:text-blue-300 "
+        >
           Register now!
         </Link>
       </p>
+      <input type="hidden" name="callbackUrl" value={callbackUrl} />
     </form>
   );
 };
