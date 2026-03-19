@@ -3,13 +3,10 @@ import { register } from "@/actions/auth";
 import { Button } from "@/components/ui/button";
 import { AuthActionState } from "@/types/auth";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import React, { useActionState } from "react";
 
-interface RegisterFormProps {
-  initialCallbackUrl: string;
-}
-
-const RegisterForm = ({ initialCallbackUrl }: RegisterFormProps) => {
+const RegisterForm = () => {
   const [state, registerAction, isPending] = useActionState<
     AuthActionState,
     FormData
@@ -18,7 +15,8 @@ const RegisterForm = ({ initialCallbackUrl }: RegisterFormProps) => {
     message: "",
   });
 
-  const callbackUrl = initialCallbackUrl;
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   return (
     <form

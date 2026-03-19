@@ -4,14 +4,7 @@ import RegisterForm from "./RegisterForm";
 import GoogleButton from "@/components/GoogleButton";
 import { Suspense } from "react";
 
-const RegisterPage = async ({
-  searchParams,
-}: {
-  searchParams?: Promise<{ callbackUrl?: string }>;
-}) => {
-  const resolvedSearchParams = await searchParams;
-  const callbackUrl = resolvedSearchParams?.callbackUrl || "/";
-
+const RegisterPage = () => {
   return (
     <>
       <div className="min-h-screen overflow-hidden pb-[70px] lg:pb-[140px] px-2 sm:px-0">
@@ -36,11 +29,13 @@ const RegisterPage = async ({
           </Link>
           <hr className="text-black border-gray-300 mb-4 w-full" />
           <div className="flex flex-col gap-5 mt-7 mb-4 items-center">
-            <GoogleButton />
+            <Suspense fallback={<p>Loading...</p>}>
+              <GoogleButton />
+            </Suspense>
             <p className="text-xl font-semibold">or</p>
           </div>
-          <Suspense fallback={<div>Loading form...</div>}>
-            <RegisterForm initialCallbackUrl={callbackUrl} />
+          <Suspense fallback={<p>Loading...</p>}>
+            <RegisterForm />
           </Suspense>
         </div>
       </div>

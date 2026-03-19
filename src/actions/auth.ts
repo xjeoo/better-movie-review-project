@@ -132,7 +132,7 @@ export async function login( prevState: AuthActionState, formData: FormData):Pro
  
    // Ensure callbackUrl is an absolute path for redirect
    const redirectPath = callbackUrl && callbackUrl.startsWith('/') ? callbackUrl : `/${callbackUrl || ''}`;
-   redirect(encodeURIComponent(redirectPath));
+   redirect(redirectPath);
   
 }
 

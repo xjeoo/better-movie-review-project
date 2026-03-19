@@ -4,12 +4,8 @@ import Link from "next/link";
 import { useActionState } from "react";
 import { login } from "@/actions/auth";
 import { AuthActionState } from "@/types/auth";
-
-interface LoginFormProps {
-  initialCallbackUrl: string;
-}
-
-const LoginForm = ({ initialCallbackUrl }: LoginFormProps) => {
+import { useSearchParams } from "next/navigation";
+const LoginForm = () => {
   const [state, loginAction, isPending] = useActionState<
     AuthActionState,
     FormData
@@ -17,7 +13,8 @@ const LoginForm = ({ initialCallbackUrl }: LoginFormProps) => {
     ok: false,
     message: "",
   });
-  const callbackUrl = initialCallbackUrl;
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
   return (
     <form
       className="flex flex-col text-[1.2em] lg:text-[1.1em] items-center  "

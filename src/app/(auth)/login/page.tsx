@@ -4,13 +4,12 @@ import GoogleButton from "@/components/GoogleButton";
 import LoginForm from "./LoginForm";
 import { Suspense } from "react";
 
-const LoginPage = async ({
-  searchParams,
-}: {
-  searchParams?: Promise<{ callbackUrl?: string }>;
-}) => {
-  const resolvedSearchParams = await searchParams;
-  const callbackUrl = resolvedSearchParams?.callbackUrl || "/";
+const LoginPage = () => {
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   const formData = new FormData(e?.currentTarget);
+  //   validateLoginForm(formData);
+  // };
 
   return (
     <>
@@ -35,12 +34,12 @@ const LoginPage = async ({
             </span>
           </Link>
           <hr className="text-black border-gray-300 mb-4 w-full" />
-          <div className="flex flex-col gap-5 mt-7 mb-4 items-center">
-            <GoogleButton />
-            <p className="text-xl font-semibold">or</p>
-          </div>
-          <Suspense fallback={<div>Loading form...</div>}>
-            <LoginForm initialCallbackUrl={callbackUrl} />
+          <Suspense fallback={<p>Loading...</p>}>
+            <div className="flex flex-col gap-5 mt-7 mb-4 items-center">
+              <GoogleButton />
+              <p className="text-xl font-semibold">or</p>
+            </div>
+            <LoginForm />
           </Suspense>
         </div>
       </div>
