@@ -4,7 +4,7 @@ import { deleteIfExistsFromWatchlist, existsInWatchlist, getUserWatchlist, savet
 import { NextRequest, NextResponse } from "next/server";
 
 
-export async function GET(request: NextRequest){
+export async function GET(){
 
   const token = await getToken();
   if(!token) return NextResponse.json({error: "Token missing"}, {status:401});
