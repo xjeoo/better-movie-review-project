@@ -102,7 +102,7 @@ const UserBox = ({ session }: { session: userInfo | null }) => {
               <div className="py-1">
                 <button
                   onClick={handleWatchlistClick}
-                  className="w-full flex items-center gap-3 px-4 py-2.5 text-gray-300 md:hover:bg-gray-900 md:hover:text-white transition-colors duration-150 cursor-pointer"
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-gray-300 md:hover:bg-gray-900/30 md:hover:text-white transition-colors duration-150 cursor-pointer"
                 >
                   <List className="w-4 h-4" />
                   <span>My Watchlist</span>
@@ -110,7 +110,7 @@ const UserBox = ({ session }: { session: userInfo | null }) => {
 
                 <button
                   onClick={handleLogout}
-                  className="w-full flex items-center gap-3 px-4 py-2.5 text-red-400 md:hover:bg-gray-900 md:hover:text-red-300 transition-colors duration-150 cursor-pointer"
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-red-400 md:hover:bg-gray-900/30 md:hover:text-red-300 transition-colors duration-150 cursor-pointer"
                 >
                   <LogOut className="w-4 h-4" />
                   <span>Logout</span>
