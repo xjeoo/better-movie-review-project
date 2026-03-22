@@ -158,21 +158,21 @@ const WatchlistPage = () => {
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex gap-2 mb-8">
+        <div className="flex flex-wrap gap-2 mb-8">
           {filterButtons.map(({ value, label, icon: Icon }) => (
             <button
               key={value}
               onClick={() => setFilter(value)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors ${
+              className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base cursor-pointer ${
                 filter === value
                   ? "bg-blue-primary text-white"
                   : "bg-zinc-800/50 text-zinc-400 hover:text-white hover:bg-zinc-800"
               }`}
             >
-              <Icon size={18} />
-              {label}
+              <Icon size={16} className="sm:w-[18px] sm:h-[18px]" />
+              <span className="hidden min-[480px]:inline">{label}</span>
               <span
-                className={`ml-1 px-2 py-0.5 text-xs rounded-full ${
+                className={`px-2 py-0.5 text-xs rounded-full ${
                   filter === value ? "bg-white/20" : "bg-zinc-700 text-zinc-300"
                 }`}
               >

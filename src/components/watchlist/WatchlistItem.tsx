@@ -129,7 +129,7 @@ const WatchlistItem = ({
       <button
         onClick={handleDelete}
         disabled={isDeleting}
-        className="absolute top-2 right-2 p-2 rounded-full bg-black/60 text-zinc-400 hover:text-red-500 hover:bg-black/80 opacity-0 group-hover:opacity-100 transition-all duration-300 disabled:opacity-50"
+        className="absolute top-2 right-2 p-2 rounded-full bg-black/60 text-red-400 lg:text-zinc-300 hover:text-red-500 hover:bg-black/80 opacity-90 lg:opacity-0 group-hover:opacity-100 transition-all duration-300 disabled:opacity-50"
         aria-label="Remove from watchlist"
       >
         <Trash2 size={16} />
