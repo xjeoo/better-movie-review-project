@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 import { PanelLeftIcon } from "lucide-react";
 import { userInfo } from "@/types/entites";
 
+// might need session to add setting later, so disable eslint here for now !!!!!
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Sidebar = ({ session }: { session: userInfo | null }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
