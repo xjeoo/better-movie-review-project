@@ -5,9 +5,10 @@ import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { PanelLeftIcon } from "lucide-react";
-import LogoutButton from "@/components/LogoutButton";
 import { userInfo } from "@/types/entites";
 
+// might need session to add setting later, so disable eslint here for now !!!!!
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Sidebar = ({ session }: { session: userInfo | null }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
@@ -59,7 +60,7 @@ const Sidebar = ({ session }: { session: userInfo | null }) => {
       <div
         className={cn(
           "fixed top-0 left-0 w-screen h-dvh bg-light-dark-transparent z-1000 ",
-          shouldRender ? "flex" : "hidden"
+          shouldRender ? "flex" : "hidden",
         )}
       >
         <div
@@ -67,7 +68,7 @@ const Sidebar = ({ session }: { session: userInfo | null }) => {
             "flex flex-col w-[70%] sm:w-[300px] bg-gradient-to-r from-black to-black/90 h-full py-3 px-2 border-r-1 border-neutral-500 rounded-md",
             isOpen
               ? "animate-in slide-in-from-left duration-100"
-              : "animate-out slide-out-to-left duration-100"
+              : "animate-out slide-out-to-left duration-100",
           )}
         >
           <div className="flex flex-col items-end justify-start w-full h-fit bg-red gap-4 mt-2">
@@ -97,11 +98,6 @@ const Sidebar = ({ session }: { session: userInfo | null }) => {
                 </Link>
               ))}
             </div>
-            {session && (
-              <div>
-                <LogoutButton className="w-full rounded-md py-2" />
-              </div>
-            )}
           </div>
         </div>
         <div className="flex-1 h-full" onClick={toggle}></div>
