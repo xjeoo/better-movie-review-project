@@ -1,8 +1,8 @@
-# 🎬 Movie Review Platform
+# Movie Review Platform
 
 > A full-stack movie discovery platform where users can search for TV shows, read details, and create or update custom reviews.
 
-## 🚀 Live Demo
+## Live Demo
 [Link here](https://better-movie-review-project.vercel.app/)
 
 ## 📸 Screenshots
@@ -11,7 +11,7 @@
 
 
 
-## ✨ Key Features
+## Key Features
 
 
 * **Custom Authentication:** Secure login and registration using NextAuth.js, supporting both credentials and Google OAuth.
@@ -19,14 +19,14 @@
 * **Responsive UI:** A fully responsive, modern interface built with Tailwind CSS and shadcn/ui, optimized for all devices.
 * **Type Safety:** Entire codebase is strictly typed with TypeScript, minimizing runtime errors and improving maintainability.
 
-## 🛠️ Tech Stack
+## Tech Stack
 * **Framework:** Next.js (App Router)
 * **Language:** TypeScript
 * **Styling:** Tailwind CSS, shadcn
 * **Backend & Database:** Next.js API Routes, MongoDB, Mongoose
 * **Authentication:** Implemented a hybrid approach using **NextAuth.js**. Features include custom credential-based login (Email/Password) and third-party provider integration (Google OAuth), with fully managed custom session handling.
 
-## 🚀 Running Locally
+## Running Locally
 
 To run this project on your local machine, follow these steps:
 
@@ -51,7 +51,7 @@ Copy the structure below and replace the placeholder values with your own API ke
 # Database
 MONGODB_URI="your_mongodb_connection_string"
 
-# NextAuth & Security
+# NextAuth and Security
 NEXTAUTH_URL="http://localhost:3000"
 NEXTAUTH_SECRET="your_generated_nextauth_secret"
 SESSION_SECRET="your_generated_session_secret"
