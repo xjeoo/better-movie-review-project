@@ -39,6 +39,7 @@ export async function getInfoForTvShowPage(showId: string): Promise<TvShowPageDa
     token,
   };
   } catch (error) {
+    console.log("Error fetching TV show page data:", error);
     return null
   }
 

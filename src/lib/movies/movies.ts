@@ -121,6 +121,7 @@ export async function getInfoForMoviePage(movieId: string): Promise<MoviePageDat
     reviews,
   };
   } catch (error) {
+    console.log("Error fetching movie page data:", error);
     return null;
   }
  

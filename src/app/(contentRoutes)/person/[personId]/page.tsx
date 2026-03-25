@@ -20,12 +20,12 @@ const PersonPage = async ({
       </div>
     );
   }
-
   const {
     data,
     combined_credits, // o le folosesc cu carousele cred
   }: { data: PersonData; combined_credits: CombinedCredits } = personInfo;
 
+  console.log(combined_credits);
   return (
     <main className="flex flex-col w-full py-5 px-3 md:px-12 bg-gray-900">
       <section className="flex flex-col md:flex-row gap-4">

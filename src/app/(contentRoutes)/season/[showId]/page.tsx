@@ -12,7 +12,6 @@ import { cn } from "@/lib/utils";
 import { tvShowSeason } from "@/types/content";
 import { Season } from "@/types/tvshows/season";
 import { LoaderCircle, Popcorn } from "lucide-react";
-import { set } from "mongoose";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";

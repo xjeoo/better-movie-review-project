@@ -32,6 +32,7 @@ export async function getInfoForPeoplePage(personId: string) {
       combined_credits,
     };
   } catch (error) {
+    console.log("Error fetching person page data:", error);
     return null;
   }
 }
