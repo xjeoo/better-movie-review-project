@@ -23,6 +23,7 @@ const SeasonPage = () => {
   const showId = params.showId?.toString();
   const seasonNumber = parseInt(searchParams.get("number")!);
   const [data, setData] = useState<Season | null>(null);
+  const [fetched, setFetched] = useState(false);
   const [showInfo, setShowInfo] = useState<{
     name: string;
     seasons: Array<tvShowSeason>;
@@ -44,6 +45,8 @@ const SeasonPage = () => {
       getSeasonInfoForTvShow(showId, seasonNumber)
         .then((data) => {
           setData(data);
+          console.log(data);
+          setFetched(true);
         })
         .catch((err) => console.log(err));
     }
@@ -58,15 +61,22 @@ const SeasonPage = () => {
   //   }
   // }, [modalVisible]);
 
+  if (!data && fetched) {
+    return (
+      <div className="flex flex-col items-center justify-center w-full h-[80dvh] bg-black">
+        <h1 className="text-4xl text-blue-primary">404</h1>
+        <h3 className="text-xl text-white">Season not found</h3>
+      </div>
+    );
+  }
+
   if (!data)
     return (
       <div className="w-fit h-[75dvh] mx-auto pt-[220px]">
         <LoaderCircle size={60} className="animate-spin" color="white" />
       </div>
     );
-
   return (
-    // pe tel copiez pagina asta https://arkhamcity.fandom.com/wiki/The_Season_of_Infamy
     <>
       {selectedEpisode && (
         <EpisodeModal

@@ -20,8 +20,10 @@ export async function TvShowSearch(query: string, page?: string):Promise<{result
   }
 }
 
-export async function getInfoForTvShowPage(showId: string): Promise<TvShowPageData> {
-  const [tvShow, rating, reviews, user, token] = await Promise.all([
+export async function getInfoForTvShowPage(showId: string): Promise<TvShowPageData | null> {
+
+  try {
+    const [tvShow, rating, reviews, user, token] = await Promise.all([
      getTvShowById(showId),
      getRatingByTvShowId(showId),
      getReviewsByTvShowId(showId),
@@ -36,4 +38,10 @@ export async function getInfoForTvShowPage(showId: string): Promise<TvShowPageDa
     user,
     token,
   };
+  } catch (error) {
+    console.log("Error fetching TV show page data:", error);
+    return null
+  }
+
+  
 }

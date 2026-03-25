@@ -104,20 +104,26 @@ export async function MovieSearch(query: string, page?: string):Promise<{results
   }
 }
 
-export async function getInfoForMoviePage(movieId: string): Promise<MoviePageData> {
-  const [movie, rating, user, token, reviews] = await Promise.all([
-    getMovieById(movieId),
-    getRatingByMovieId(movieId),
-    getSession(),
-    getToken(),
-    getReviewsByMovieId(movieId),
-  ]);
-
-  return {
+export async function getInfoForMoviePage(movieId: string): Promise<MoviePageData | null> {
+  try {
+    const [movie, rating, user, token, reviews] = await Promise.all([
+      getMovieById(movieId),
+      getRatingByMovieId(movieId),
+      getSession(),
+      getToken(),
+      getReviewsByMovieId(movieId),
+    ]);
+     return {
     movie,
     rating,
     user,
     token,
     reviews,
   };
+  } catch (error) {
+    console.log("Error fetching movie page data:", error);
+    return null;
+  }
+ 
+
 }

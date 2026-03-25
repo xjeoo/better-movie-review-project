@@ -21,8 +21,18 @@ const TvShowPage = async ({
   params: Promise<{ showId: string }>;
 }) => {
   const showId = (await params).showId[0];
-  const { tvShow, rating, reviews, user, token } =
-    await getInfoForTvShowPage(showId);
+  const showInfo = await getInfoForTvShowPage(showId);
+
+  if (!showInfo) {
+    return (
+      <div className="flex flex-col items-center justify-center w-full h-[80dvh] bg-black">
+        <h1 className="text-4xl text-blue-primary">404</h1>
+        <h3 className="text-xl text-white">TV Show not found</h3>
+      </div>
+    );
+  }
+
+  const { tvShow, rating, reviews, user, token } = showInfo;
 
   const addedToWatchList = await existsInWatchlist(
     showId,

@@ -10,11 +10,20 @@ const PersonPage = async ({
   params: Promise<{ personId: string }>;
 }) => {
   const personId = (await params).personId;
+  const personInfo = await getInfoForPeoplePage(personId);
+
+  if (!personInfo) {
+    return (
+      <div className="flex flex-col items-center justify-center w-full h-[80dvh] bg-black">
+        <h1 className="text-4xl text-blue-primary">404</h1>
+        <h3 className="text-xl text-white">Person not found</h3>
+      </div>
+    );
+  }
   const {
     data,
     combined_credits, // o le folosesc cu carousele cred
-  }: { data: PersonData; combined_credits: CombinedCredits } =
-    await getInfoForPeoplePage(personId);
+  }: { data: PersonData; combined_credits: CombinedCredits } = personInfo;
 
   console.log(combined_credits);
   return (
