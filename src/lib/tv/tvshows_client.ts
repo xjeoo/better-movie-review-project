@@ -2,6 +2,11 @@ export async function getSeasonInfoForTvShow(showId: string, seasonNumber: numbe
   const apiUrl = `/api/tv/${showId}/seasons?seasonNumber=${seasonNumber}`;
 
   const infoRes = await fetch(apiUrl);
+
+  if (!infoRes.ok) {
+    return null;
+  }
+
   return await infoRes.json();
 }
 

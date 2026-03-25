@@ -33,8 +33,18 @@ const MoviePage = async ({
 }) => {
   const { movieId } = await params;
 
-  const { movie, rating, user, token, reviews } =
-    await getInfoForMoviePage(movieId);
+  const movieInfo = await getInfoForMoviePage(movieId);
+
+  if (!movieInfo) {
+    return (
+      <div className="flex flex-col items-center justify-center w-full h-[80dvh] bg-black">
+        <h1 className="text-4xl text-blue-primary">404</h1>
+        <h3 className="text-xl text-white">Movie not found</h3>
+      </div>
+    );
+  }
+
+  const { movie, rating, user, token, reviews } = movieInfo;
 
   const addedToWatchList = await existsInWatchlist(
     movieId,
@@ -43,6 +53,7 @@ const MoviePage = async ({
   );
   // console.log("Images: ", movie.images);
   // console.log("Videos: ", movie.video);
+
   return (
     <div className="flex flex-col w-full h-full pb-20 bg-black">
       <div className="relative">
