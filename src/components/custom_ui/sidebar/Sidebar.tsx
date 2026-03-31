@@ -53,52 +53,72 @@ const Sidebar = ({ session }: { session: userInfo | null }) => {
 
   return (
     <>
-      <button onClick={toggle} className="flex gap-4">
-        <PanelLeftIcon className="size-[1.7em] md:hover:bg-neutral-200 md:hover:text-black p-1 rounded-md cursor-pointer transition-colors" />
-        <Separator orientation="vertical" />
+      <button onClick={toggle} className="flex items-center gap-3">
+        <PanelLeftIcon className="size-8 p-1.5 rounded-lg text-white hover:bg-zinc-800/80 transition-all duration-200 cursor-pointer" />
+        <Separator orientation="vertical" className="h-6 bg-zinc-700" />
       </button>
       <div
         className={cn(
-          "fixed top-0 left-0 w-screen h-dvh bg-light-dark-transparent z-1000 ",
+          "fixed inset-0 w-screen h-dvh bg-black/60 backdrop-blur-sm z-[1000]",
           shouldRender ? "flex" : "hidden",
         )}
       >
         <div
           className={cn(
-            "flex flex-col w-[70%] sm:w-[300px] bg-gradient-to-r from-black to-black/90 h-full py-3 px-2 border-r-1 border-neutral-500 rounded-md",
+            "flex flex-col w-[85%] sm:w-[320px] h-full bg-gradient-to-b from-black via-zinc-950 to-black border-r border-zinc-800/50 shadow-2xl shadow-black/50",
             isOpen
-              ? "animate-in slide-in-from-left duration-100"
-              : "animate-out slide-out-to-left duration-100",
+              ? "animate-in slide-in-from-left duration-200 ease-out"
+              : "animate-out slide-out-to-left duration-200 ease-in",
           )}
         >
-          <div className="flex flex-col items-end justify-start w-full h-fit bg-red gap-4 mt-2">
+          {/* Header */}
+          <div className="flex items-center justify-between px-5 py-5 border-b border-zinc-800/50">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-primary to-blue-primary-darker flex items-center justify-center">
+                <Clapperboard className="w-4 h-4 text-white" />
+              </div>
+              <span className="text-lg font-semibold text-white">Menu</span>
+            </div>
             <button
               onClick={toggle}
-              className="p-2 mx-4 bg-neutral-800 cursor-pointer rounded-full md:hover:bg-black md:hover:invert"
+              className="p-2 rounded-lg bg-zinc-800/50 text-zinc-400 hover:text-white hover:bg-zinc-700/50 transition-all duration-200 cursor-pointer"
             >
               <img
                 src="/icons/leftarrow.svg"
-                alt="back"
-                className="size-4 invert"
+                alt="close"
+                className="w-4 h-4 invert opacity-70"
               />
             </button>
-
-            <Separator className="bg-neutral-500" />
           </div>
-          <div className="flex flex-col justify-between h-full gap-5 mt-8 px-1">
-            <div>
+
+          {/* Navigation */}
+          <nav className="flex-1 px-4 py-6 overflow-y-auto">
+            <div className="space-y-1">
+              <p className="px-3 mb-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">
+                Navigation
+              </p>
               {items.map((item, index) => (
                 <Link
                   key={index}
                   href={item.url}
-                  className="flex items-center w-full rounded-sm md:hover:bg-neutral-700 h-[2.5em] pl-8"
+                  onClick={toggle}
+                  className="flex items-center gap-3 px-3 py-3 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800/60 transition-all duration-200 group"
                 >
-                  <item.icon className="mr-4" />
-                  {item.title}
+                  <div className="p-2 rounded-lg bg-zinc-800/50 text-zinc-500 group-hover:bg-blue-primary/20 group-hover:text-blue-primary transition-all duration-200">
+                    <item.icon className="w-4 h-4" />
+                  </div>
+                  <span className="font-medium">{item.title}</span>
                 </Link>
               ))}
             </div>
-          </div>
+          </nav>
+
+          {/* Footer */}
+          {/* <div className="px-5 py-4 border-t border-zinc-800/50">
+            <p className="text-xs text-zinc-600 text-center">
+              © 2024 MovieReview
+            </p>
+          </div> */}
         </div>
         <div className="flex-1 h-full" onClick={toggle}></div>
       </div>
